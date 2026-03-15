@@ -16,7 +16,7 @@ public class ExamplePlugin extends JavaPlugin {
 
     @Override
     protected void setup() {
-        this.getCommandRegistry().registerCommand(new ExampleCommand("Brutal Impacts", "An example command from de Brutal Impacts Mod."));
+        this.getCommandRegistry().registerCommand(new ExampleCommand("brutalimpacts", "An example command from de Brutal Impacts Mod."));
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
     }
 }
