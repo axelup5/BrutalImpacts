@@ -1,4 +1,4 @@
-rootProject.name = "dev.hytalemodding"
+rootProject.name = "Brutal Impacts v0.0.1"
 
 plugins {
     // See documentation on https://scaffoldit.dev
@@ -21,8 +21,8 @@ hytale {
     }
 
     manifest {
-        Group = "HytaleModding"
-        Name = "ExamplePlugin"
+        Group = "Axelup"
+        Name = "Brutal Impacts"
         Main = "dev.hytalemodding.ExamplePlugin"
     }
 }

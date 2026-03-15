@@ -1,13 +1,13 @@
 {
-    "Group": "HytaleModding",
-    "Name": "ExamplePlugin",
-    "Version": "0.0.0",
-    "Description": "Description of your plugin",
+    "Group": "Axelup",
+    "Name": "Brutal Impacts",
+    "Version": "0.0.1",
+    "Description": "Adds new particle effects and blood splatter when entities are hit, enhancing the visual impact of combat.",
     "Authors": [
         {
-            "Name": "Your Name",
-            "Email": "your.email@example.com",
-            "Url": "https://your-website.com"
+            "Name": "Axelup",
+            "Email": "axelup5@gmail.com",
+            "Url": ""
         }
     ],
     "Website": "https://your-plugin-website.com",
