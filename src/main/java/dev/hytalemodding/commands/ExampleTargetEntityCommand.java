@@ -18,7 +18,6 @@ public class ExampleTargetEntityCommand extends AbstractTargetEntityCommand {
     public ExampleTargetEntityCommand() {
         super("targetentity", "This is a target entity command");
     }
-
     protected void execute(CommandContext context, ObjectList<Ref<EntityStore>> ref, World world, Store<EntityStore> store) {
 
         EntityStatMap stats = store.getComponent(ref.getFirst(), EntityStatMap.getComponentType());
@@ -36,6 +35,7 @@ public class ExampleTargetEntityCommand extends AbstractTargetEntityCommand {
             return;
         }
 
+        context.sendMessage(Message.raw("Se regeneró 100 de HP."));
         stats.addStatValue(healthIdx, 100);
     }
 }

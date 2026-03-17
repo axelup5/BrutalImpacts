@@ -36,9 +36,6 @@ public class HealPlayerCommand extends AbstractTargetPlayerCommand {
 
     @Override
     protected void execute(@NonNullDecl CommandContext context, @NullableDecl Ref<EntityStore> ref, @NonNullDecl Ref<EntityStore> ref1, @NonNullDecl PlayerRef playerRef, @NonNullDecl World world, @NonNullDecl Store<EntityStore> store) {
-        if (this.debugArg.get(context) == true) {
-            context.sendMessage(Message.raw("We are debugging."));
-        }
 
         EntityStatMap stats = store.getComponent(ref, EntityStatMap.getComponentType());
         int healthIdx = DefaultEntityStatTypes.getHealth();
@@ -46,10 +43,18 @@ public class HealPlayerCommand extends AbstractTargetPlayerCommand {
 
         float missing = health.getMax() - health.get();
 
+        if (this.healthArg.get(context) != null) {
+            context.sendMessage(Message.raw("Healing for: " + healthArg.get(context)));
+        }
+
+        if (this.messageArg.get(context) != null) {
+            context.sendMessage(Message.raw(messageArg.get(context)));
+        }
+
         if (this.debugArg.get(context) == true) {
+            context.sendMessage(Message.raw("We are debugging."));
             context.sendMessage(Message.raw("Missing: " + missing + " health."));
             context.sendMessage(Message.raw("Adding: " + healthArg.get(context) + " health to "));
-            context.sendMessage(Message.raw(messageArg.get(context)));
             context.sendMessage(Message.raw("Imput value: " + healthArg.get(context) + " Default"));
             context.sendMessage(Message.raw("Default health value: " + healthArg.getDefaultValue()));
         }
