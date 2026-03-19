@@ -8,7 +8,9 @@ import dev.hytalemodding.commands.ExamplePlayerCommand;
 import dev.hytalemodding.commands.ExampleTargetEntityCommand;
 import dev.hytalemodding.commands.HealPlayerCommand;
 import dev.hytalemodding.commands.ServerRulesCommand;
+import dev.hytalemodding.commands.SpawnParticleSystemCommand;
 import dev.hytalemodding.events.ExampleEvent;
+import dev.hytalemodding.systems.BrutalImpactParticlesSystem;
 
 import javax.annotation.Nonnull;
 
@@ -25,6 +27,13 @@ public class ExamplePlugin extends JavaPlugin {
         this.getCommandRegistry().registerCommand(new ServerRulesCommand());
         this.getCommandRegistry().registerCommand(new ExampleTargetEntityCommand());
         this.getCommandRegistry().registerCommand(new HealPlayerCommand());
+        this.getCommandRegistry().registerCommand(new SpawnParticleSystemCommand());
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
+
+        // Adds an extra impact particle system to all Damage events (without replacing existing ones).
+        // Replace the id below with the id of your custom particle system asset.
+        this.getEntityStoreRegistry().registerSystem(
+            new BrutalImpactParticlesSystem("axelup:brutal_impacts/blood_splatter", 75.0)
+        );
     }
 }

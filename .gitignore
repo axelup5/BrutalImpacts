@@ -44,3 +44,7 @@ build/
 .kotlin
 devserver
 /.idea/
+
+# Local Gradle user-home + caches (should never be committed)
+.gradle-user-home/
+.cache/

@@ -1,7 +1,7 @@
 {
     "Group": "Axelup",
     "Name": "Brutal Impacts",
-    "Version": "0.0.1",
+    "Version": "0.0.2",
     "Description": "Adds new particle effects and blood splatter when entities are hit, enhancing the visual impact of combat.",
     "Authors": [
         {
@@ -12,7 +12,7 @@
     ],
     "Website": "https://your-plugin-website.com",
     "DisabledByDefault": false,
-    "IncludesAssetPack": false,
+    "IncludesAssetPack": true,
     "Dependencies": {},
     "OptionalDependencies": {},
     "ServerVersion": "*",
