@@ -33,7 +33,7 @@ public class ExamplePlugin extends JavaPlugin {
         // Adds an extra impact particle system to all Damage events (without replacing existing ones).
         // Replace the id below with the id of your custom particle system asset.
         this.getEntityStoreRegistry().registerSystem(
-            new BrutalImpactParticlesSystem("axelup:brutal_impacts/blood_splatter", 75.0)
+            new BrutalImpactParticlesSystem("BrutalImpacts_Blood", 75.0)
         );
     }
 }
