@@ -1,9 +1,6 @@
 package dev.hytalemodding.commands;
 
-import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.component.Store;
-import com.hypixel.hytale.server.core.Message;
-import com.hypixel.hytale.server.core.command.system.CommandContext;
+/*pixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractTargetEntityCommand;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatValue;
@@ -39,3 +36,4 @@ public class ExampleTargetEntityCommand extends AbstractTargetEntityCommand {
         stats.addStatValue(healthIdx, 100);
     }
 }
+*/

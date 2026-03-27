@@ -1,6 +1,6 @@
 package dev.hytalemodding.commands;
 
-import com.hypixel.hytale.component.Ref;
+/*import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.spatial.SpatialResource;
 import com.hypixel.hytale.server.core.Message;
@@ -76,5 +76,5 @@ public class SpawnParticleSystemCommand extends AbstractPlayerCommand {
         ParticleUtil.spawnParticleEffect(system.getId(), transform.getPosition(), transform.getRotation(), results, store);
         context.sendMessage(Message.raw("Spawned particle system: " + system.getId()));
     }
-}
+}*/
 

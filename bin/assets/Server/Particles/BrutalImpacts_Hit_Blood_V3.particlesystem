@@ -1,0 +1,17 @@
+{
+  "Spawners": [
+    {
+      "SpawnerId": "BrutalImpacts_Blood3"
+    },
+    {
+      "SpawnerId": "BrutalImpacts_Blood12",
+      "TotalSpawners": 2,
+      "SpawnRate": {
+        "Min": 100,
+        "Max": 100
+      }
+    }
+  ],
+  "IsImportant": false,
+  "LifeSpan": 0
+}

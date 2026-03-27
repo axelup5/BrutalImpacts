@@ -1,5 +1,5 @@
 package dev.hytalemodding.commands;
-
+/*
 import javax.annotation.Nonnull;
 
 import com.hypixel.hytale.component.Store;
@@ -32,3 +32,4 @@ public class ExamplePlayerCommand extends AbstractPlayerCommand {
         player.sendMessage(Message.raw("Transform : " + transform.getPosition()));
     }
 }
+*/
