@@ -46,7 +46,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
     private static final ComponentType<EntityStore, TransformComponent> TRANSFORM_COMPONENT_TYPE = TransformComponent.getComponentType();
     private static final Query<EntityStore> QUERY = Query.and(TRANSFORM_COMPONENT_TYPE);
 
-    private final String particleSystemId;
+    private volatile String particleSystemId;
     private final double defaultViewDistance;
     private final boolean debug;
 
@@ -54,6 +54,15 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         this.particleSystemId = particleSystemId;
         this.defaultViewDistance = defaultViewDistance;
         this.debug = debug;
+    }
+
+    @Nonnull
+    public String getParticleSystemId() {
+        return this.particleSystemId;
+    }
+
+    public void setParticleSystemId(@Nonnull String particleSystemId) {
+        this.particleSystemId = particleSystemId;
     }
 
     @Nonnull
@@ -70,12 +79,13 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         @Nonnull CommandBuffer<EntityStore> commandBuffer,
         @Nonnull Damage damage
     ) {
-        if (this.particleSystemId.isBlank()) {
+        String particleSystemIdSnapshot = this.particleSystemId;
+        if (particleSystemIdSnapshot == null || particleSystemIdSnapshot.isBlank()) {
             return;
         }
 
         WorldParticle extra = new WorldParticle(
-            this.particleSystemId,
+            particleSystemIdSnapshot,
             new Color((byte) 120, (byte) 0, (byte) 0),
             1.0F,
             new Vector3f(0.0F, 0.0F, 0.0F),
@@ -86,7 +96,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         if (particles == null) {
             particles = new Damage.Particles(new ModelParticle[0], new WorldParticle[] { extra }, this.defaultViewDistance);
             damage.putMetaObject(Damage.IMPACT_PARTICLES, particles);
-            this.debugNotify(commandBuffer, damage, "Created IMPACT_PARTICLES + appended " + this.particleSystemId);
+            this.debugNotify(commandBuffer, damage, "Created IMPACT_PARTICLES + appended " + particleSystemIdSnapshot);
             this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extra);
             return;
         }
@@ -94,7 +104,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         WorldParticle[] existing = particles.getWorldParticles();
         if (existing != null) {
             for (WorldParticle worldParticle : existing) {
-                if (worldParticle != null && this.particleSystemId.equals(worldParticle.getSystemId())) {
+                if (worldParticle != null && particleSystemIdSnapshot.equals(worldParticle.getSystemId())) {
                     return;
                 }
             }
@@ -113,7 +123,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
             particles.setViewDistance(this.defaultViewDistance);
         }
 
-        this.debugNotify(commandBuffer, damage, "Appended world particle " + this.particleSystemId);
+        this.debugNotify(commandBuffer, damage, "Appended world particle " + particleSystemIdSnapshot);
         this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extra);
     }
 
@@ -168,7 +178,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         justSource.add(sourceRef);
 
         ParticleUtil.spawnParticleEffect(extra, targetPosition, justSource, commandBuffer);
-        this.debugNotify(commandBuffer, damage, "Sent predicted-only particle to source " + this.particleSystemId);
+        this.debugNotify(commandBuffer, damage, "Sent predicted-only particle to source " + extra.getSystemId());
     }
 
     private void debugNotify(@Nonnull CommandBuffer<EntityStore> commandBuffer, @Nonnull Damage damage, @Nonnull String msg) {
