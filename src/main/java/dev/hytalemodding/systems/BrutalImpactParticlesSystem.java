@@ -8,7 +8,6 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.SystemGroup;
 import com.hypixel.hytale.component.dependency.Dependency;
 import com.hypixel.hytale.component.dependency.SystemDependency;
-import com.hypixel.hytale.component.spatial.SpatialResource;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector4d;
 import com.hypixel.hytale.component.query.Query;
@@ -18,18 +17,17 @@ import com.hypixel.hytale.protocol.Vector3f;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.particle.config.WorldParticle;
 import com.hypixel.hytale.server.core.entity.entities.Player;
-import com.hypixel.hytale.server.core.modules.entity.EntityModule;
 import com.hypixel.hytale.server.core.modules.entity.damage.Damage;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageEventSystem;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageModule;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageSystems;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
-import com.hypixel.hytale.server.core.modules.entity.tracker.NetworkId;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelParticle;
 import com.hypixel.hytale.server.core.universe.world.ParticleUtil;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 
-import it.unimi.dsi.fastutil.objects.ObjectList;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -46,7 +44,6 @@ import static com.hypixel.hytale.component.dependency.OrderPriority.CLOSEST;
 public class BrutalImpactParticlesSystem extends DamageEventSystem {
 
     private static final ComponentType<EntityStore, TransformComponent> TRANSFORM_COMPONENT_TYPE = TransformComponent.getComponentType();
-    private static final ComponentType<EntityStore, NetworkId> NETWORK_ID_COMPONENT_TYPE = NetworkId.getComponentType();
     private static final Query<EntityStore> QUERY = Query.and(TRANSFORM_COMPONENT_TYPE);
 
     private final String particleSystemId;
@@ -90,7 +87,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
             particles = new Damage.Particles(new ModelParticle[0], new WorldParticle[] { extra }, this.defaultViewDistance);
             damage.putMetaObject(Damage.IMPACT_PARTICLES, particles);
             this.debugNotify(commandBuffer, damage, "Created IMPACT_PARTICLES + appended " + this.particleSystemId);
-            this.spawnDirectIfNeeded(index, archetypeChunk, commandBuffer, damage, extra, this.defaultViewDistance);
+            this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extra);
             return;
         }
 
@@ -117,28 +114,43 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         }
 
         this.debugNotify(commandBuffer, damage, "Appended world particle " + this.particleSystemId);
-        this.spawnDirectIfNeeded(index, archetypeChunk, commandBuffer, damage, extra, particles.getViewDistance());
+        this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extra);
     }
 
-    private void spawnDirectIfNeeded(
+    /**
+     * If the damage can be predicted, vanilla {@link DamageSystems.ApplyParticles} intentionally does NOT send
+     * world-particle packets to the predicting source (it passes {@code particleSource=sourceRef}).
+     *
+     * That means when you're alone, you might not see particles at all.
+     *
+     * This method sends the extra particle effect ONLY to the predicting player so:
+     * - The attacker sees the effect
+     * - Other nearby players still receive it from vanilla (no duplicates)
+     */
+    private void spawnForPredictingSourceIfNeeded(
         int index,
         @Nonnull ArchetypeChunk<EntityStore> archetypeChunk,
         @Nonnull CommandBuffer<EntityStore> commandBuffer,
         @Nonnull Damage damage,
-        @Nonnull WorldParticle extra,
-        double viewDistance
+        @Nonnull WorldParticle extra
     ) {
-        NetworkId targetNetworkId = archetypeChunk.getComponent(index, NETWORK_ID_COMPONENT_TYPE);
-
-        boolean applyParticlesLikelyToRun = false;
-        if (targetNetworkId != null && damage.getSource() instanceof Damage.EntitySource sourceEntity) {
-            if (sourceEntity.getRef().isValid()) {
-                TransformComponent sourceTransform = commandBuffer.getComponent(sourceEntity.getRef(), TransformComponent.getComponentType());
-                applyParticlesLikelyToRun = sourceTransform != null;
-            }
+        boolean canBePredicted = damage.getMetaStore().getMetaObject(Damage.CAN_BE_PREDICTED);
+        if (!canBePredicted) {
+            return;
         }
 
-        if (applyParticlesLikelyToRun && !this.debug) {
+        if (!(damage.getSource() instanceof Damage.EntitySource sourceEntity)) {
+            return;
+        }
+
+        Ref<EntityStore> sourceRef = sourceEntity.getRef();
+        if (!sourceRef.isValid()) {
+            return;
+        }
+
+        // Safety: ParticleUtil asserts that every targetRef has a PlayerRef component.
+        PlayerRef sourcePlayerRef = commandBuffer.getComponent(sourceRef, PlayerRef.getComponentType());
+        if (sourcePlayerRef == null) {
             return;
         }
 
@@ -152,21 +164,11 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
             ? targetTransform.getPosition()
             : new Vector3d(hitLocation.x, hitLocation.y, hitLocation.z);
 
-        if (this.debug) {
-            System.out.println(
-                "[BrutalImpacts] direct spawn pos=" + targetPosition + " viewDistance=" + viewDistance + " targetHasNetworkId=" + (targetNetworkId != null)
-            );
-        }
+        ObjectArrayList<Ref<EntityStore>> justSource = new ObjectArrayList<>(1);
+        justSource.add(sourceRef);
 
-        SpatialResource<Ref<EntityStore>, EntityStore> playerSpatialResource = commandBuffer.getResource(
-            EntityModule.get().getPlayerSpatialResourceType()
-        );
-        ObjectList<Ref<EntityStore>> results = SpatialResource.getThreadLocalReferenceList();
-        results.clear();
-        playerSpatialResource.getSpatialStructure().collect(targetPosition, viewDistance, results);
-
-        ParticleUtil.spawnParticleEffect(extra, targetPosition, results, commandBuffer);
-        this.debugNotify(commandBuffer, damage, "Direct-spawn fallback ran for " + this.particleSystemId);
+        ParticleUtil.spawnParticleEffect(extra, targetPosition, justSource, commandBuffer);
+        this.debugNotify(commandBuffer, damage, "Sent predicted-only particle to source " + this.particleSystemId);
     }
 
     private void debugNotify(@Nonnull CommandBuffer<EntityStore> commandBuffer, @Nonnull Damage damage, @Nonnull String msg) {
