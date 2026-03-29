@@ -19,18 +19,18 @@
   "ParticleRotateWithSpawner": false,
   "TrailSpawnerPositionMultiplier": 1,
   "TrailSpawnerRotationMultiplier": 1,
-  "MaxConcurrentParticles": 20,
+  "MaxConcurrentParticles": 30,
   "ParticleLifeSpan": {
-    "Min": 0.2,
-    "Max": 0.25
+    "Min": 0.1,
+    "Max": 0.2
   },
   "TotalParticles": {
-    "Min": 4,
-    "Max": 6
+    "Min": 6,
+    "Max": 10
   },
   "InitialVelocity": {
     "Speed": {
-      "Min": 3.0,
+      "Min": 3,
       "Max": 5
     },
     "Yaw": {
@@ -43,31 +43,30 @@
     }
   },
   "Particle": {
-    "Texture": "Particles/Textures/Rnd/Water_Splash_Animated2.png",
-    "ScaleRatioConstraint": "OneToOne",
-    "UVOption": "RandomFlipU",
+    "Texture": "Particles/Textures/Shapes/Metal.png",
+    "UVOption": "None",
     "Animation": {
       "0": {
         "FrameIndex": {
           "Min": 0,
-          "Max": 0
+          "Max": 3
         }
       },
-      "40": {
+      "25": {
         "FrameIndex": {
-          "Min": 1,
-          "Max": 1
+          "Min": 0,
+          "Max": 3
         }
       },
-      "70": {
+      "50": {
         "FrameIndex": {
-          "Min": 2,
-          "Max": 2
+          "Min": 0,
+          "Max": 3
         }
       },
-      "90": {
+      "75": {
         "FrameIndex": {
-          "Min": 3,
+          "Min": 0,
           "Max": 3
         }
       }
@@ -78,8 +77,8 @@
       },
       "Scale": {
         "X": {
-          "Min": 0.2,
-          "Max": 0.2
+          "Min": 0.15,
+          "Max": 0.3
         }
       },
       "Rotation": {
@@ -88,14 +87,13 @@
           "Max": 180.0
         }
       },
-      "Color": "#ad0000",
+      "Color": "#f5efd7",
       "Opacity": 1
     },
     "SoftParticles": "Disable",
-    "UseSpriteBlending": true,
     "FrameSize": {
-      "Width": 128,
-      "Height": 128
+      "Width": 32,
+      "Height": 32
     }
   },
   "SpawnBurst": true,

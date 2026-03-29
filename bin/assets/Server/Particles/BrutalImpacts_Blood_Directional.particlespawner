@@ -19,19 +19,19 @@
   "ParticleRotateWithSpawner": false,
   "TrailSpawnerPositionMultiplier": 1,
   "TrailSpawnerRotationMultiplier": 1,
-  "MaxConcurrentParticles": 10,
+  "MaxConcurrentParticles": 20,
   "ParticleLifeSpan": {
-    "Min": 0.08,
+    "Min": 0.1,
     "Max": 0.15
   },
   "TotalParticles": {
-    "Min": 4,
-    "Max": 6
+    "Min": 8,
+    "Max": 10
   },
   "InitialVelocity": {
     "Speed": {
-      "Min": 3.0,
-      "Max": 7.0
+      "Min": 4,
+      "Max": 5
     },
     "Yaw": {
       "Min": 0.0,
@@ -43,65 +43,53 @@
     }
   },
   "Particle": {
-    "Texture": "Particles/Textures/Basic/Flash_Spritesheet6.png",
-    "ScaleRatioConstraint": "None",
-    "UVOption": "RandomFlipU",
+    "Texture": "Particles/Textures/Basic/Flash_Spritesheet5.png",
+    "ScaleRatioConstraint": "OneToOne",
     "Animation": {
-      "0": {
-        "Scale": {
-          "X": {
-            "Min": 1.0,
-            "Max": 1.0
-          },
-          "Y": {
-            "Min": 1.0,
-            "Max": 1.0
-          }
-        },
-        "Opacity": 1.0,
-        "Color": "#ff0000"
+      "0": {},
+      "40": {
+        "FrameIndex": {
+          "Min": 1,
+          "Max": 1
+        }
       },
-      "20": {},
-      "50": {
-        "Opacity": 0.8
+      "60": {
+        "FrameIndex": {
+          "Min": 2,
+          "Max": 2
+        }
       },
-      "100": {
-        "Opacity": 0.0
+      "85": {
+        "FrameIndex": {
+          "Min": 3,
+          "Max": 3
+        }
       }
     },
     "InitialAnimationFrame": {
-      "FrameIndex": {
-        "Min": 0,
-        "Max": 3
+      "Opacity": 1,
+      "Color": "#8e0000",
+      "Rotation": {
+        "Z": {
+          "Min": -180,
+          "Max": -180
+        }
       },
       "Scale": {
         "X": {
-          "Min": 0.15,
-          "Max": 0.17
-        },
-        "Y": {
-          "Min": 0.25,
-          "Max": 0.4
-        }
-      },
-      "Rotation": {
-        "Z": {
-          "Min": 180.0,
-          "Max": 180.0
+          "Min": 0.05,
+          "Max": 0.1
         }
       }
     },
-    "SoftParticles": "Enable",
+    "SoftParticles": "Disable",
     "FrameSize": {
-      "Width": 32,
+      "Width": 64,
       "Height": 64
-    }
+    },
+    "UVOption": "RandomFlipU"
   },
   "SpawnBurst": true,
-  "SpawnRate": {
-    "Min": 10.0,
-    "Max": 10.0
-  },
   "UseEmitDirection": true,
   "Attractors": [
     {
@@ -112,5 +100,8 @@
       }
     }
   ],
-  "LightInfluence": 0.4
+  "IntersectionHighlight": {
+    "HighlightThreshold": 0
+  },
+  "LightInfluence": 1
 }

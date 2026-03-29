@@ -1,0 +1,104 @@
+{
+  "RenderMode": "BlendLinear",
+  "EmitOffset": {
+    "X": {
+      "Min": 0.2,
+      "Max": 0.2
+    },
+    "Y": {
+      "Min": 0.2,
+      "Max": 0.2
+    },
+    "Z": {
+      "Min": 0.2,
+      "Max": 0.2
+    }
+  },
+  "ParticleRotationInfluence": "BillboardVelocity",
+  "LinearFiltering": true,
+  "ParticleRotateWithSpawner": false,
+  "TrailSpawnerPositionMultiplier": 1,
+  "TrailSpawnerRotationMultiplier": 1,
+  "MaxConcurrentParticles": 30,
+  "ParticleLifeSpan": {
+    "Min": 0.1,
+    "Max": 0.2
+  },
+  "TotalParticles": {
+    "Min": 8,
+    "Max": 10
+  },
+  "InitialVelocity": {
+    "Speed": {
+      "Min": 3,
+      "Max": 5
+    },
+    "Yaw": {
+      "Min": 0.0,
+      "Max": 0.0
+    },
+    "Pitch": {
+      "Max": 0.0,
+      "Min": 0.0
+    }
+  },
+  "Particle": {
+    "Texture": "Particles/Textures/Rnd/Sauce_Splash.png",
+    "ScaleRatioConstraint": "OneToOne",
+    "UVOption": "RandomFlipU",
+    "Animation": {
+      "0": {},
+      "25": {
+        "FrameIndex": {
+          "Min": 1,
+          "Max": 1
+        }
+      },
+      "50": {
+        "FrameIndex": {
+          "Min": 2,
+          "Max": 2
+        }
+      },
+      "75": {
+        "FrameIndex": {
+          "Min": 3,
+          "Max": 3
+        }
+      }
+    },
+    "InitialAnimationFrame": {
+      "Scale": {
+        "X": {
+          "Min": 0.1,
+          "Max": 0.15
+        }
+      },
+      "Rotation": {
+        "Z": {
+          "Min": 180.0,
+          "Max": 180.0
+        }
+      },
+      "Color": "#ad0000",
+      "Opacity": 1
+    },
+    "SoftParticles": "Disable",
+    "FrameSize": {
+      "Width": 64,
+      "Height": 64
+    }
+  },
+  "SpawnBurst": true,
+  "UseEmitDirection": true,
+  "Attractors": [
+    {
+      "DampingMultiplier": {
+        "X": 0.8,
+        "Y": 0.8,
+        "Z": 0.8
+      }
+    }
+  ],
+  "LightInfluence": 0.4
+}

@@ -23,7 +23,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
 
         this.particleArg = this.withOptionalArg(
             "particle",
-            "Particle system id to use on hit (e.g. BrutalImpacts_Hit_Blood_V3 / Impact_Sword_Bash)",
+            "Default particle system id to use on hit (e.g. BrutalImpacts_Hit_Blood_V3 / Impact_Sword_Bash)",
             ArgTypes.PARTICLE_SYSTEM
         );
     }

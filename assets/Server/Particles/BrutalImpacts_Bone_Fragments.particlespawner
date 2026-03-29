@@ -19,19 +19,19 @@
   "ParticleRotateWithSpawner": false,
   "TrailSpawnerPositionMultiplier": 1,
   "TrailSpawnerRotationMultiplier": 1,
-  "MaxConcurrentParticles": 30,
+  "MaxConcurrentParticles": 25,
   "ParticleLifeSpan": {
-    "Min": 0.1,
-    "Max": 0.2
+    "Min": 0.2,
+    "Max": 0.25
   },
   "TotalParticles": {
-    "Min": 6,
-    "Max": 10
+    "Min": 4,
+    "Max": 5
   },
   "InitialVelocity": {
     "Speed": {
-      "Min": 3,
-      "Max": 5
+      "Min": 3.0,
+      "Max": 4
     },
     "Yaw": {
       "Min": 0.0,
@@ -43,8 +43,8 @@
     }
   },
   "Particle": {
-    "Texture": "Particles/Textures/Splash/Mud_Splash_Small_Left.png",
-    "UVOption": "None",
+    "Texture": "Particles/Textures/Splash/Sand_Splash.png",
+    "UVOption": "RandomFlipU",
     "Animation": {
       "0": {},
       "25": {
@@ -53,43 +53,46 @@
           "Max": 1
         }
       },
-      "50": {
+      "45": {
         "FrameIndex": {
           "Min": 2,
           "Max": 2
         }
       },
-      "75": {
+      "60": {
         "FrameIndex": {
           "Min": 3,
           "Max": 3
         }
+      },
+      "75": {
+        "FrameIndex": {
+          "Min": 4,
+          "Max": 4
+        }
+      },
+      "90": {
+        "FrameIndex": {
+          "Min": 5,
+          "Max": 5
+        }
       }
     },
     "InitialAnimationFrame": {
-      "FrameIndex": {
-        "Min": 0
-      },
       "Scale": {
         "X": {
-          "Min": 0.15,
-          "Max": 0.3
+          "Min": 0.1,
+          "Max": 0.2
         }
       },
-      "Rotation": {
-        "Z": {
-          "Min": 180.0,
-          "Max": 180.0
-        }
-      },
-      "Color": "#ff0000",
+      "Color": "#f5efd7",
       "Opacity": 1
     },
-    "SoftParticles": "Disable",
     "FrameSize": {
-      "Width": 32,
+      "Width": 64,
       "Height": 32
-    }
+    },
+    "SoftParticles": "Disable"
   },
   "SpawnBurst": true,
   "UseEmitDirection": true,
@@ -101,6 +104,5 @@
         "Z": 0.8
       }
     }
-  ],
-  "LightInfluence": 0.4
+  ]
 }

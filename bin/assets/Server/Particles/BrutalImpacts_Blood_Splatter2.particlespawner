@@ -1,0 +1,114 @@
+{
+  "RenderMode": "Erosion",
+  "EmitOffset": {
+    "X": {
+      "Min": 0.2,
+      "Max": 0.2
+    },
+    "Y": {
+      "Min": 0.2,
+      "Max": 0.2
+    },
+    "Z": {
+      "Min": 0.2,
+      "Max": 0.2
+    }
+  },
+  "ParticleRotationInfluence": "BillboardVelocity",
+  "LinearFiltering": true,
+  "ParticleRotateWithSpawner": false,
+  "TrailSpawnerPositionMultiplier": 1,
+  "TrailSpawnerRotationMultiplier": 1,
+  "MaxConcurrentParticles": 25,
+  "ParticleLifeSpan": {
+    "Min": 0.2,
+    "Max": 0.25
+  },
+  "TotalParticles": {
+    "Min": 4,
+    "Max": 6
+  },
+  "InitialVelocity": {
+    "Speed": {
+      "Min": 3.0,
+      "Max": 4
+    },
+    "Yaw": {
+      "Min": 0.0,
+      "Max": 0.0
+    },
+    "Pitch": {
+      "Max": 0.0,
+      "Min": 0.0
+    }
+  },
+  "Particle": {
+    "Texture": "Particles/Textures/Rnd/Water_Splash_Test4.png",
+    "UVOption": "RandomFlipU",
+    "Animation": {
+      "0": {},
+      "25": {
+        "FrameIndex": {
+          "Min": 1,
+          "Max": 1
+        }
+      },
+      "45": {
+        "FrameIndex": {
+          "Min": 2,
+          "Max": 2
+        }
+      },
+      "60": {
+        "FrameIndex": {
+          "Min": 3,
+          "Max": 3
+        }
+      },
+      "75": {
+        "FrameIndex": {
+          "Min": 4,
+          "Max": 4
+        }
+      },
+      "90": {
+        "FrameIndex": {
+          "Min": 5,
+          "Max": 5
+        }
+      }
+    },
+    "InitialAnimationFrame": {
+      "Scale": {
+        "X": {
+          "Min": 0.1,
+          "Max": 0.15
+        }
+      },
+      "Rotation": {
+        "Z": {
+          "Min": 180.0,
+          "Max": 180.0
+        }
+      },
+      "Color": "#ff0000",
+      "Opacity": 1
+    },
+    "FrameSize": {
+      "Width": 128,
+      "Height": 128
+    },
+    "SoftParticles": "Disable"
+  },
+  "SpawnBurst": true,
+  "UseEmitDirection": true,
+  "Attractors": [
+    {
+      "DampingMultiplier": {
+        "X": 0.8,
+        "Y": 0.8,
+        "Z": 0.8
+      }
+    }
+  ]
+}

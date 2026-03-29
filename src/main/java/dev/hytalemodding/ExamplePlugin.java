@@ -3,6 +3,7 @@ package dev.hytalemodding;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import dev.hytalemodding.api.BrutalImpactsApi;
 import dev.hytalemodding.commands.BrutalImpactsCommand;
 import dev.hytalemodding.commands.ExampleCommand;
 //import dev.hytalemodding.commands.ExamplePlayerCommand;
@@ -31,9 +32,13 @@ public class ExamplePlugin extends JavaPlugin {
         //this.getCommandRegistry().registerCommand(new SpawnParticleSystemCommand());
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
 
+        // Example hit-particle rules by target model asset id (tweak strings to match your actual assets).
+        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton", "BrutalImpacts_Hit_Bone_Default");
+        BrutalImpactsApi.hitParticles().registerModelContains("Spider", "BrutalImpacts_Hit_Blood_Alternative");
+
         // Adds an extra impact particle system to all Damage events (without replacing existing ones).
         // Replace the id below with the id of your custom particle system asset.
-        BrutalImpactParticlesSystem brutalParticles = new BrutalImpactParticlesSystem("BrutalImpacts_Hit_Blood_V3", 75.0, false);
+        BrutalImpactParticlesSystem brutalParticles = new BrutalImpactParticlesSystem("BrutalImpacts_Hit_Blood_Default", 75.0, true);
         this.getEntityStoreRegistry().registerSystem(brutalParticles);
         this.getCommandRegistry().registerCommand(new BrutalImpactsCommand(brutalParticles));
     }

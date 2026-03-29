@@ -14,6 +14,7 @@ import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.protocol.Color;
 import com.hypixel.hytale.protocol.Direction;
 import com.hypixel.hytale.protocol.Vector3f;
+import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.particle.config.WorldParticle;
 import com.hypixel.hytale.server.core.entity.entities.Player;
@@ -26,6 +27,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelParticle;
 import com.hypixel.hytale.server.core.universe.world.ParticleUtil;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
+import dev.hytalemodding.api.BrutalImpactsApi;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
@@ -44,6 +46,7 @@ import static com.hypixel.hytale.component.dependency.OrderPriority.CLOSEST;
 public class BrutalImpactParticlesSystem extends DamageEventSystem {
 
     private static final ComponentType<EntityStore, TransformComponent> TRANSFORM_COMPONENT_TYPE = TransformComponent.getComponentType();
+    private static final ComponentType<EntityStore, ModelComponent> MODEL_COMPONENT_TYPE = ModelComponent.getComponentType();
     private static final Query<EntityStore> QUERY = Query.and(TRANSFORM_COMPONENT_TYPE);
 
     private volatile String particleSystemId;
@@ -79,9 +82,24 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         @Nonnull CommandBuffer<EntityStore> commandBuffer,
         @Nonnull Damage damage
     ) {
-        String particleSystemIdSnapshot = this.particleSystemId;
-        if (particleSystemIdSnapshot == null || particleSystemIdSnapshot.isBlank()) {
+        String defaultParticleSystemIdSnapshot = this.particleSystemId;
+        if (defaultParticleSystemIdSnapshot == null || defaultParticleSystemIdSnapshot.isBlank()) {
             return;
+        }
+
+        String modelAssetId = null;
+        ModelComponent modelComponent = archetypeChunk.getComponent(index, MODEL_COMPONENT_TYPE);
+        if (modelComponent != null && modelComponent.getModel() != null) {
+            modelAssetId = modelComponent.getModel().getModelAssetId();
+        }
+
+        String particleSystemIdSnapshot = BrutalImpactsApi.hitParticles().resolve(modelAssetId, defaultParticleSystemIdSnapshot);
+        if (particleSystemIdSnapshot.isBlank()) {
+            return;
+        }
+
+        if (this.debug) {
+            System.out.println("[BrutalImpacts] targetModelAssetId=" + modelAssetId + " -> particle=" + particleSystemIdSnapshot);
         }
 
         WorldParticle extra = new WorldParticle(

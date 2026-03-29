@@ -1,0 +1,16 @@
+{
+  "Spawners": [
+    {
+      "SpawnerId": "BrutalImpacts_Blood_Drops2"
+    },
+    {
+      "SpawnerId": "BrutalImpacts_Blood_Splatter",
+      "TotalSpawners": 1
+    },
+    {
+      "SpawnerId": "BrutalImpacts_Blood_Drops_Directional"
+    }
+  ],
+  "IsImportant": false,
+  "LifeSpan": 0
+}
