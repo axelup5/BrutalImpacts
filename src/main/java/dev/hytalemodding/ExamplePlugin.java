@@ -33,8 +33,11 @@ public class ExamplePlugin extends JavaPlugin {
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
 
         // Example hit-particle rules by target model asset id (tweak strings to match your actual assets).
-        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton", "BrutalImpacts_Hit_Bone_Default");
-        BrutalImpactsApi.hitParticles().registerModelContains("Spider", "BrutalImpacts_Hit_Blood_Alternative");
+        // More specific rules should be registered first.
+        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton_Burnt", "BrutalImpacts_Hit_Blood_Default", 0, 0, 0);
+        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton_Sand", "BrutalImpacts_Hit_Bone_Default", 0, 0, 0);
+        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton", "BrutalImpacts_Hit_Bone_Default");        
+        BrutalImpactsApi.hitParticles().registerModelContainsTint("Spider", "BrutalImpacts_Hit_Blood_Default", 255, 255, 255);
 
         // Adds an extra impact particle system to all Damage events (without replacing existing ones).
         // Replace the id below with the id of your custom particle system asset.

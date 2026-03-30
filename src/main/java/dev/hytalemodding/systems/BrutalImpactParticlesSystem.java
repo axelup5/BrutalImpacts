@@ -28,6 +28,7 @@ import com.hypixel.hytale.server.core.asset.type.model.config.ModelParticle;
 import com.hypixel.hytale.server.core.universe.world.ParticleUtil;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import dev.hytalemodding.api.BrutalImpactsApi;
+import dev.hytalemodding.api.HitParticleSpec;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
@@ -93,18 +94,20 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
             modelAssetId = modelComponent.getModel().getModelAssetId();
         }
 
-        String particleSystemIdSnapshot = BrutalImpactsApi.hitParticles().resolve(modelAssetId, defaultParticleSystemIdSnapshot);
-        if (particleSystemIdSnapshot.isBlank()) {
+        HitParticleSpec spec = BrutalImpactsApi.hitParticles().resolveSpec(modelAssetId, defaultParticleSystemIdSnapshot);
+        String particleSystemIdSnapshot = spec.particleSystemId();
+        if (particleSystemIdSnapshot == null || particleSystemIdSnapshot.isBlank()) {
             return;
         }
+        Color colorOverride = spec.colorOverride();
 
         if (this.debug) {
-            System.out.println("[BrutalImpacts] targetModelAssetId=" + modelAssetId + " -> particle=" + particleSystemIdSnapshot);
+            System.out.println("[BrutalImpacts] targetModelAssetId=" + modelAssetId + " -> particle=" + particleSystemIdSnapshot + " colorOverride=" + colorOverride);
         }
 
         WorldParticle extra = new WorldParticle(
             particleSystemIdSnapshot,
-            new Color((byte) 120, (byte) 0, (byte) 0),
+            colorOverride,
             1.0F,
             new Vector3f(0.0F, 0.0F, 0.0F),
             new Direction(0.0F, 0.0F, 0.0F)
