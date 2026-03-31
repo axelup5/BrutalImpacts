@@ -4,6 +4,7 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import dev.hytalemodding.api.BrutalImpactsApi;
+import dev.hytalemodding.api.HitParticleRulesJson;
 import dev.hytalemodding.commands.BrutalImpactsCommand;
 import dev.hytalemodding.commands.ExampleCommand;
 //import dev.hytalemodding.commands.ExamplePlayerCommand;
@@ -15,6 +16,8 @@ import dev.hytalemodding.events.ExampleEvent;
 import dev.hytalemodding.systems.BrutalImpactParticlesSystem;
 
 import javax.annotation.Nonnull;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class ExamplePlugin extends JavaPlugin {
 
@@ -32,19 +35,23 @@ public class ExamplePlugin extends JavaPlugin {
         //this.getCommandRegistry().registerCommand(new SpawnParticleSystemCommand());
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
 
-        // Example hit-particle rules by target model asset id (tweak strings to match your actual assets).
-        // More specific rules should be registered first.
-        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton_Burnt", "BrutalImpacts_Hit_Bone_Default", 50, 50, 50);
-        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton_Sand", "BrutalImpacts_Hit_Bone_Default", 255, 235, 145);
-        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton", "BrutalImpacts_Hit_Bone_Default", 235, 224, 192);
-        BrutalImpactsApi.hitParticles().registerModelContains("Spider", "BrutalImpacts_Hit_Blood_Default", 30, 30, 30);
-
-        // Example: multiple particle systems + per-effect color + per-effect scale for a single mob.
-        BrutalImpactsApi.hitParticles().registerModelContains(
-            "Zombie",
-            dev.hytalemodding.api.HitParticleEffect.tinted("BrutalImpacts_Hit_Blood_Default", 255, 0, 0, 2.0F),
-            dev.hytalemodding.api.HitParticleEffect.tinted("BrutalImpacts_Hit_Bone_Default", 0, 80, 255, 1.0F)
-        );
+        // Hit particle rules are loaded from JSON (supports thousands of mobs efficiently).
+        // External override (no rebuild): config/brutalimpacts/hit_particles.json
+        // Fallback: bundled resource /hit_particles.json
+        int loadedRules = 0;
+        try {
+            Path external = Path.of("config", "brutalimpacts", "hit_particles.json");
+            if (Files.exists(external)) {
+                loadedRules = HitParticleRulesJson.clearAndLoadFromFile(BrutalImpactsApi.hitParticles(), external);
+                System.out.println("[BrutalImpacts] Loaded hit particle rules from " + external + " (" + loadedRules + ")");
+            } else {
+                loadedRules = HitParticleRulesJson.clearAndLoadFromResource(BrutalImpactsApi.hitParticles(), ExamplePlugin.class, "/hit_particles.json");
+                System.out.println("[BrutalImpacts] Loaded hit particle rules from bundled /hit_particles.json (" + loadedRules + ")");
+            }
+        } catch (Exception e) {
+            System.out.println("[BrutalImpacts] Failed to load hit particle rules JSON: " + e.getMessage());
+            e.printStackTrace();
+        }
 
         // Adds an extra impact particle system to all Damage events (without replacing existing ones).
         // Replace the id below with the id of your custom particle system asset.

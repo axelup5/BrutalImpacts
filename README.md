@@ -49,6 +49,15 @@ For in-depth configuration, you can visit the [ScaffoldIt Plugin Docs](https://s
 - [Hytale Modding Discord](https://discord.gg/hytalemodding)
 - [ScaffoldIt Plugin Docs](https://scaffoldit.dev)
 
+## Brutal Impacts: Hit Particles JSON
+
+This plugin can load hit particle rules from JSON:
+
+- External override: `config/brutalimpacts/hit_particles.json`
+- Bundled fallback: `src/main/resources/hit_particles.json`
+
+Each rule uses a `match` (`exact` / `prefix` / `contains`) and either a single effect (`particleSystemId` + optional `color`/`scale`) or multiple `effects`.
+
 ## License
 
 Add your own after copying the template, though we recommend using MIT, BSD, or Apache to keep
