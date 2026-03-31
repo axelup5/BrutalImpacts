@@ -11,6 +11,10 @@ public record HitParticleEffect(@Nonnull String particleSystemId, @Nullable Colo
         return new HitParticleEffect(particleSystemId, null, 1.0F);
     }
 
+    public static HitParticleEffect of(@Nonnull String particleSystemId, float scale) {
+        return new HitParticleEffect(particleSystemId, null, scale);
+    }
+
     public static HitParticleEffect tinted(@Nonnull String particleSystemId, int r, int g, int b) {
         return tinted(particleSystemId, r, g, b, 1.0F);
     }

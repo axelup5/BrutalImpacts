@@ -34,13 +34,13 @@ public class ExamplePlugin extends JavaPlugin {
 
         // Example hit-particle rules by target model asset id (tweak strings to match your actual assets).
         // More specific rules should be registered first.
-        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton_Burnt", "BrutalImpacts_Hit_Bone_Default", 50, 50, 50);
-        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton_Sand", "BrutalImpacts_Hit_Bone_Default", 255, 235, 145);
-        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton", "BrutalImpacts_Hit_Bone_Default", 235, 224, 192);        
-        BrutalImpactsApi.hitParticles().registerModelContainsTint("Spider", "BrutalImpacts_Hit_Blood_Default", 30, 30, 30);
+        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton_Burnt", "BrutalImpacts_Hit_Bone_Default", 50, 50, 50);
+        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton_Sand", "BrutalImpacts_Hit_Bone_Default", 255, 235, 145);
+        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton", "BrutalImpacts_Hit_Bone_Default", 235, 224, 192);
+        BrutalImpactsApi.hitParticles().registerModelContains("Spider", "BrutalImpacts_Hit_Blood_Default", 30, 30, 30);
 
         // Example: multiple particle systems + per-effect color + per-effect scale for a single mob.
-        BrutalImpactsApi.hitParticles().registerModelContainsEffects(
+        BrutalImpactsApi.hitParticles().registerModelContains(
             "Zombie",
             dev.hytalemodding.api.HitParticleEffect.tinted("BrutalImpacts_Hit_Blood_Default", 255, 0, 0, 2.0F),
             dev.hytalemodding.api.HitParticleEffect.tinted("BrutalImpacts_Hit_Bone_Default", 0, 80, 255, 1.0F)
