@@ -39,6 +39,13 @@ public class ExamplePlugin extends JavaPlugin {
         BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton", "BrutalImpacts_Hit_Bone_Default", 235, 224, 192);        
         BrutalImpactsApi.hitParticles().registerModelContainsTint("Spider", "BrutalImpacts_Hit_Blood_Default", 30, 30, 30);
 
+        // Example: multiple particle systems + per-effect color + per-effect scale for a single mob.
+        BrutalImpactsApi.hitParticles().registerModelContainsEffects(
+            "Zombie",
+            dev.hytalemodding.api.HitParticleEffect.tinted("BrutalImpacts_Hit_Blood_Default", 255, 0, 0, 2.0F),
+            dev.hytalemodding.api.HitParticleEffect.tinted("BrutalImpacts_Hit_Bone_Default", 0, 80, 255, 1.0F)
+        );
+
         // Adds an extra impact particle system to all Damage events (without replacing existing ones).
         // Replace the id below with the id of your custom particle system asset.
         BrutalImpactParticlesSystem brutalParticles = new BrutalImpactParticlesSystem("BrutalImpacts_Hit_Blood_Default", 75.0, true);

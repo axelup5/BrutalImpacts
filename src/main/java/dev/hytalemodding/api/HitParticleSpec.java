@@ -1,8 +1,16 @@
 package dev.hytalemodding.api;
 
-import com.hypixel.hytale.protocol.Color;
+import javax.annotation.Nonnull;
+import java.util.List;
 
-import javax.annotation.Nullable;
+public record HitParticleSpec(@Nonnull List<HitParticleEffect> effects) {
 
-public record HitParticleSpec(String particleSystemId, @Nullable Color colorOverride) {
+    public HitParticleSpec {
+        effects = List.copyOf(effects);
+    }
+
+    public static HitParticleSpec single(@Nonnull HitParticleEffect effect) {
+        return new HitParticleSpec(List.of(effect));
+    }
 }
+

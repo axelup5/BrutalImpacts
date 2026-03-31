@@ -28,12 +28,16 @@ import com.hypixel.hytale.server.core.asset.type.model.config.ModelParticle;
 import com.hypixel.hytale.server.core.universe.world.ParticleUtil;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import dev.hytalemodding.api.BrutalImpactsApi;
+import dev.hytalemodding.api.HitParticleEffect;
 import dev.hytalemodding.api.HitParticleSpec;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static com.hypixel.hytale.component.dependency.Order.BEFORE;
@@ -52,6 +56,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
 
     private volatile String particleSystemId;
     private volatile @Nullable Color defaultColor;
+    private volatile float defaultScale = 1.0F;
     private final double defaultViewDistance;
     private final boolean debug;
 
@@ -70,6 +75,13 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         this.defaultColor = defaultColor;
     }
 
+    public float getDefaultScale() {
+        return this.defaultScale;
+    }
+
+    public void setDefaultScale(float defaultScale) {
+        this.defaultScale = defaultScale;
+    }
 
     @Nonnull
     public String getParticleSystemId() {
@@ -105,65 +117,38 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
             modelAssetId = modelComponent.getModel().getModelAssetId();
         }
 
+        if (this.debug) {
+            System.out.println("[BrutalImpacts] targetModelAssetId=" + modelAssetId);
+        }
+
         HitParticleSpec spec = BrutalImpactsApi.hitParticles().resolveSpec(modelAssetId, defaultParticleSystemIdSnapshot);
-        String particleSystemIdSnapshot = spec.particleSystemId();
-        if (particleSystemIdSnapshot == null || particleSystemIdSnapshot.isBlank()) {
+        List<HitParticleEffect> effects = spec.effects();
+        if (effects == null || effects.isEmpty()) {
             return;
         }
 
-        Color colorOverride = spec.colorOverride();
-        Color colorToUse = colorOverride != null ? colorOverride : this.defaultColor;
-
-        if (this.debug) {
-            System.out.println(
-                "[BrutalImpacts] targetModelAssetId=" + modelAssetId
-                    + " -> particle=" + particleSystemIdSnapshot
-                    + " colorOverride=" + formatColor(colorOverride)
-                    + " colorUsed=" + formatColor(colorToUse)
-            );
+        WorldParticle[] extras = buildWorldParticles(effects);
+        if (extras.length == 0) {
+            return;
         }
-
-        WorldParticle extra = new WorldParticle(
-            particleSystemIdSnapshot,
-            colorToUse,
-            1.0F,
-            new Vector3f(0.0F, 0.0F, 0.0F),
-            new Direction(0.0F, 0.0F, 0.0F)
-        );
 
         Damage.Particles particles = damage.getIfPresentMetaObject(Damage.IMPACT_PARTICLES);
         if (particles == null) {
-            particles = new Damage.Particles(new ModelParticle[0], new WorldParticle[] { extra }, this.defaultViewDistance);
+            particles = new Damage.Particles(new ModelParticle[0], extras, this.defaultViewDistance);
             damage.putMetaObject(Damage.IMPACT_PARTICLES, particles);
-            this.debugNotify(commandBuffer, damage, "Created IMPACT_PARTICLES + appended " + particleSystemIdSnapshot);
-            this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extra);
+            this.debugNotify(commandBuffer, damage, "Created IMPACT_PARTICLES + appended " + extras.length + " world particles");
+            this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extras);
             return;
         }
 
-        WorldParticle[] existing = particles.getWorldParticles();
-        if (existing != null) {
-            for (WorldParticle worldParticle : existing) {
-                if (worldParticle != null && particleSystemIdSnapshot.equals(worldParticle.getSystemId())) {
-                    return;
-                }
-            }
-        }
-
-        if (existing == null || existing.length == 0) {
-            particles.setWorldParticles(new WorldParticle[] { extra });
-        } else {
-            WorldParticle[] combined = new WorldParticle[existing.length + 1];
-            System.arraycopy(existing, 0, combined, 0, existing.length);
-            combined[existing.length] = extra;
-            particles.setWorldParticles(combined);
-        }
+        appendWorldParticles(particles, extras);
 
         if (particles.getViewDistance() < this.defaultViewDistance) {
             particles.setViewDistance(this.defaultViewDistance);
         }
 
-        this.debugNotify(commandBuffer, damage, "Appended world particle " + particleSystemIdSnapshot);
-        this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extra);
+        this.debugNotify(commandBuffer, damage, "Ensured " + extras.length + " world particles are present");
+        this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extras);
     }
 
     /**
@@ -181,7 +166,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         @Nonnull ArchetypeChunk<EntityStore> archetypeChunk,
         @Nonnull CommandBuffer<EntityStore> commandBuffer,
         @Nonnull Damage damage,
-        @Nonnull WorldParticle extra
+        @Nonnull WorldParticle[] extras
     ) {
         boolean canBePredicted = damage.getMetaStore().getMetaObject(Damage.CAN_BE_PREDICTED);
         if (!canBePredicted) {
@@ -216,8 +201,10 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         ObjectArrayList<Ref<EntityStore>> justSource = new ObjectArrayList<>(1);
         justSource.add(sourceRef);
 
-        ParticleUtil.spawnParticleEffect(extra, targetPosition, justSource, commandBuffer);
-        this.debugNotify(commandBuffer, damage, "Sent predicted-only particle to source " + extra.getSystemId());
+        for (WorldParticle extra : extras) {
+            ParticleUtil.spawnParticleEffect(extra, targetPosition, justSource, commandBuffer);
+        }
+        this.debugNotify(commandBuffer, damage, "Sent predicted-only particles to source (" + extras.length + ")");
     }
 
     private void debugNotify(@Nonnull CommandBuffer<EntityStore> commandBuffer, @Nonnull Damage damage, @Nonnull String msg) {
@@ -242,6 +229,85 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
             return "null";
         }
         return "rgb(" + (color.red & 0xFF) + "," + (color.green & 0xFF) + "," + (color.blue & 0xFF) + ")";
+    }
+
+    @Nonnull
+    private WorldParticle[] buildWorldParticles(@Nonnull List<HitParticleEffect> effects) {
+        ArrayList<WorldParticle> out = new ArrayList<>(effects.size());
+        for (HitParticleEffect effect : effects) {
+            if (effect == null || effect.particleSystemId() == null || effect.particleSystemId().isBlank()) {
+                continue;
+            }
+
+            Color colorToUse = effect.colorOverride() != null ? effect.colorOverride() : this.defaultColor;
+            float scaleToUse = effect.scale() > 0.0F ? effect.scale() : this.defaultScale;
+
+            out.add(
+                new WorldParticle(
+                    effect.particleSystemId(),
+                    colorToUse,
+                    scaleToUse,
+                    new Vector3f(0.0F, 0.0F, 0.0F),
+                    new Direction(0.0F, 0.0F, 0.0F)
+                )
+            );
+        }
+
+        if (this.debug) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[BrutalImpacts] resolved effects:");
+            for (WorldParticle wp : out) {
+                sb.append(" {id=").append(wp.getSystemId())
+                    .append(", scale=").append(wp.getScale())
+                    .append(", color=").append(formatColor(wp.getColor()))
+                    .append("}");
+            }
+            System.out.println(sb);
+        }
+
+        return out.toArray(new WorldParticle[0]);
+    }
+
+    private static void appendWorldParticles(@Nonnull Damage.Particles particles, @Nonnull WorldParticle[] extras) {
+        WorldParticle[] existing = particles.getWorldParticles();
+
+        ArrayList<WorldParticle> combined = new ArrayList<>((existing == null ? 0 : existing.length) + extras.length);
+        if (existing != null) {
+            for (WorldParticle wp : existing) {
+                if (wp != null) {
+                    combined.add(wp);
+                }
+            }
+        }
+
+        for (WorldParticle extra : extras) {
+            if (extra == null) {
+                continue;
+            }
+
+            boolean alreadyPresent = false;
+            for (WorldParticle wp : combined) {
+                if (sameWorldParticle(wp, extra)) {
+                    alreadyPresent = true;
+                    break;
+                }
+            }
+
+            if (!alreadyPresent) {
+                combined.add(extra);
+            }
+        }
+
+        particles.setWorldParticles(combined.toArray(new WorldParticle[0]));
+    }
+
+    private static boolean sameWorldParticle(@Nullable WorldParticle a, @Nullable WorldParticle b) {
+        if (a == null || b == null) {
+            return false;
+        }
+        return Objects.equals(a.getSystemId(), b.getSystemId())
+            && Float.compare(a.getScale(), b.getScale()) == 0
+            && Objects.equals(a.getColor(), b.getColor());
     }
 
     @Nonnull
