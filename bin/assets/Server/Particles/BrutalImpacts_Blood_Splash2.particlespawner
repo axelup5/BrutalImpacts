@@ -80,7 +80,6 @@
           "Max": 0.4
         }
       },
-      "Color": "#ad0000",
       "Opacity": 1
     },
     "SoftParticles": "Disable",

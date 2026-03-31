@@ -51,6 +51,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
     private static final Query<EntityStore> QUERY = Query.and(TRANSFORM_COMPONENT_TYPE);
 
     private volatile String particleSystemId;
+    private volatile @Nullable Color defaultColor;
     private final double defaultViewDistance;
     private final boolean debug;
 
@@ -59,6 +60,16 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         this.defaultViewDistance = defaultViewDistance;
         this.debug = debug;
     }
+
+    @Nullable
+    public Color getDefaultColor() {
+        return this.defaultColor;
+    }
+
+    public void setDefaultColor(@Nullable Color defaultColor) {
+        this.defaultColor = defaultColor;
+    }
+
 
     @Nonnull
     public String getParticleSystemId() {
@@ -99,15 +110,22 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
         if (particleSystemIdSnapshot == null || particleSystemIdSnapshot.isBlank()) {
             return;
         }
+
         Color colorOverride = spec.colorOverride();
+        Color colorToUse = colorOverride != null ? colorOverride : this.defaultColor;
 
         if (this.debug) {
-            System.out.println("[BrutalImpacts] targetModelAssetId=" + modelAssetId + " -> particle=" + particleSystemIdSnapshot + " colorOverride=" + colorOverride);
+            System.out.println(
+                "[BrutalImpacts] targetModelAssetId=" + modelAssetId
+                    + " -> particle=" + particleSystemIdSnapshot
+                    + " colorOverride=" + formatColor(colorOverride)
+                    + " colorUsed=" + formatColor(colorToUse)
+            );
         }
 
         WorldParticle extra = new WorldParticle(
             particleSystemIdSnapshot,
-            colorOverride,
+            colorToUse,
             1.0F,
             new Vector3f(0.0F, 0.0F, 0.0F),
             new Direction(0.0F, 0.0F, 0.0F)
@@ -216,6 +234,14 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
                 player.sendMessage(Message.raw("[BrutalImpacts] " + msg + " (source=" + sourceType + ")"));
             }
         }
+    }
+
+    @Nonnull
+    private static String formatColor(@Nullable Color color) {
+        if (color == null) {
+            return "null";
+        }
+        return "rgb(" + (color.red & 0xFF) + "," + (color.green & 0xFF) + "," + (color.blue & 0xFF) + ")";
     }
 
     @Nonnull

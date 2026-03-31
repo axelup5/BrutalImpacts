@@ -6,4 +6,3 @@ import javax.annotation.Nullable;
 
 public record HitParticleSpec(String particleSystemId, @Nullable Color colorOverride) {
 }
-

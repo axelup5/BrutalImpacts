@@ -88,7 +88,6 @@
           "Max": 180.0
         }
       },
-      "Color": "#ad0000",
       "Opacity": 1
     },
     "SoftParticles": "Disable",

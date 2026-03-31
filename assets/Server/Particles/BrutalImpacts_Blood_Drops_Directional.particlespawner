@@ -68,7 +68,6 @@
     },
     "InitialAnimationFrame": {
       "Opacity": 1,
-      "Color": "#8e0000",
       "Rotation": {
         "Z": {
           "Min": -180,

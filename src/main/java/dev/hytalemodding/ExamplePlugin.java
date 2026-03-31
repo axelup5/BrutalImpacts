@@ -34,14 +34,15 @@ public class ExamplePlugin extends JavaPlugin {
 
         // Example hit-particle rules by target model asset id (tweak strings to match your actual assets).
         // More specific rules should be registered first.
-        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton_Burnt", "BrutalImpacts_Hit_Blood_Default", 0, 0, 0);
-        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton_Sand", "BrutalImpacts_Hit_Bone_Default", 0, 0, 0);
-        BrutalImpactsApi.hitParticles().registerModelContains("Skeleton", "BrutalImpacts_Hit_Bone_Default");        
-        BrutalImpactsApi.hitParticles().registerModelContainsTint("Spider", "BrutalImpacts_Hit_Blood_Default", 255, 255, 255);
+        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton_Burnt", "BrutalImpacts_Hit_Bone_Default", 50, 50, 50);
+        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton_Sand", "BrutalImpacts_Hit_Bone_Default", 255, 235, 145);
+        BrutalImpactsApi.hitParticles().registerModelContainsTint("Skeleton", "BrutalImpacts_Hit_Bone_Default", 235, 224, 192);        
+        BrutalImpactsApi.hitParticles().registerModelContainsTint("Spider", "BrutalImpacts_Hit_Blood_Default", 30, 30, 30);
 
         // Adds an extra impact particle system to all Damage events (without replacing existing ones).
         // Replace the id below with the id of your custom particle system asset.
         BrutalImpactParticlesSystem brutalParticles = new BrutalImpactParticlesSystem("BrutalImpacts_Hit_Blood_Default", 75.0, true);
+        brutalParticles.setDefaultColor(new com.hypixel.hytale.protocol.Color((byte) 150, (byte) 0, (byte) 0));
         this.getEntityStoreRegistry().registerSystem(brutalParticles);
         this.getCommandRegistry().registerCommand(new BrutalImpactsCommand(brutalParticles));
     }
