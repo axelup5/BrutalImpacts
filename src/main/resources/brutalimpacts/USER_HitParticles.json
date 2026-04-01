@@ -1,0 +1,11 @@
+{
+  "rules": [
+    {
+      "match": { "type": "exact", "value": "Skeleton" },
+      "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+      "color": { "r": 235, "g": 224, "b": 192 },
+      "scale": 1.0
+    }
+  ]
+}
+

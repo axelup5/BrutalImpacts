@@ -48,6 +48,28 @@ public final class HitParticleRulesJson {
     }
 
     /**
+     * Loads rules from a JSON resource on the classpath (does NOT clear the registry).
+     *
+     * @return number of loaded rules
+     */
+    public static int loadIntoFromResource(
+        @Nonnull HitParticleRegistry registry,
+        @Nonnull Class<?> resourceContext,
+        @Nonnull String resourcePath
+    ) throws IOException {
+        Objects.requireNonNull(registry, "registry");
+        Objects.requireNonNull(resourceContext, "resourceContext");
+        Objects.requireNonNull(resourcePath, "resourcePath");
+
+        try (InputStream in = resourceContext.getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                throw new IOException("Resource not found: " + resourcePath);
+            }
+            return loadInto(registry, new InputStreamReader(in, StandardCharsets.UTF_8));
+        }
+    }
+
+    /**
      * Loads rules from a JSON file. This clears the registry first.
      *
      * @return number of loaded rules
@@ -62,11 +84,38 @@ public final class HitParticleRulesJson {
     }
 
     /**
+     * Loads rules from a JSON file (does NOT clear the registry).
+     *
+     * @return number of loaded rules
+     */
+    public static int loadIntoFromFile(@Nonnull HitParticleRegistry registry, @Nonnull Path path) throws IOException {
+        Objects.requireNonNull(registry, "registry");
+        Objects.requireNonNull(path, "path");
+
+        try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+            return loadInto(registry, reader);
+        }
+    }
+
+    /**
      * Loads rules from a Reader. This clears the registry first.
      *
      * @return number of loaded rules
      */
     public static int clearAndLoad(@Nonnull HitParticleRegistry registry, @Nonnull Reader reader) {
+        Objects.requireNonNull(registry, "registry");
+        Objects.requireNonNull(reader, "reader");
+
+        registry.clear();
+        return loadInto(registry, reader);
+    }
+
+    /**
+     * Loads rules from a Reader (does NOT clear the registry).
+     *
+     * @return number of loaded rules
+     */
+    public static int loadInto(@Nonnull HitParticleRegistry registry, @Nonnull Reader reader) {
         Objects.requireNonNull(registry, "registry");
         Objects.requireNonNull(reader, "reader");
 
@@ -78,8 +127,6 @@ public final class HitParticleRulesJson {
         }
 
         List<Rule> rules = config == null ? List.of() : safeList(config.rules);
-
-        registry.clear();
 
         int loaded = 0;
         for (Rule rule : rules) {
@@ -181,4 +228,3 @@ public final class HitParticleRulesJson {
         private Integer b;
     }
 }
-

@@ -4,7 +4,6 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import dev.hytalemodding.api.BrutalImpactsApi;
-import dev.hytalemodding.api.HitParticleRulesJson;
 import dev.hytalemodding.commands.BrutalImpactsCommand;
 import dev.hytalemodding.commands.ExampleCommand;
 //import dev.hytalemodding.commands.ExamplePlayerCommand;
@@ -12,11 +11,11 @@ import dev.hytalemodding.commands.ExampleCommand;
 import dev.hytalemodding.commands.HealPlayerCommand;
 import dev.hytalemodding.commands.ServerRulesCommand;
 //import dev.hytalemodding.commands.SpawnParticleSystemCommand;
+import dev.hytalemodding.config.BrutalImpactsFiles;
 import dev.hytalemodding.events.ExampleEvent;
 import dev.hytalemodding.systems.BrutalImpactParticlesSystem;
 
 import javax.annotation.Nonnull;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class ExamplePlugin extends JavaPlugin {
@@ -35,19 +34,13 @@ public class ExamplePlugin extends JavaPlugin {
         //this.getCommandRegistry().registerCommand(new SpawnParticleSystemCommand());
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
 
-        // Hit particle rules are loaded from JSON (supports thousands of mobs efficiently).
-        // External override (no rebuild): config/brutalimpacts/hit_particles.json
-        // Fallback: bundled resource /hit_particles.json
-        int loadedRules = 0;
+        // Hit particle rules are loaded from JSON in the Mods folder:
+        // `Hytale/UserData/Mods/BrutalImpacts/*.json`
         try {
-            Path external = Path.of("config", "brutalimpacts", "hit_particles.json");
-            if (Files.exists(external)) {
-                loadedRules = HitParticleRulesJson.clearAndLoadFromFile(BrutalImpactsApi.hitParticles(), external);
-                System.out.println("[BrutalImpacts] Loaded hit particle rules from " + external + " (" + loadedRules + ")");
-            } else {
-                loadedRules = HitParticleRulesJson.clearAndLoadFromResource(BrutalImpactsApi.hitParticles(), ExamplePlugin.class, "/hit_particles.json");
-                System.out.println("[BrutalImpacts] Loaded hit particle rules from bundled /hit_particles.json (" + loadedRules + ")");
-            }
+            Path dataDir = BrutalImpactsFiles.resolveDataDir(ExamplePlugin.class);
+            BrutalImpactsFiles.ensureLayout(ExamplePlugin.class, dataDir);
+            int loadedRules = BrutalImpactsFiles.clearAndLoadAllHitParticleJson(BrutalImpactsApi.hitParticles(), dataDir);
+            System.out.println("[BrutalImpacts] Loaded hit particle rules (" + loadedRules + ") from " + dataDir);
         } catch (Exception e) {
             System.out.println("[BrutalImpacts] Failed to load hit particle rules JSON: " + e.getMessage());
             e.printStackTrace();

@@ -51,12 +51,13 @@ For in-depth configuration, you can visit the [ScaffoldIt Plugin Docs](https://s
 
 ## Brutal Impacts: Hit Particles JSON
 
-This plugin can load hit particle rules from JSON:
+This plugin loads hit particle rules from JSON files in:
 
-- External override: `config/brutalimpacts/hit_particles.json`
-- Bundled fallback: `src/main/resources/hit_particles.json`
+`Hytale/UserData/Mods/BrutalImpacts/`
 
-Each rule uses a `match` (`exact` / `prefix` / `contains`) and either a single effect (`particleSystemId` + optional `color`/`scale`) or multiple `effects`.
+- `DefaultHitParticles_ReadOnly.json` is overwritten when the mod updates
+- `USER_HitParticles.json` is created once and never overwritten
+- Any other `*.json` file is also read (e.g. `MoreAnimals.json`)
 
 ## License
 
