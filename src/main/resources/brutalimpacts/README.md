@@ -27,6 +27,12 @@ When multiple JSON files define rules for the same mob/model id, priority is:
 
 Tip: if you need a modder file to win over another modder file, prefix the filename (e.g. `00_MoreAnimals.json`).
 
+### Hot reload
+
+After editing any JSON file, you can reload rules in-game with:
+
+`/brutalimpacts reload`
+
 ### JSON format
 
 ```json
@@ -48,4 +54,3 @@ Tip: if you need a modder file to win over another modder file, prefix the filen
   ]
 }
 ```
-

@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -70,15 +71,36 @@ public final class BrutalImpactsFiles {
      * 3) DefaultHitParticles_ReadOnly.json
      */
     public static int clearAndLoadAllHitParticleJson(@Nonnull HitParticleRegistry registry, @Nonnull Path dataDir) throws IOException {
+        return clearAndLoadAllHitParticleJsonReport(registry, dataDir).rulesLoaded();
+    }
+
+    /**
+     * Loads all JSON files in the data directory with priority:
+     * 1) USER_HitParticles.json
+     * 2) Any other *.json (sorted by filename)
+     * 3) DefaultHitParticles_ReadOnly.json
+     */
+    @Nonnull
+    public static JsonLoadReport clearAndLoadAllHitParticleJsonReport(@Nonnull HitParticleRegistry registry, @Nonnull Path dataDir) throws IOException {
         Objects.requireNonNull(registry, "registry");
         Objects.requireNonNull(dataDir, "dataDir");
 
         registry.clear();
 
         int loadedRules = 0;
+        int loadedFiles = 0;
+        int failedFiles = 0;
+        ArrayList<JsonLoadError> errors = new ArrayList<>();
+
         Path user = dataDir.resolve(USER_HIT_PARTICLES_FILE);
         if (Files.exists(user)) {
-            loadedRules += HitParticleRulesJson.loadIntoFromFile(registry, user);
+            try {
+                loadedRules += HitParticleRulesJson.loadIntoFromFile(registry, user);
+                loadedFiles++;
+            } catch (Exception e) {
+                failedFiles++;
+                errors.add(new JsonLoadError(user, e.getMessage()));
+            }
         }
 
         ArrayList<Path> modderFiles = new ArrayList<>();
@@ -96,15 +118,36 @@ public final class BrutalImpactsFiles {
         }
         modderFiles.sort(Comparator.comparing(p -> p.getFileName().toString().toLowerCase(Locale.ROOT)));
         for (Path p : modderFiles) {
-            loadedRules += HitParticleRulesJson.loadIntoFromFile(registry, p);
+            try {
+                loadedRules += HitParticleRulesJson.loadIntoFromFile(registry, p);
+                loadedFiles++;
+            } catch (Exception e) {
+                failedFiles++;
+                errors.add(new JsonLoadError(p, e.getMessage()));
+            }
         }
 
         Path defaults = dataDir.resolve(DEFAULT_HIT_PARTICLES_FILE);
         if (Files.exists(defaults)) {
-            loadedRules += HitParticleRulesJson.loadIntoFromFile(registry, defaults);
+            try {
+                loadedRules += HitParticleRulesJson.loadIntoFromFile(registry, defaults);
+                loadedFiles++;
+            } catch (Exception e) {
+                failedFiles++;
+                errors.add(new JsonLoadError(defaults, e.getMessage()));
+            }
         }
 
-        return loadedRules;
+        return new JsonLoadReport(loadedRules, loadedFiles, failedFiles, errors);
+    }
+
+    public record JsonLoadReport(int rulesLoaded, int filesLoaded, int filesFailed, @Nonnull List<JsonLoadError> errors) {
+        public JsonLoadReport {
+            errors = List.copyOf(errors);
+        }
+    }
+
+    public record JsonLoadError(@Nonnull Path path, @Nonnull String message) {
     }
 
     private static void copyResource(@Nonnull Class<?> pluginClass, @Nonnull String resourcePath, @Nonnull Path out, boolean overwrite) throws IOException {
@@ -125,4 +168,3 @@ public final class BrutalImpactsFiles {
         }
     }
 }
-

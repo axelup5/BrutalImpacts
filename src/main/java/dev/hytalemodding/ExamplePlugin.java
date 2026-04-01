@@ -36,11 +36,15 @@ public class ExamplePlugin extends JavaPlugin {
 
         // Hit particle rules are loaded from JSON in the Mods folder:
         // `Hytale/UserData/Mods/BrutalImpacts/*.json`
+        Path dataDir = BrutalImpactsFiles.resolveDataDir(ExamplePlugin.class);
         try {
-            Path dataDir = BrutalImpactsFiles.resolveDataDir(ExamplePlugin.class);
             BrutalImpactsFiles.ensureLayout(ExamplePlugin.class, dataDir);
-            int loadedRules = BrutalImpactsFiles.clearAndLoadAllHitParticleJson(BrutalImpactsApi.hitParticles(), dataDir);
-            System.out.println("[BrutalImpacts] Loaded hit particle rules (" + loadedRules + ") from " + dataDir);
+            var report = BrutalImpactsFiles.clearAndLoadAllHitParticleJsonReport(BrutalImpactsApi.hitParticles(), dataDir);
+            System.out.println("[BrutalImpacts] Loaded hit particle rules (" + report.rulesLoaded() + ") from " + dataDir
+                + " [files ok=" + report.filesLoaded() + ", failed=" + report.filesFailed() + "]");
+            for (var err : report.errors()) {
+                System.out.println("[BrutalImpacts] JSON load failed: " + err.path() + " (" + err.message() + ")");
+            }
         } catch (Exception e) {
             System.out.println("[BrutalImpacts] Failed to load hit particle rules JSON: " + e.getMessage());
             e.printStackTrace();
@@ -51,6 +55,6 @@ public class ExamplePlugin extends JavaPlugin {
         BrutalImpactParticlesSystem brutalParticles = new BrutalImpactParticlesSystem("BrutalImpacts_Hit_Blood_Default", 75.0, true);
         brutalParticles.setDefaultColor(new com.hypixel.hytale.protocol.Color((byte) 150, (byte) 0, (byte) 0));
         this.getEntityStoreRegistry().registerSystem(brutalParticles);
-        this.getCommandRegistry().registerCommand(new BrutalImpactsCommand(brutalParticles));
+        this.getCommandRegistry().registerCommand(new BrutalImpactsCommand(brutalParticles, ExamplePlugin.class, dataDir));
     }
 }
