@@ -1,0 +1,131 @@
+{
+  "RenderMode": "BlendAdd",
+  "EmitOffset": {
+    "X": {
+      "Min": -0.4,
+      "Max": 0.4
+    },
+    "Y": {
+      "Min": -0.4,
+      "Max": 0.4
+    },
+    "Z": {
+      "Min": -0.4,
+      "Max": 0.4
+    }
+  },
+  "ParticleRotationInfluence": "BillboardVelocity",
+  "LinearFiltering": false,
+  "ParticleRotateWithSpawner": false,
+  "TrailSpawnerPositionMultiplier": 1,
+  "TrailSpawnerRotationMultiplier": 1,
+  "MaxConcurrentParticles": 25,
+  "ParticleLifeSpan": {
+    "Min": 0.2,
+    "Max": 0.9
+  },
+  "InitialVelocity": {
+    "Yaw": {
+      "Min": 0.0,
+      "Max": 0.0
+    },
+    "Pitch": {
+      "Max": 0.0,
+      "Min": 0.0
+    },
+    "Speed": {
+      "Min": 0.1,
+      "Max": 0.2
+    }
+  },
+  "Particle": {
+    "Texture": "Particles/Textures/Shapes/LightningVoid.png",
+    "ScaleRatioConstraint": "OneToOne",
+    "UVOption": "RandomFlipU",
+    "Animation": {
+      "0": {},
+      "25": {
+        "FrameIndex": {
+          "Min": 0,
+          "Max": 5
+        }
+      },
+      "45": {
+        "FrameIndex": {
+          "Min": 0,
+          "Max": 5
+        }
+      },
+      "60": {
+        "FrameIndex": {
+          "Min": 0,
+          "Max": 5
+        }
+      },
+      "70": {
+        "FrameIndex": {
+          "Min": 0,
+          "Max": 5
+        }
+      },
+      "90": {
+        "FrameIndex": {
+          "Min": 0,
+          "Max": 5
+        }
+      }
+    },
+    "InitialAnimationFrame": {
+      "FrameIndex": {
+        "Min": 0,
+        "Max": 5
+      },
+      "Scale": {
+        "X": {
+          "Min": 0.05,
+          "Max": 0.12
+        }
+      },
+      "Rotation": {
+        "Z": {
+          "Min": 0,
+          "Max": 180.0
+        },
+        "X": {
+          "Min": 0,
+          "Max": 180
+        },
+        "Y": {
+          "Max": 180,
+          "Min": 0
+        }
+      },
+      "Opacity": 1
+    },
+    "SoftParticles": "Disable",
+    "UseSpriteBlending": false,
+    "FrameSize": {
+      "Width": 64,
+      "Height": 128
+    }
+  },
+  "SpawnBurst": false,
+  "UseEmitDirection": true,
+  "Attractors": [
+    {
+      "DampingMultiplier": {
+        "X": 0.8,
+        "Y": 0.8,
+        "Z": 0.8
+      }
+    }
+  ],
+  "TotalParticles": {
+    "Min": 2,
+    "Max": 6
+  },
+  "SpawnRate": {
+    "Min": 7,
+    "Max": 7
+  }
+}

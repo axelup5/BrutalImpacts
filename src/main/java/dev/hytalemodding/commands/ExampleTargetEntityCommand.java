@@ -1,6 +1,6 @@
-package dev.hytalemodding.commands;
+/*package dev.hytalemodding.commands;
 
-/*pixel.hytale.server.core.command.system.CommandContext;
+pixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractTargetEntityCommand;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatValue;

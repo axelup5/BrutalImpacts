@@ -1,0 +1,195 @@
+{
+  "RenderMode": "Erosion",
+  "Shape": "Cube",
+  "EmitOffset": {
+    "Y": {
+      "Min": 0,
+      "Max": 0.2
+    },
+    "X": {
+      "Min": -0.1,
+      "Max": 0.1
+    },
+    "Z": {
+      "Min": -0.1,
+      "Max": 0.1
+    }
+  },
+  "ParticleRotationInfluence": "BillboardY",
+  "LinearFiltering": false,
+  "ParticleRotateWithSpawner": false,
+  "ParticleLifeSpan": {
+    "Min": 0.6666666666666666,
+    "Max": 0.8333333333333334
+  },
+  "SpawnRate": {
+    "Min": 25,
+    "Max": 30
+  },
+  "TotalParticles": {
+    "Min": 4,
+    "Max": 8
+  },
+  "Attractors": [
+    {
+      "RadialImpulse": 4.5,
+      "Radius": 1.25,
+      "LinearAcceleration": {
+        "Y": 3
+      }
+    }
+  ],
+  "Particle": {
+    "Texture": "Particles/Textures/Fire/Fire_Impact.png",
+    "FrameSize": {
+      "Width": 32,
+      "Height": 32
+    },
+    "ScaleRatioConstraint": "None",
+    "UVOption": "RandomFlipU",
+    "Animation": {
+      "0": {
+        "Scale": {
+          "X": {
+            "Min": 1,
+            "Max": 1
+          },
+          "Y": {
+            "Min": 1,
+            "Max": 1
+          }
+        },
+        "Opacity": 0,
+        "Rotation": {
+          "X": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Y": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Z": {
+            "Min": 0,
+            "Max": 0
+          }
+        },
+        "FrameIndex": {
+          "Min": 0,
+          "Max": 0
+        }
+      },
+      "15": {
+        "Opacity": 0.45,
+        "Scale": {
+          "X": {
+            "Min": 10,
+            "Max": 6
+          },
+          "Y": {
+            "Min": 10,
+            "Max": 6
+          }
+        },
+        "FrameIndex": {
+          "Min": 1,
+          "Max": 1
+        }
+      },
+      "30": {
+        "FrameIndex": {
+          "Min": 2,
+          "Max": 2
+        }
+      },
+      "45": {
+        "Opacity": 1,
+        "FrameIndex": {
+          "Min": 3,
+          "Max": 3
+        }
+      },
+      "60": {
+        "FrameIndex": {
+          "Min": 4,
+          "Max": 4
+        }
+      },
+      "75": {
+        "FrameIndex": {
+          "Min": 5,
+          "Max": 5
+        }
+      },
+      "90": {
+        "Opacity": 0.35,
+        "FrameIndex": {
+          "Min": 5,
+          "Max": 5
+        },
+        "Rotation": {
+          "X": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Y": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Z": {
+            "Min": 0,
+            "Max": 0
+          }
+        }
+      },
+      "100": {
+        "Opacity": 0,
+        "Scale": {
+          "X": {
+            "Min": 4,
+            "Max": 3
+          },
+          "Y": {
+            "Min": 4,
+            "Max": 3
+          }
+        }
+      }
+    },
+    "InitialAnimationFrame": {
+      "Rotation": {
+        "X": {
+          "Min": 0,
+          "Max": 0
+        },
+        "Y": {
+          "Min": 0,
+          "Max": 0
+        },
+        "Z": {
+          "Min": 0,
+          "Max": 0
+        }
+      },
+      "Scale": {
+        "X": {
+          "Min": 0.05,
+          "Max": 0.1
+        },
+        "Y": {
+          "Min": 0.05,
+          "Max": 0.1
+        }
+      },
+      "Opacity": 1,
+      "FrameIndex": {
+        "Min": 0,
+        "Max": 0
+      }
+    }
+  },
+  "SpawnBurst": false,
+  "UseEmitDirection": false,
+  "LightInfluence": 1,
+  "MaxConcurrentParticles": 100
+}

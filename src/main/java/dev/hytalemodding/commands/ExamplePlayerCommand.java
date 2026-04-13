@@ -1,5 +1,5 @@
-package dev.hytalemodding.commands;
-/*
+/*package dev.hytalemodding.commands;
+
 import javax.annotation.Nonnull;
 
 import com.hypixel.hytale.component.Store;

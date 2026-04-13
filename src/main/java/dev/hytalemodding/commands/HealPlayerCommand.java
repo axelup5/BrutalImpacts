@@ -1,4 +1,4 @@
-package dev.hytalemodding.commands;
+/*package dev.hytalemodding.commands;
 
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
@@ -62,3 +62,4 @@ public class HealPlayerCommand extends AbstractTargetPlayerCommand {
         stats.addStatValue(healthIdx, healthArg.get(context));
     }
 }
+*/

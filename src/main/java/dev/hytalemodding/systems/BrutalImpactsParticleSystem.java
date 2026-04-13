@@ -48,7 +48,7 @@ import static com.hypixel.hytale.component.dependency.OrderPriority.CLOSEST;
  *
  * This relies on the vanilla {@link DamageSystems.ApplyParticles} system to actually broadcast/spawn the particles.
  */
-public class BrutalImpactParticlesSystem extends DamageEventSystem {
+public class BrutalImpactsParticleSystem extends DamageEventSystem {
 
     private static final ComponentType<EntityStore, TransformComponent> TRANSFORM_COMPONENT_TYPE = TransformComponent.getComponentType();
     private static final ComponentType<EntityStore, ModelComponent> MODEL_COMPONENT_TYPE = ModelComponent.getComponentType();
@@ -60,7 +60,7 @@ public class BrutalImpactParticlesSystem extends DamageEventSystem {
     private final double defaultViewDistance;
     private final boolean debug;
 
-    public BrutalImpactParticlesSystem(@Nonnull String particleSystemId, double defaultViewDistance, boolean debug) {
+    public BrutalImpactsParticleSystem(@Nonnull String particleSystemId, double defaultViewDistance, boolean debug) {
         this.particleSystemId = particleSystemId;
         this.defaultViewDistance = defaultViewDistance;
         this.debug = debug;

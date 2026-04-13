@@ -1,0 +1,9 @@
+{
+  "Spawners": [
+    {
+      "SpawnerId": "BrutalImpacts_Lightning"
+    }
+  ],
+  "IsImportant": false,
+  "LifeSpan": 0
+}

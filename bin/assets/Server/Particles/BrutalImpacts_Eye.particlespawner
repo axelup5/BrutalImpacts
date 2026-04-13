@@ -1,0 +1,118 @@
+{
+  "RenderMode": "Erosion",
+  "Shape": "Cube",
+  "EmitOffset": {
+    "Y": {
+      "Min": 0,
+      "Max": 0.2
+    },
+    "X": {
+      "Min": -0.1,
+      "Max": 0.1
+    },
+    "Z": {
+      "Min": -0.1,
+      "Max": 0.1
+    }
+  },
+  "ParticleRotationInfluence": "Billboard",
+  "LinearFiltering": false,
+  "ParticleRotateWithSpawner": false,
+  "MaxConcurrentParticles": 20,
+  "ParticleLifeSpan": {
+    "Min": 1,
+    "Max": 3
+  },
+  "SpawnRate": {
+    "Min": 25,
+    "Max": 30
+  },
+  "TotalParticles": {
+    "Min": 1,
+    "Max": 2
+  },
+  "Attractors": [
+    {
+      "Radius": 2,
+      "RadialImpulse": 25
+    }
+  ],
+  "Particle": {
+    "Texture": "Particles/Textures/Shapes/Eye_Void.png",
+    "FrameSize": {
+      "Width": 32,
+      "Height": 32
+    },
+    "ScaleRatioConstraint": "OneToOne",
+    "UVOption": "RandomFlipU",
+    "Animation": {
+      "20": {
+        "FrameIndex": {
+          "Min": 3,
+          "Max": 3
+        }
+      },
+      "26": {
+        "FrameIndex": {
+          "Min": 1,
+          "Max": 1
+        }
+      },
+      "32": {
+        "FrameIndex": {
+          "Min": 2,
+          "Max": 2
+        }
+      },
+      "38": {
+        "FrameIndex": {
+          "Min": 3,
+          "Max": 3
+        }
+      },
+      "70": {},
+      "76": {
+        "FrameIndex": {
+          "Min": 1,
+          "Max": 1
+        }
+      },
+      "82": {
+        "FrameIndex": {
+          "Min": 2,
+          "Max": 2
+        }
+      },
+      "88": {
+        "FrameIndex": {
+          "Min": 3,
+          "Max": 3
+        }
+      }
+    },
+    "InitialAnimationFrame": {
+      "Rotation": {
+        "X": {
+          "Min": 0,
+          "Max": 0
+        },
+        "Y": {
+          "Min": 0,
+          "Max": 0
+        },
+        "Z": {
+          "Min": 0,
+          "Max": 0
+        }
+      },
+      "FrameIndex": {
+        "Min": 3,
+        "Max": 3
+      },
+      "Opacity": 0.956,
+      "Color": "#ffcf9f"
+    }
+  },
+  "SpawnBurst": false,
+  "IsLowRes": false
+}

@@ -1,0 +1,10 @@
+{
+  "BoundingRadius": 10,
+  "IsImportant": false,
+  "Spawners": [
+    {
+      "SpawnerId": "BrutalImpacts_Feathers",
+      "FixedRotation": true
+    }
+  ]
+}

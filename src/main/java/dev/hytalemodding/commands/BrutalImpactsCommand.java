@@ -10,7 +10,7 @@ import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalAr
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import dev.hytalemodding.api.BrutalImpactsApi;
 import dev.hytalemodding.config.BrutalImpactsFiles;
-import dev.hytalemodding.systems.BrutalImpactParticlesSystem;
+import dev.hytalemodding.systems.BrutalImpactsParticleSystem;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -19,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class BrutalImpactsCommand extends AbstractCommand {
 
-    private final BrutalImpactParticlesSystem particlesSystem;
+    private final BrutalImpactsParticleSystem particlesSystem;
     private final Class<?> pluginClass;
     private final Path dataDir;
 
@@ -27,7 +27,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
     private final FlagArg reloadFlag;
     private final OptionalArg<ParticleSystem> particleArg;
 
-    public BrutalImpactsCommand(@Nonnull BrutalImpactParticlesSystem particlesSystem, @Nonnull Class<?> pluginClass, @Nonnull Path dataDir) {
+    public BrutalImpactsCommand(@Nonnull BrutalImpactsParticleSystem particlesSystem, @Nonnull Class<?> pluginClass, @Nonnull Path dataDir) {
         super("brutalimpacts", "Brutal Impacts settings.");
         this.particlesSystem = particlesSystem;
         this.pluginClass = pluginClass;
@@ -38,7 +38,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
 
         this.particleArg = this.withOptionalArg(
             "particle",
-            "Default particle system id to use on hit (e.g. BrutalImpacts_Hit_Blood_V3 / Impact_Sword_Bash)",
+            "Default particle system id to use on hit (e.g. BrutalImpacts_Hit_Blood_Default / Impact_Sword_Bash / BrutalImpacts_Hit_Fire)",
             ArgTypes.PARTICLE_SYSTEM
         );
     }
@@ -70,15 +70,14 @@ public class BrutalImpactsCommand extends AbstractCommand {
 
         ParticleSystem particleSystem = this.particleArg.get(context);
         if (particleSystem == null) {
-            context.sendMessage(Message.raw("Current particle: " + this.particlesSystem.getParticleSystemId()));
-            context.sendMessage(Message.raw("Usage: /brutalimpacts reload"));
-            context.sendMessage(Message.raw("   or: /brutalimpacts --reload"));
-            context.sendMessage(Message.raw("   or: /brutalimpacts --particle <ParticleSystemId>"));
+            context.sendMessage(Message.raw("Current default particle: " + this.particlesSystem.getParticleSystemId()));
+            context.sendMessage(Message.raw("Usage: /brutalimpacts --reload"));
+            context.sendMessage(Message.raw("   or: /brutalimpacts --default <ParticleSystemId>"));
             return CompletableFuture.completedFuture(null);
         }
 
         this.particlesSystem.setParticleSystemId(particleSystem.getId());
-        context.sendMessage(Message.raw("Updated hit particle to: " + particleSystem.getId()));
+        context.sendMessage(Message.raw("Updated default hit particle to: " + particleSystem.getId()));
         return CompletableFuture.completedFuture(null);
     }
 }

@@ -1,37 +1,4615 @@
 {
   "rules": [
     {
-      "match": { "type": "contains", "value": "Skeleton_Burnt" },
-      "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
-      "color": { "r": 50, "g": 50, "b": 50 }
-    },
-    {
-      "match": { "type": "contains", "value": "Skeleton_Sand" },
-      "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
-      "color": { "r": 255, "g": 235, "b": 145 }
-    },
-    {
-      "match": { "type": "contains", "value": "Skeleton" },
-      "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
-      "color": { "r": 235, "g": 224, "b": 192 }
-    },
-    {
-      "match": { "type": "contains", "value": "Spider" },
-      "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
-      "color": { "r": 30, "g": 30, "b": 30 }
-    },
-    {
-      "match": { "type": "contains", "value": "Zombie" },
+      "match": { "type": "exact", "value": "Antelope" },
       "effects": [
         {
           "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
-          "color": { "r": 255, "g": 0, "b": 0 },
-          "scale": 2.0
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 163, "g": 102, "b": 52 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Archaeopteryx" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 72, "g": 186, "b": 244 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Armadillo" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 255, "g": 187, "b": 127 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Bat" },
+      "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+      "color": { "r": 150, "g": 0, "b": 0 },
+      "scale": 0.5
+    },
+    {
+      "match": { "type": "exact", "value": "Bat_Ice" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 255, "g": 255, "b": 255 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Bear_Grizzly" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 76, "g": 46, "b": 36 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Bear_Polar" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 254, "g": 232, "b": 193 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Bison" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 83, "g": 47, "b": 25 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Bison_Calf" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 83, "g": 47, "b": 25 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Bluebird" },
+      "particleSystemId": "BrutalImpacts_Hit_Feathers",
+      "color": { "r": 48, "g": 222, "b": 254 },
+      "scale": 0.25
+    },
+    {
+      "match": { "type": "exact", "value": "Bluegill" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 151, "g": 187, "b": 202 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Boar" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 145, "g": 68, "b": 64 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Boar_Piglet" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 145, "g": 68, "b": 64 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Bunny" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 145, "g": 155, "b": 157 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Cactee" },
+      "effects": [
+        {
+      "particleSystemId": "BrutalImpacts_Hit_Sparks",
+      "color": { "r": 224, "g": 215, "b": 98 },
+      "scale": 0.45
+        },
+        {
+      "particleSystemId": "BrutalImpacts_Hit_Liquid",
+      "color": { "r": 195, "g": 217, "b": 140 },
+      "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Calf" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 164, "g": 104, "b": 48 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Camel" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 251, "g": 180, "b": 87 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Camel_Calf" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 251, "g": 180, "b": 87 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Cat" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 60, "g": 56, "b": 54 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Catfish" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 138, "g": 62, "b": 96 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Chick" },
+      "particleSystemId": "BrutalImpacts_Hit_Feathers",
+      "color": { "r": 254, "g": 230, "b": 43 },
+      "scale": 0.25
+    },
+    {
+      "match": { "type": "exact", "value": "Chick_Desert" },
+      "particleSystemId": "BrutalImpacts_Hit_Feathers",
+      "color": { "r": 254, "g": 215, "b": 113 },
+      "scale": 0.25
+    },
+    {
+      "match": { "type": "exact", "value": "Chicken" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 246, "g": 241, "b": 217 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Chicken_Desert" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 254, "g": 215, "b": 113 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Chicken_Undead" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 59, "g": 183, "b": 245 },
+          "scale": 0.35
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
-          "color": { "r": 0, "g": 80, "b": 255 },
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Clownfish" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 239, "g": 141, "b": 33 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Cow" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
           "scale": 1.0
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 127, "g": 74, "b": 38 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Cow_Undead" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.75
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 128, "g": 194, "b": 201 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Crab" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 170, "g": 200, "b": 210 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 212, "g": 69, "b": 33 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Crawler_Void" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 218, "b": 184 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 119, "g": 215, "b": 48 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Crocodile" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 135, "g": 165, "b": 66 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Crow" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 57, "g": 61, "b": 71 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Deer_Doe" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 84, "g": 38, "b": 26 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Dog" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 126, "g": 79, "b": 52 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Duck" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 86, "g": 67, "b": 56 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Emberwulf" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Hit_Stone",
+          "color": { "r": 130, "g": 34, "b": 33 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 246, "g": 88, "b": 11 },
+          "scale": 1.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fire",
+          "color": { "r": 255, "g": 255, "b": 255  },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 246, "g": 88, "b": 11 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Eye_Void" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Eye",
+          "color": { "r": 255, "g": 207, "b": 159 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 45, "g": 84, "b": 54 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Fen_Stalker" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 97, "g": 235, "b": 116 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 140, "g": 255, "b": 100 },
+          "scale": 0.9
+        }
+      ]
+    },
+        {
+      "match": { "type": "exact", "value": "Feran_Burrower" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 178, "g": 167, "b": 151 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Feran_Civilian" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 250, "g": 192, "b": 103 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Feran_Cub" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 219, "g": 137, "b": 75 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Feran_Longtooth" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 160, "g": 84, "b": 51 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 232, "g": 211, "b": 160 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Feran_Sharptooth" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 250, "g": 192, "b": 103 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 232, "g": 211, "b": 160 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Feran_Windwalker" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 178, "g": 167, "b": 151 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 232, "g": 211, "b": 160 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Finch_Green" },
+      "particleSystemId": "BrutalImpacts_Hit_Feathers",
+      "color": { "r": 91, "g": 162, "b": 84 },
+      "scale": 0.25
+    },
+    {
+      "match": { "type": "exact", "value": "Flamingo" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 253, "g": 129, "b": 170 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Fox" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 220, "g": 127, "b": 41 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Frog_Blue" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.25
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 160, "g": 200, "b": 145 },
+          "scale": 0.65
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Frog_Green" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.25
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 160, "g": 200, "b": 145 },
+          "scale": 0.65
+        }
+      ]
+    },
+  {
+      "match": { "type": "exact", "value": "Frog_Orange" },
+      "effects": [  
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.25
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 160, "g": 200, "b": 145 },
+          "scale": 0.65
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Frostgill" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 49, "g": 74, "b": 150 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 255, "g": 255, "b": 255 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Gecko" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 252, "g": 134, "b": 32 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Ghoul" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 70, "g": 90, "b": 25 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 226, "g": 225, "b": 169 },
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goat" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 255, "g": 170, "b": 76 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goat_Kid" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 255, "g": 191, "b": 116 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goblin" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 144, "g": 154, "b": 56 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goblin_Duke" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 126, "g": 110, "b": 45 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 104, "g": 99, "b": 98 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 109, "g": 53, "b": 30 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goblin_Duke_Large" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 126, "g": 110, "b": 45 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 104, "g": 99, "b": 98 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 109, "g": 53, "b": 30 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goblin_Hermit" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 75, "g": 75, "b": 75 },
+          "scale": 0.85
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goblin_Lobber" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 139, "g": 111, "b": 50 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 255, "g": 220, "b": 100 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goblin_Miner" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 71, "g": 61, "b": 51 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 75, "g": 75, "b": 75 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goblin_Ogre" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 196, "g": 143, "b": 59 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 125, "g": 111, "b": 45 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goblin_Scrapper" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 144, "g": 154, "b": 56 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Goblin_Thief" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 71, "g": 61, "b": 51 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Golem_Crystal_Earth" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Hit_Stone",
+          "color": { "r": 177, "g": 155, "b": 91 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 77, "g": 179, "b": 77 },
+          "scale": 2.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 77, "g": 179, "b": 77 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Golem_Crystal_Flame" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Hit_Stone",
+          "color": { "r": 71, "g": 49, "b": 48 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 208, "g": 88, "b": 44 },
+          "scale": 2.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 250, "g": 25, "b": 0 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Golem_Crystal_Frost" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Hit_Stone",
+          "color": { "r": 97, "g": 125, "b": 124 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 24, "g": 127, "b": 201 },
+          "scale": 2.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 158, "g": 233, "b": 235 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "Impact_Ice",
+          "color": { "r": 158, "g": 233, "b": 235 },
+          "scale": 0.1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Golem_Crystal_Sand" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Hit_Stone",
+          "color": { "r": 229, "g": 185, "b": 89 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 88, "g": 229, "b": 255 },
+          "scale": 2.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 88, "g": 229, "b": 255 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Golem_Crystal_Thunder" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Hit_Stone",
+          "color": { "r": 177, "g": 155, "b": 91 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 193, "g": 169, "b": 76 },
+          "scale": 2.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 255, "g": 196, "b": 48 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Lightning",
+          "color": { "r": 255, "g": 255, "b": 70 },
+          "scale": 1.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Golem_Firesteel" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 53, "g": 51, "b": 68 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 195, "b": 45 },
+          "scale": 1.2
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 255, "g": 161, "b": 32 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 255, "g": 161, "b": 32 },
+          "scale": 2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Hatworm" },
+      "particleSystemId": "BrutalImpacts_Hit_Liquid",
+      "color": { "r": 139, "g": 216, "b": 157 },
+      "scale": 0.8
+    },
+    {
+      "match": { "type": "exact", "value": "Hawk" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 133, "g": 90, "b": 41 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Hedera" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 119, "g": 68, "b": 32 },
+          "scale": 1.1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 255, "g": 222, "b": 45 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 10, "g": 36, "b": 44 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "Block_Land_Hard_Leaves_Round",
+          "color": { "r": 17, "g": 100, "b": 85 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Horse" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 161, "g": 81, "b": 47 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Horse_Foal" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 161, "g": 81, "b": 47 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Horse_Skeleton" },
+      "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+      "color": { "r": 200, "g": 189, "b": 172 },
+      "scale": 1.3
+    },
+    {
+      "match": { "type": "exact", "value": "Horse_Skeleton_Armored" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 200, "g": 189, "b": 172 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 63, "g": 47, "b": 34 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 54, "g": 36, "b": 24 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Hound_Bleached" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 178, "g": 169, "b": 150 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 93, "g": 85, "b": 55 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Hyena" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 182, "g": 123, "b": 90 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Jellyfish_Blue" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 175, "g": 191, "b": 255 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Lightning",
+          "color": { "r": 187, "g": 221, "b": 255 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Jellyfish_Cyan" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 154, "g": 206, "b": 229 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Lightning",
+          "color": { "r": 187, "g": 221, "b": 255 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Jellyfish_Green" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 15, "g": 201, "b": 83 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Lightning",
+          "color": { "r": 255, "g": 255, "b": 70 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Jellyfish_Man_Of_War" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 191, "g": 182, "b": 255 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Lightning",
+          "color": { "r": 187, "g": 221, "b": 255 },
+          "scale": 1.1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Jellyfish_Red" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 194, "b": 108 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Lightning",
+          "color": { "r": 255, "g": 255, "b": 70 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Jellyfish_Yellow" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 192, "b": 40 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Lightning",
+          "color": { "r": 255, "g": 255, "b": 70 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Klops_Gentleman" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 205, "g": 166, "b": 62 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 208, "g": 249, "b": 244 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Klops_Merchant" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 188, "g": 169, "b": 45 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Klops_Miner" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 188, "g": 169, "b": 45 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 30, "g": 30, "b": 30 },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Kweebec_Rootling" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 160, "g": 87, "b": 63 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "Block_Land_Hard_Leaves_Round",
+          "color": { "r": 103, "g": 155, "b": 51 },
+          "scale": 0.2
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Kweebec_Sapling" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 215, "g": 112, "b": 63 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 215, "g": 112, "b": 63 },
+          "scale": 0.9
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Kweebec_Sapling_Orange" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 215, "g": 112, "b": 63 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 239, "g": 163, "b": 45 },
+          "scale": 0.9
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Kweebec_Sapling_Pink" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 214, "g": 94, "b": 86 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "Block_Land_Hard_Leaves_Round",
+          "color": { "r": 79, "g": 172, "b": 52 },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Kweebec_Sapling_Razorleaf" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 125, "g": 92, "b": 54 },
+          "scale": 0.35
+        },
+        {
+          "particleSystemId": "Block_Land_Hard_Leaves_Round",
+          "color": { "r": 79, "g": 172, "b": 52 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Kweebec_Sapling_Treesinger"  },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 110, "g": 73, "b": 51 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "Block_Land_Hard_Leaves_Round",
+          "color": { "r": 199, "g": 125, "b": 48 },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Kweebec_Seedling" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 223, "g": 136, "b": 71 },
+          "scale": 0.25
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 68, "g": 135, "b": 47 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Kweebec_Sproutling" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 90, "g": 127, "b": 89 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "Block_Land_Hard_Leaves_Round",
+          "color": { "r": 140, "g": 194, "b": 52 },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Lamb" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 230, "g": 216, "b": 198 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Larva_Silk" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 184, "g": 238, "b": 243 },
+          "scale": 0.35
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 220, "g": 224, "b": 199 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Larva_Void" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 222, "g": 42, "b": 86 },
+          "scale": 0.35
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 34, "g": 30, "b": 48 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 149, "g": 218, "b": 31 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Leopard_Snow" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 97, "g": 114, "b": 135 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Lizard_Sand" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 254, "g": 213, "b": 72 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 255, "g": 199, "b": 36 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Lobster" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 170, "g": 200, "b": 210 },
+          "scale": 0.45
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 220, "g": 49, "b": 43 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Mannequin" },
+      "particleSystemId": "Block_Break_Wood",
+      "color": { "r": 129, "g": 88, "b": 56 },
+      "scale": 0.25
+    },
+    {
+      "match": { "type": "exact", "value": "Meerkat" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 255, "g": 222, "b": 145 },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Minnow" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 94, "g": 114, "b": 85 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.4
+        }
+      ]
+    },
+        {
+      "match": { "type": "exact", "value": "Model_Deer_Stag" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 84, "g": 38, "b": 26 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Molerat" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 165, "g": 146, "b": 138 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 107, "g": 57, "b": 31 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Moose_Bull" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 116, "g": 77, "b": 64 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Moose_Cow" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1.0
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 128, "g": 70, "b": 54 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Mosshorn" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.9
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 193, "g": 144, "b": 68 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 137, "g": 164, "b": 63 },
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Mosshorn_Plain" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.9
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 246, "g": 190, "b": 103 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 167, "g": 179, "b": 34 },
+          "scale": 1.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Mouflon" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 248, "g": 196, "b": 112 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Mouflon_Lamb" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 248, "g": 196, "b": 112 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Mouse" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 183, "g": 197, "b": 208 },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Outlander_Berserker" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 132, "g": 103, "b": 56 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Outlander_Brute" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 34, "g": 40, "b": 42 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 43, "g": 63, "b": 89 },
+          "scale": 0.75
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Outlander_Cultist" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.75
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 43, "g": 63, "b": 89 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Outlander_Hunter" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 106, "g": 54, "b": 47 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Outlander_Marauder" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 68, "g": 30, "b": 21 },
+          "scale": 0.25
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 132, "g": 103, "b": 56 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Outlander_Peon" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.75
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 43, "g": 63, "b": 89 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Outlander_Priest" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 121, "g": 61, "b": 48 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Outlander_Sorcerer" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 74, "g": 70, "b": 84 },
+          "scale": 0.35
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Outlander_Stalker" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 106, "g": 54, "b": 47 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Owl_Brown" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 110, "g": 66, "b": 51 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Owl_Snow" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 240, "g": 240, "b": 255 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Parrot" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 255, "g": 227, "b": 49 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Penguin" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 104, "g": 120, "b": 175 },
+          "scale": 0.12
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Pig" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 241, "g": 157, "b": 156 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Pig_Undead" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 226, "g": 198, "b": 144 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 133, "g": 205, "b": 239 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Pig_Wild" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 156, "g": 147, "b": 166 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Pigeon" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 104, "g": 151, "b": 178 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Piglet" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 241, "g": 157, "b": 156 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Piglet_Wild" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 156, "g": 147, "b": 166 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Pike" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.45
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 72, "g": 115, "b": 34 },
+          "scale": 0.45
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Piranha" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 130, "g": 187, "b": 231 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Piranha_Black" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.45
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 255, "g": 255, "b": 255 },
+          "scale": 0.45
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 58, "g": 63, "b": 79 },
+          "scale": 0.25
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Pterodactyl" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 131, "g": 203, "b": 210 },
+          "scale": 0.35
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 255, "g": 199, "b": 36 },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Pufferfish" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 255, "g": 255, "b": 81 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Rabbit" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 116, "g": 111, "b": 105 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Ram" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 230, "g": 216, "b": 198 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Ram_Lamb" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 230, "g": 216, "b": 198 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Raptor_Cave" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.65
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 99, "g": 190, "b": 85 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 224, "g": 60, "b": 39 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Rat" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 40, "g": 67, "b": 90 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Raven" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 33, "g": 42, "b": 67 },
+          "scale": 0.45
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Rex_Cave" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 175, "g": 45, "b": 35 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 123, "g": 4, "b": 51 },
+          "scale": 0.35
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 170, "g": 255, "b": 255 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Salmon" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 115, "g": 94, "b": 95 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Scarak_Broodmother" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 176, "g": 236, "b": 255 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 206, "g": 171, "b": 255 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Scarak_Defender" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 215, "g": 142, "b": 77 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 176, "g": 236, "b": 255 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Scarak_Fighter" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 215, "g": 142, "b": 77 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 176, "g": 236, "b": 255 },
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Scarak_Fighter_Royal_Guard" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 215, "g": 142, "b": 77 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 176, "g": 236, "b": 255 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 219, "g": 182, "b": 89 },
+          "scale": 0.9
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Scarak_Louse" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 215, "g": 142, "b": 77 },
+          "scale": 0.25
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 176, "g": 236, "b": 255 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Scarak_Seeker" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 215, "g": 142, "b": 77 },
+          "scale": 0.2
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 176, "g": 236, "b": 255 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 193, "g": 220, "b": 63 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Scorpion" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 170, "g": 200, "b": 210 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 208, "g": 135, "b": 75 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 237, "g": 219, "b": 158 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Shadow_Knight" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 88, "g": 112, "b": 122 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 88, "g": 112, "b": 122 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fire_Color",
+          "color": { "r": 0, "g": 200, "b": 255 },
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Shark_Hammerhead" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 57, "g": 101, "b": 116 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Sheep" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 230, "g": 216, "b": 198 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Shellfish_Lava" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 195, "b": 45 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 147, "g": 43, "b": 45 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton" },
+      "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+      "color": { "r": 235, "g": 224, "b": 192 },
+      "scale": 1.0
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Archer" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 105, "g": 115, "b": 64 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Archmage" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 149, "g": 72, "b": 50 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Land_Hard_Leaves_Round",
+          "color": { "r": 149, "g": 72, "b": 50 },
+          "scale": 0.35
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Burnt_Alchemist" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 77, "g": 69, "b": 66 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 60, "g": 80, "b": 44 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 188, "g": 255, "b": 59 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Burnt_Archer" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 77, "g": 69, "b": 66 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 47, "g": 36, "b": 27 },
+          "scale": 0.35
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 156, "g": 155, "b": 147 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Burnt_Gunner" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 77, "g": 69, "b": 66 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 156, "g": 155, "b": 147 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 83, "g": 58, "b": 38 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 30, "g": 30, "b": 30 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Burnt_Knight" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 77, "g": 69, "b": 66 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 103, "g": 94, "b": 81 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 115, "g": 23, "b": 62 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Burnt_Lancer" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 77, "g": 69, "b": 66 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 103, "g": 94, "b": 81 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 42, "g": 41, "b": 42 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Burnt_Praetorian" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 77, "g": 69, "b": 66 },
+          "scale": 1.2
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 71, "g": 42, "b": 27 },
+          "scale": 1.1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 156, "g": 81, "b": 60 },
+          "scale": 0.9
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 127, "g": 255, "b": 255 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Burnt_Soldier" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 77, "g": 69, "b": 66 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 103, "g": 94, "b": 81 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 75, "g": 49, "b": 29 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Burnt_Wizard" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 77, "g": 69, "b": 66 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 96, "g": 50, "b": 95 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 255, "g": 122, "b": 255 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Fighter" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 96, "g": 60, "b": 24 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Frost_Archer" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 199, "g": 241, "b": 238 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 130, "g": 242, "b": 250 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Frost_Archmage" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 199, "g": 241, "b": 238 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 68, "g": 115, "b": 126 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 147, "g": 255, "b": 255 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Frost_Fighter" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 199, "g": 241, "b": 238 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 42, "g": 51, "b": 66 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Frost_Knight" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 199, "g": 241, "b": 238 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 90, "g": 127, "b": 129 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 130, "g": 242, "b": 250 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Frost_Mage" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 199, "g": 241, "b": 238 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 52, "g": 47, "b": 76 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 147, "g": 255, "b": 255 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Frost_Ranger" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 199, "g": 241, "b": 238 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 114, "g": 69, "b": 75 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 130, "g": 242, "b": 250 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Frost_Scout" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 199, "g": 241, "b": 238 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 55, "g": 82, "b": 94 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Frost_Soldier" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 199, "g": 241, "b": 238 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 77, "g": 97, "b": 102 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 130, "g": 242, "b": 250 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Incandescent_Fighter" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 46, "g": 41, "b": 40 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 255, "g": 85, "b": 70 },
+          "scale": 2
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 46, "g": 41, "b": 40 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Incandescent_Footman" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 46, "g": 41, "b": 40 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 255, "g": 85, "b": 70 },
+          "scale": 2
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 95, "g": 23, "b": 15 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 46, "g": 41, "b": 40 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Incandescent_Head" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 46, "g": 41, "b": 40 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 255, "g": 85, "b": 70 },
+          "scale": 2
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 195, "b": 45 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 46, "g": 41, "b": 40 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Incandescent_Mage" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 46, "g": 41, "b": 40 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 255, "g": 85, "b": 70 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 92, "g": 27, "b": 11 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 46, "g": 41, "b": 40 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Knight" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 81, "g": 76, "b": 67 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Mage" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 105, "g": 115, "b": 64 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Pirate_Captain" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 105, "g": 45, "b": 45 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 47, "g": 51, "b": 56 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Pirate_Gunner" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 72, "g": 43, "b": 47 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 196, "g": 63, "b": 73 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 30, "g": 30, "b": 30 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Pirate_Striker" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 102, "g": 69, "b": 30 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 186, "g": 49, "b": 54 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Ranger" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 112, "g": 65, "b": 66 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Sand_Archer" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 211, "g": 172, "b": 112 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 189, "g": 169, "b": 139 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 70, "g": 94, "b": 98 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Sand_Archmage" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 211, "g": 172, "b": 112 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 189, "g": 169, "b": 139 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 58, "g": 45, "b": 60 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 144, "g": 255, "b": 255 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Sand_Assassin" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 211, "g": 172, "b": 112 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 189, "g": 169, "b": 139 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 58, "g": 45, "b": 60 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Sand_Guard" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 211, "g": 172, "b": 112 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 189, "g": 169, "b": 139 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 136, "g": 125, "b": 105 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Sand_Mage" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 211, "g": 172, "b": 112 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 189, "g": 169, "b": 139 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 92, "g": 56, "b": 58 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 144, "g": 255, "b": 255 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Sand_Ranger" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 211, "g": 172, "b": 112 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 189, "g": 169, "b": 139 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 58, "g": 45, "b": 60 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 129, "g": 52, "b": 77 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Sand_Scout" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 211, "g": 172, "b": 112 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 189, "g": 169, "b": 139 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 61, "g": 76, "b": 109 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Sand_Soldier" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 211, "g": 172, "b": 112 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 189, "g": 169, "b": 139 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 223, "g": 190, "b": 108 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 48, "g": 32, "b": 26 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Scout" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 148, "g": 116, "b": 35 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skeleton_Soldier" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 74, "g": 72, "b": 15 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 109, "g": 94, "b": 77 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skrill" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 235, "g": 89, "b": 39 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Skrill_Chick" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 235, "g": 89, "b": 39 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Slug_Magma" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 195, "b": 45 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 230, "g": 47, "b": 22 },  
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 89, "g": 161, "b": 212 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Snail_Frost" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 103, "g": 99, "b": 158 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 167, "g": 223, "b": 255 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Snail_Magma" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 195, "b": 45 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 87, "g": 151, "b": 192 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 30, "g": 30, "b": 30 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Snake_Cobra" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 52, "g": 51, "b": 61 },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Snake_Marsh" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 118, "g": 81, "b": 48 },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Snake_Rattle" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 231, "g": 51, "b": 50 },
+          "scale": 0.2
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 168, "g": 41, "b": 41 },
+          "scale": 0.15
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Snapdragon" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 106, "g": 152, "b": 42 },
+          "scale": 0.35
+        },
+        {
+          "particleSystemId": "Block_Land_Hard_Leaves_Round",
+          "color": { "r": 106, "g": 152, "b": 42 },
+          "scale": 0.5
+        }
+        ,
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 203, "g": 38, "b": 32 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Snapjaw" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 61, "g": 97, "b": 156 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Spark_Living" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 195, "b": 45 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 255, "g": 195, "b": 45 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Sparrow" },
+      "particleSystemId": "BrutalImpacts_Hit_Feathers",
+      "color": { "r": 213, "g": 123, "b": 58 },
+      "scale": 0.25
+    },
+    {
+      "match": { "type": "exact", "value": "Spawn_Void" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 218, "b": 184 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 119, "g": 215, "b": 48 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 58, "g": 79, "b": 100 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Spectre_Void" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 170 , "g": 120, "b": 240 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fire_Color",
+          "color": { "r": 143, "g": 120, "b": 185 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Spider" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 22, "g": 24, "b": 35 },
+          "scale": 0.75
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 66, "g": 47, "b": 33 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Spider_Cave" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 22, "g": 24, "b": 35 },
+          "scale": 0.75
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 213, "g": 198, "b": 190 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Spirit_Ember" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 195, "b": 45 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "Block_Hit_Stone",
+          "color": { "r": 59, "g": 33, "b": 31 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 30, "g": 30, "b": 30 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fire",
+          "color": { "r": 255, "g": 255, "b": 255  },
+          "scale": 0.2
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Spirit_Frost" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Metal",
+          "color": { "r": 130, "g": 242, "b": 250 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Spirit_Root" },
+      "effects": [
+        {
+          "particleSystemId": "Block_Break_Wood",
+          "color": { "r": 67, "g": 45, "b": 28 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 157, "g": 255, "b": 70 },
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Spirit_Thunder" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Lightning",
+          "color": { "r": 255, "g": 255, "b": 70 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "Block_Hit_Sand",
+          "color": { "r": 173, "g": 255, "b": 255 },
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Squirrel" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 235, "g": 159, "b": 81 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Tang_Blue" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 72, "g": 100, "b": 234 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Tang_Chevron" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 191, "g": 52, "b": 49 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Tang_Lemon_Peel" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 255, "g": 198, "b": 20 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Tang_Sailfin" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 255, "g": 241, "b": 211 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Tetrabird" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 36, "g": 44, "b": 102 },
+          "scale": 0.45
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Tiger_Sabertooth" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 206, "g": 130, "b": 65 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Toad_Rhino" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 83, "g": 195, "b": 160 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 160, "g": 200, "b": 145 },
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Toad_Rhino_Magma" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 124, "g": 82, "b": 132 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 255, "g": 195, "b": 45 },
+          "scale": 0.9
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 246, "g": 88, "b": 11 },
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Tortoise" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 168, "g": 171, "b": 51 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trillodon" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.65
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 164, "g": 175, "b": 47 },
+          "scale": 0.45
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 184, "g": 255, "b": 186 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trilobite" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 194, "g": 110, "b": 80 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trilobite_Black" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 109, "g": 128, "b": 143 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 144, "g": 174, "b": 104 },
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork_Brawler" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 144, "g": 174, "b": 104 },
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork_Chieftain" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 217, "g": 174, "b": 82 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 35, "g": 33, "b": 32 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 102, "g": 42, "b": 15 },
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork_Doctor_Witch" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 105, "g": 150, "b": 198 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 255, "g": 135, "b": 66 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork_Guard" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 144, "g": 174, "b": 104 },
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork_Hunter" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 90, "g": 185, "b": 148 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 112, "g": 80, "b": 35 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork_Mauler" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 129, "g": 210, "b": 178 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 45, "g": 46, "b": 45 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork_Sentry" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 121, "g": 156, "b": 184 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 100, "g": 72, "b": 48 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork_Shaman" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 123, "g": 170, "b": 207 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 255, "g": 135, "b": 66 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trork_Warrior" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 121, "g": 156, "b": 184 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 39, "g": 37, "b": 36 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Trout_Rainbow" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Scales",
+          "color": { "r": 245, "g": 175, "b": 74 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Turkey" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 116, "g": 77, "b": 68 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Turkey_Chick" },
+      "particleSystemId": "BrutalImpacts_Hit_Feathers",
+      "color": { "r": 168, "g": 108, "b": 92 },
+      "scale": 0.25
+    },
+    {
+      "match": { "type": "exact", "value": "Vulture" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.65
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Feathers",
+          "color": { "r": 223, "g": 119, "b": 47 },
+          "scale": 0.45
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Warthog" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 104, "g": 64, "b": 48 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Warthog_Piglet" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.4
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 126, "g": 81, "b": 65 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Werewolf" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 171, "g": 171, "b": 183 },
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Whale_Humpback" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 34, "g": 71, "b": 116 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bubbles",
+          "color": { "r": 180, "g": 200, "b": 200 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Wolf_Black" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 43, "g": 46, "b": 54 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Wolf_Outlander_Priest" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 228, "g": 237, "b": 240 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Wolf_Outlander_Sorcerer" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 43, "g": 46, "b": 54 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Wolf_Trork_Hunter" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 73, "g": 81, "b": 87 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Wolf_Trork_Shaman" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 228, "g": 237, "b": 240 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Wolf_White" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 228, "g": 237, "b": 240 },
+          "scale": 0.35
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Woodpecker" },
+      "particleSystemId": "BrutalImpacts_Hit_Feathers",
+      "color": { "r": 33, "g": 131, "b": 52 },
+      "scale": 0.25
+    },
+    {
+      "match": { "type": "exact", "value": "Wraith" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 64, "g": 56, "b": 81 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 235, "g": 224, "b": 192 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 83, "g": 205, "b": 177 },
+          "scale": 0.9
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Wraith_Lantern" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 30, "g": 30, "b": 30 },
+          "scale": 0.3
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Aura",
+          "color": { "r": 246, "g": 88, "b": 11 },
+          "scale": 0.25
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Yeti" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 150, "g": 0, "b": 0 },
+          "scale": 1.2
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Fur",
+          "color": { "r": 171, "g": 171, "b": 183 },
+          "scale": 0.6
+        },
+        {
+          "particleSystemId": "Impact_Ice",
+          "color": { "r": 158, "g": 233, "b": 235 },
+          "scale": 0.15
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Zombie" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 100, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 150, "g": 170, "b": 88 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Zombie_Aberrant" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 100, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 150, "g": 170, "b": 88 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 160, "g": 200, "b": 145 },
+          "scale": 0.65
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Zombie_Aberrant_Big" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 100, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 150, "g": 170, "b": 88 },
+          "scale": 1
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Liquid",
+          "color": { "r": 160, "g": 200, "b": 145 },
+          "scale": 0.65
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Zombie_Aberrant_Small" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 100, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 150, "g": 170, "b": 88 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 157, "g": 143, "b": 110 },
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Zombie_Burnt" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 100, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 50, "g": 54, "b": 57 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 155, "g": 112, "b": 48 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 30, "g": 30, "b": 30 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Zombie_Frost" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 100, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 179, "g": 199, "b": 182 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 173, "g": 144, "b": 115 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 183, "g": 229, "b": 238 },
+          "scale": 0.3
+        }
+      ]
+    },
+    {
+      "match": { "type": "exact", "value": "Zombie_Sand" },
+      "effects": [
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 100, "g": 0, "b": 0 },
+          "scale": 0.7
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 219, "g": 178, "b": 90 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Flesh",
+          "color": { "r": 76, "g": 65, "b": 54 },
+          "scale": 0.8
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 219, "g": 178, "b": 90 },
+          "scale": 0.25
         }
       ]
     }

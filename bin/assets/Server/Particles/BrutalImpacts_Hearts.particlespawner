@@ -1,0 +1,141 @@
+{
+  "RenderMode": "Erosion",
+  "Shape": "Cube",
+  "EmitOffset": {
+    "Y": {
+      "Min": 0,
+      "Max": 0.2
+    },
+    "X": {
+      "Min": -0.1,
+      "Max": 0.1
+    },
+    "Z": {
+      "Min": -0.1,
+      "Max": 0.1
+    }
+  },
+  "ParticleRotationInfluence": "BillboardY",
+  "LinearFiltering": false,
+  "ParticleRotateWithSpawner": false,
+  "ParticleLifeSpan": {
+    "Min": 0.6666666666666666,
+    "Max": 0.8333333333333334
+  },
+  "SpawnRate": {
+    "Min": 25,
+    "Max": 30
+  },
+  "TotalParticles": {
+    "Min": 4,
+    "Max": 8
+  },
+  "Attractors": [
+    {
+      "RadialImpulse": 4.5,
+      "Radius": 1.25,
+      "LinearAcceleration": {
+        "Y": 3
+      }
+    }
+  ],
+  "Particle": {
+    "Texture": "Particles/Textures/Shapes/Erosion_Heart.png",
+    "FrameSize": {
+      "Width": 64,
+      "Height": 64
+    },
+    "ScaleRatioConstraint": "OneToOne",
+    "UVOption": "RandomFlipU",
+    "Animation": {
+      "0": {
+        "Rotation": {
+          "X": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Y": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Z": {
+            "Min": 0,
+            "Max": 0
+          }
+        },
+        "FrameIndex": {
+          "Min": 0,
+          "Max": 0
+        }
+      },
+      "15": {},
+      "30": {},
+      "45": {},
+      "60": {},
+      "75": {},
+      "90": {
+        "Rotation": {
+          "X": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Y": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Z": {
+            "Min": 0,
+            "Max": 0
+          }
+        }
+      },
+      "100": {
+        "Scale": {
+          "X": {
+            "Min": 4,
+            "Max": 3
+          },
+          "Y": {
+            "Min": 4,
+            "Max": 3
+          }
+        }
+      }
+    },
+    "InitialAnimationFrame": {
+      "Rotation": {
+        "X": {
+          "Min": 0,
+          "Max": 0
+        },
+        "Y": {
+          "Min": 0,
+          "Max": 0
+        },
+        "Z": {
+          "Min": 0,
+          "Max": 0
+        }
+      },
+      "Scale": {
+        "X": {
+          "Min": 0.05,
+          "Max": 0.1
+        },
+        "Y": {
+          "Min": 0.05,
+          "Max": 0.1
+        }
+      },
+      "Opacity": 1,
+      "FrameIndex": {
+        "Min": 0,
+        "Max": 0
+      }
+    }
+  },
+  "SpawnBurst": false,
+  "UseEmitDirection": false,
+  "LightInfluence": 0,
+  "MaxConcurrentParticles": 100
+}

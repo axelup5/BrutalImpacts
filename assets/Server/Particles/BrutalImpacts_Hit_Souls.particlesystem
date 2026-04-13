@@ -1,0 +1,22 @@
+{
+  "Spawners": [
+    {
+      "SpawnerId": "BrutalImpacts_Souls",
+      "LifeSpan": {
+        "Min": 4,
+        "Max": 4
+      },
+      "FixedRotation": false
+    },
+    {
+      "SpawnerId": "BrutalImpacts_Fire_Sparks",
+      "PositionOffset": {
+        "X": 0
+      },
+      "LifeSpan": {
+        "Min": 2,
+        "Max": 4
+      }
+    }
+  ]
+}

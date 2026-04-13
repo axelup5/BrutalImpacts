@@ -1,4 +1,4 @@
-package dev.hytalemodding.commands;
+/*package dev.hytalemodding.commands;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -21,3 +21,4 @@ public class ServerRulesCommand extends AbstractAsyncCommand {
         return CompletableFuture.completedFuture(null);
     } 
 }
+*/

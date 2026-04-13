@@ -1,4 +1,4 @@
-package dev.hytalemodding.commands;
+/*package dev.hytalemodding.commands;
 
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.AbstractCommand;
@@ -22,3 +22,4 @@ public class ExampleCommand extends AbstractCommand {
     }
 
 }
+*/

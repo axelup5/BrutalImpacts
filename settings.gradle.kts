@@ -23,6 +23,6 @@ hytale {
     manifest {
         Group = "Axelup"
         Name = "Brutal Impacts"
-        Main = "dev.hytalemodding.ExamplePlugin"
+        Main = "dev.hytalemodding.BrutalImpacts"
     }
 }

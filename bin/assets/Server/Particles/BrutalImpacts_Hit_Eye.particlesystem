@@ -1,0 +1,18 @@
+{
+  "Spawners": [
+    {
+      "SpawnerId": "BrutalImpacts_Eye",
+      "FixedRotation": false
+    },
+    {
+      "SpawnerId": "BrutalImpacts_Fire_Sparks",
+      "PositionOffset": {
+        "X": 0
+      },
+      "LifeSpan": {
+        "Min": 2,
+        "Max": 4
+      }
+    }
+  ]
+}
