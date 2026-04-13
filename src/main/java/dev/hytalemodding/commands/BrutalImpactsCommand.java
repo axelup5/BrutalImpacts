@@ -17,6 +17,17 @@ import javax.annotation.Nullable;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Server command for managing Brutal Impacts at runtime.
+ *
+ * <p>Supported actions:</p>
+ * <ul>
+ *   <li>Reload JSON rule files from disk: {@code /brutalimpacts reload} or {@code /brutalimpacts --reload}</li>
+ *   <li>Set the fallback particle system id (used when no rule matches): {@code /brutalimpacts --particle <id>}</li>
+ * </ul>
+ *
+ * <p>Note: the fallback particle system id is kept in memory and is not persisted to disk.</p>
+ */
 public class BrutalImpactsCommand extends AbstractCommand {
 
     private final BrutalImpactsParticleSystem particlesSystem;
@@ -28,7 +39,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
     private final OptionalArg<ParticleSystem> particleArg;
 
     public BrutalImpactsCommand(@Nonnull BrutalImpactsParticleSystem particlesSystem, @Nonnull Class<?> pluginClass, @Nonnull Path dataDir) {
-        super("brutalimpacts", "Brutal Impacts settings.");
+        super("brutalimpacts", "Manage Brutal Impacts (reload JSON rules / set fallback particle).");
         this.particlesSystem = particlesSystem;
         this.pluginClass = pluginClass;
         this.dataDir = dataDir;
@@ -71,14 +82,14 @@ public class BrutalImpactsCommand extends AbstractCommand {
         ParticleSystem particleSystem = this.particleArg.get(context);
         if (particleSystem == null) {
             context.sendMessage(Message.raw("Current default particle: " + this.particlesSystem.getParticleSystemId()));
-            context.sendMessage(Message.raw("Usage: /brutalimpacts --reload"));
-            context.sendMessage(Message.raw("   or: /brutalimpacts --default <ParticleSystemId>"));
+            context.sendMessage(Message.raw("Usage: /brutalimpacts reload"));
+            context.sendMessage(Message.raw("   or: /brutalimpacts --reload"));
+            context.sendMessage(Message.raw("   or: /brutalimpacts --particle <ParticleSystemId>"));
             return CompletableFuture.completedFuture(null);
         }
 
         this.particlesSystem.setParticleSystemId(particleSystem.getId());
-        context.sendMessage(Message.raw("Updated default hit particle to: " + particleSystem.getId()));
+        context.sendMessage(Message.raw("Updated fallback hit particle to: " + particleSystem.getId()));
         return CompletableFuture.completedFuture(null);
     }
 }
-

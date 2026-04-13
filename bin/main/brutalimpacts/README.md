@@ -2,9 +2,10 @@
 
 ## Hit particles config
 
-This mod reads hit particle rules from JSON files in:
+This mod reads hit particle rules from JSON files in its data directory:
 
-`Hytale/UserData/Mods/BrutalImpacts/`
+- By default: a `BrutalImpacts/` folder next to the mod JAR (commonly under your Hytale `UserData/Mods/` directory).
+- Optional override: `-Dbrutalimpacts.dir=<path>` → data dir becomes `<path>/BrutalImpacts/`.
 
 ### Files
 
@@ -33,6 +34,13 @@ After editing any JSON file, you can reload rules in-game with:
 
 `/brutalimpacts --reload`
 
+### Default fallback particle (optional)
+
+If no rule matches a model id, the mod uses a fallback particle system id.
+You can change it in-game with:
+
+`/brutalimpacts --particle <ParticleSystemId>`
+
 ### JSON format
 
 ```json
@@ -45,10 +53,18 @@ After editing any JSON file, you can reload rules in-game with:
       "scale": 1.0
     },
     {
-      "match": { "type": "contains", "value": "Zombie" },
+      "match": { "type": "exact", "value": "Zombie" },
       "effects": [
-        { "particleSystemId": "BrutalImpacts_Hit_Blood_Default", "color": { "r": 255, "g": 0, "b": 0 }, "scale": 2.0 },
-        { "particleSystemId": "BrutalImpacts_Hit_Bone_Default", "color": { "r": 0, "g": 80, "b": 255 }, "scale": 1.0 }
+        { 
+          "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
+          "color": { "r": 255, "g": 0, "b": 0 },
+          "scale": 2.0 
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
+          "color": { "r": 0, "g": 80, "b": 255 },
+          "scale": 1.0 
+        }
       ]
     }
   ]

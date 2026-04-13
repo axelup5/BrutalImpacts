@@ -18,6 +18,17 @@ import dev.hytalemodding.systems.BrutalImpactsParticleSystem;
 import javax.annotation.Nonnull;
 import java.nio.file.Path;
 
+/**
+ * Main plugin entry point for Brutal Impacts.
+ *
+ * <p>Responsibilities:</p>
+ * <ul>
+ *   <li>Ensure the configuration folder exists and copy bundled resources (README + default JSON)</li>
+ *   <li>Load hit particle rules from JSON into {@link BrutalImpactsApi}</li>
+ *   <li>Register {@link BrutalImpactsParticleSystem} to append extra impact particles on damage events</li>
+ *   <li>Register {@code /brutalimpacts} command for reload / runtime tweaking</li>
+ * </ul>
+ */
 public class BrutalImpacts extends JavaPlugin {
 
     public BrutalImpacts(@Nonnull JavaPluginInit init) {
@@ -26,16 +37,17 @@ public class BrutalImpacts extends JavaPlugin {
 
     @Override
     protected void setup() {
-        //this.getCommandRegistry().registerCommand(new ExampleCommand("brutalhello", "Hello command from Brutal Impacts."));
-        //this.getCommandRegistry().registerCommand(new ExamplePlayerCommand());
-        //this.getCommandRegistry().registerCommand(new ServerRulesCommand());
-        //this.getCommandRegistry().registerCommand(new ExampleTargetEntityCommand());
-        //this.getCommandRegistry().registerCommand(new HealPlayerCommand());
-        //this.getCommandRegistry().registerCommand(new SpawnParticleSystemCommand());
+        // Example scaffolding commands/events (kept as references while developing):
+        // this.getCommandRegistry().registerCommand(new ExampleCommand("brutalhello", "Hello command from Brutal Impacts."));
+        // this.getCommandRegistry().registerCommand(new ExamplePlayerCommand());
+        // this.getCommandRegistry().registerCommand(new ServerRulesCommand());
+        // this.getCommandRegistry().registerCommand(new ExampleTargetEntityCommand());
+        // this.getCommandRegistry().registerCommand(new HealPlayerCommand());
+        // this.getCommandRegistry().registerCommand(new SpawnParticleSystemCommand());
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
 
-        // Hit particle rules are loaded from JSON in the Mods folder:
-        // `Hytale/UserData/Mods/BrutalImpacts/*.json`
+        // Hit particle rules are loaded from JSON in the BrutalImpacts data directory.
+        // You can override the base directory with: -Dbrutalimpacts.dir=<path>
         Path dataDir = BrutalImpactsFiles.resolveDataDir(BrutalImpacts.class);
         try {
             BrutalImpactsFiles.ensureLayout(BrutalImpacts.class, dataDir);

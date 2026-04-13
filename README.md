@@ -1,65 +1,64 @@
-# Hytale Plugin Template
+# Brutal Impacts
 
-A ready-to-use starting point for creating Hytale server plugins with Java, _or Kotlin_. If you've
-been using the Asset Editor and want to start writing server-side logic — custom commands, event
-handling, gameplay systems — this is the simplest place to begin.
+Brutal Impacts is a Hytale server mod that adds **extra impact particles** when entities take damage.
+It does **not** replace vanilla particles; it appends additional world particles to the damage event.
 
-## How to start?
+## Configuration (Hit Particles JSON)
 
-1. Copy the template by downloading it or using the "Use this template" button.
-2. [Configure or Install the Java SDK](https://hytalemodding.dev/en/docs/guides/plugin/setting-up-env)
-   to use the latest 25 from JetBrains or similar.
-3. Open the project in your favorite IDE, we
-   recommend [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
-4. Optionally, run `./gradlew` if your IDE does not automtically synchronizes.
-5. Run the devserver with the Run Configuration created, or `./gradlew devServer`.
+On startup, the mod creates/uses a data directory named `BrutalImpacts/` **next to the mod JAR** and loads hit particle rules from `*.json` files inside it.
 
-> On Windows, use `.\gradlew.bat` instead of `./gradlew`, this script is here to run the
-> Gradle without you needing to install the tooling itself, only the Java is required.
+You can override the base directory with the JVM system property:
 
-With that you will be prompted in the output to authorize your server, and then you can start
-developing your plugin while the server is live reloading the code changes.
+`-Dbrutalimpacts.dir=<path>` → data dir becomes `<path>/BrutalImpacts/`
 
-From here,
-the [HytaleModding guides](https://hytalemodding.dev/en/docs/guides/plugin/build-and-test) cover
-more details!
+### Files
 
-## Scaffoldit Plugin
+- `DefaultHitParticles_ReadOnly.json`
+  - Bundled defaults (read-only example).
+  - Overwritten when the mod updates.
+- `USER_HitParticles.json`
+  - Your personal overrides.
+  - Created once and never overwritten on updates.
+- Any other `*.json` file (e.g. `MoreAnimals.json`)
+  - Additional rules (useful for modpacks / servers).
 
-While there are multiple plugins made for Hytale, the template currently uses a zero-boilerplate one
-where you only need the absolute minimum to start. However, you do have access to everything as
-normal if you know what you are doing.
+### Priority (override order)
 
-For in-depth configuration, you can visit the [ScaffoldIt Plugin Docs](https://scaffoldit.dev).
+When multiple JSON files define rules for the same model id, priority is:
 
-## Troubleshooting
+1. `USER_HitParticles.json` (highest)
+2. Other `*.json` (sorted by filename)
+3. `DefaultHitParticles_ReadOnly.json` (lowest)
 
-- **Gradle sync fails in IntelliJ** –
-  _Check that Java 25 is installed and configured under File → Project Structure → SDKs._
-- **Build fails with missing dependencies** –
-  _Run `./gradlew build --refresh-dependencies`. Make sure you have internet access!_
-- **Permission denied on `./gradlew`** –
-  _Run `chmod +x gradlew` (macOS/Linux)._
-- **Hot-reload doesn't work** –
-  _Verify you're using JetBrains Runtime, not a regular JDK._
+Tip: if you need one modder file to win over another, prefix the filename (e.g. `00_MoreAnimals.json`).
+
+### Hot reload
+
+After editing any JSON file, reload rules in-game:
+
+- `/brutalimpacts --reload`
+
+### Default Particles
+
+The default particles (the blood splatter) can be replaced using:
+
+- `/brutalimpacts --particle <ParticleSystemId>`
+
+## JSON format
+
+The bundled README shipped into the data directory includes the full JSON schema + examples:
+
+- `BrutalImpacts/README.md` (generated at runtime)
+- `src/main/resources/brutalimpacts/README.md` (source copy in this repo)
+
+## Developer API (optional)
+
+Other mods/plugins can register rules at runtime via:
+
+- `dev.hytalemodding.api.BrutalImpactsApi.hitParticles()`
 
 ## Resources
 
-- [Hytale Modding Guides](https://hytalemodding.dev)
-- [Hytale Modding Discord](https://discord.gg/hytalemodding)
-- [ScaffoldIt Plugin Docs](https://scaffoldit.dev)
-
-## Brutal Impacts: Hit Particles JSON
-
-This plugin loads hit particle rules from JSON files in:
-
-`Hytale/UserData/Mods/BrutalImpacts/`
-
-- `DefaultHitParticles_ReadOnly.json` is overwritten when the mod updates
-- `USER_HitParticles.json` is created once and never overwritten
-- Any other `*.json` file is also read (e.g. `MoreAnimals.json`)
-
-## License
-
-Add your own after copying the template, though we recommend using MIT, BSD, or Apache to keep
-the modding community open!
+- Hytale Modding Guides: https://hytalemodding.dev
+- Hytale Modding Discord: https://discord.gg/hytalemodding
+- ScaffoldIt Plugin Docs: https://scaffoldit.dev

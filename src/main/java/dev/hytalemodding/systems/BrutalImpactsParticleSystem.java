@@ -46,7 +46,10 @@ import static com.hypixel.hytale.component.dependency.OrderPriority.CLOSEST;
 /**
  * Adds extra impact particles to {@link Damage#IMPACT_PARTICLES} without replacing existing ones.
  *
- * This relies on the vanilla {@link DamageSystems.ApplyParticles} system to actually broadcast/spawn the particles.
+ * <p>This system resolves hit particle rules via {@link BrutalImpactsApi#hitParticles()} using the target's model
+ * asset id, then appends the resulting world particles to the damage metadata.</p>
+ *
+ * <p>This relies on the vanilla {@link DamageSystems.ApplyParticles} system to actually broadcast/spawn the particles.</p>
  */
 public class BrutalImpactsParticleSystem extends DamageEventSystem {
 
@@ -60,6 +63,11 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
     private final double defaultViewDistance;
     private final boolean debug;
 
+    /**
+     * @param particleSystemId Fallback particle system id used when no rule matches.
+     * @param defaultViewDistance Minimum view distance for spawned particles.
+     * @param debug Enables verbose console output and source-player chat notifications.
+     */
     public BrutalImpactsParticleSystem(@Nonnull String particleSystemId, double defaultViewDistance, boolean debug) {
         this.particleSystemId = particleSystemId;
         this.defaultViewDistance = defaultViewDistance;

@@ -18,6 +18,21 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * JSON loader for Brutal Impacts hit particle rules.
+ *
+ * <p>The JSON format is intentionally simple and is used by the mod's on-disk configuration files. Rules are
+ * appended into a {@link HitParticleRegistry} using one of three match modes:</p>
+ *
+ * <ul>
+ *   <li>{@code exact}: model id must match exactly</li>
+ *   <li>{@code prefix}: model id must start with the configured value</li>
+ *   <li>{@code contains}: model id must contain the configured value</li>
+ * </ul>
+ *
+ * <p>Each rule can define either a single effect via {@code particleSystemId/color/scale} or multiple effects
+ * via {@code effects: [{ particleSystemId, color, scale }, ...]}.</p>
+ */
 public final class HitParticleRulesJson {
 
     private static final Gson GSON = new GsonBuilder().setLenient().create();

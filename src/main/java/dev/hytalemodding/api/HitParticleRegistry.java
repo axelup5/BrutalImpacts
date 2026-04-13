@@ -8,6 +8,15 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 
+/**
+ * In-memory registry of "model id → hit particle" rules.
+ *
+ * <p>This registry supports three string match modes (exact/prefix/contains) plus a generic predicate hook.
+ * Rules preserve "first match wins" semantics based on registration order.</p>
+ *
+ * <p>For performance, {@link #resolveSpec(String, String)} maintains an internal per-model cache and uses
+ * immutable snapshots for prefix/contains/predicate rules. Rule registration clears the cache.</p>
+ */
 public final class HitParticleRegistry {
 
     /**
@@ -37,6 +46,9 @@ public final class HitParticleRegistry {
      */
     private final ConcurrentHashMap<String, ResolvedCacheEntry> resolvedCache = new ConcurrentHashMap<>();
 
+    /**
+     * Removes all rules and cached resolutions.
+     */
     public void clear() {
         this.nextOrder.set(0);
         this.exactRules.clear();
@@ -54,60 +66,96 @@ public final class HitParticleRegistry {
         this.resolvedCache.clear();
     }
 
+    /**
+     * Registers an exact match for a model asset id.
+     */
     public void registerModelExact(@Nonnull String modelAssetId, @Nonnull String particleSystemId) {
         registerModelExact(modelAssetId, particleSystemId, 0, 0, 0, 1.0F);
     }
 
+    /**
+     * Registers an exact match with an RGB tint override.
+     */
     public void registerModelExact(@Nonnull String modelAssetId, @Nonnull String particleSystemId, int r, int g, int b) {
         registerModelExact(modelAssetId, particleSystemId, r, g, b, 1.0F);
     }
 
+    /**
+     * Registers an exact match with an RGB tint override and scale.
+     */
     public void registerModelExact(@Nonnull String modelAssetId, @Nonnull String particleSystemId, int r, int g, int b, float scale) {
         Objects.requireNonNull(modelAssetId, "modelAssetId");
         Objects.requireNonNull(particleSystemId, "particleSystemId");
         registerModelExact(modelAssetId, effectFrom(particleSystemId, r, g, b, scale));
     }
 
+    /**
+     * Registers an exact match that can spawn multiple effects.
+     */
     public void registerModelExact(@Nonnull String modelAssetId, @Nonnull HitParticleEffect... effects) {
         Objects.requireNonNull(modelAssetId, "modelAssetId");
         Objects.requireNonNull(effects, "effects");
         registerModelExactSpec(modelAssetId, new HitParticleSpec(java.util.List.of(effects)));
     }
 
+    /**
+     * Registers a prefix match for model asset ids.
+     */
     public void registerModelPrefix(@Nonnull String prefix, @Nonnull String particleSystemId) {
         registerModelPrefix(prefix, particleSystemId, 0, 0, 0, 1.0F);
     }
 
+    /**
+     * Registers a prefix match with an RGB tint override.
+     */
     public void registerModelPrefix(@Nonnull String prefix, @Nonnull String particleSystemId, int r, int g, int b) {
         registerModelPrefix(prefix, particleSystemId, r, g, b, 1.0F);
     }
 
+    /**
+     * Registers a prefix match with an RGB tint override and scale.
+     */
     public void registerModelPrefix(@Nonnull String prefix, @Nonnull String particleSystemId, int r, int g, int b, float scale) {
         Objects.requireNonNull(prefix, "prefix");
         Objects.requireNonNull(particleSystemId, "particleSystemId");
         registerModelPrefix(prefix, effectFrom(particleSystemId, r, g, b, scale));
     }
 
+    /**
+     * Registers a prefix match that can spawn multiple effects.
+     */
     public void registerModelPrefix(@Nonnull String prefix, @Nonnull HitParticleEffect... effects) {
         Objects.requireNonNull(prefix, "prefix");
         Objects.requireNonNull(effects, "effects");
         registerModelPrefixSpec(prefix, new HitParticleSpec(java.util.List.of(effects)));
     }
 
+    /**
+     * Registers a substring ("contains") match for model asset ids.
+     */
     public void registerModelContains(@Nonnull String needle, @Nonnull String particleSystemId) {
         registerModelContains(needle, particleSystemId, 0, 0, 0, 1.0F);
     }
 
+    /**
+     * Registers a substring ("contains") match with an RGB tint override.
+     */
     public void registerModelContains(@Nonnull String needle, @Nonnull String particleSystemId, int r, int g, int b) {
         registerModelContains(needle, particleSystemId, r, g, b, 1.0F);
     }
 
+    /**
+     * Registers a substring ("contains") match with an RGB tint override and scale.
+     */
     public void registerModelContains(@Nonnull String needle, @Nonnull String particleSystemId, int r, int g, int b, float scale) {
         Objects.requireNonNull(needle, "needle");
         Objects.requireNonNull(particleSystemId, "particleSystemId");
         registerModelContains(needle, effectFrom(particleSystemId, r, g, b, scale));
     }
 
+    /**
+     * Registers a substring ("contains") match that can spawn multiple effects.
+     */
     public void registerModelContains(@Nonnull String needle, @Nonnull HitParticleEffect... effects) {
         Objects.requireNonNull(needle, "needle");
         Objects.requireNonNull(effects, "effects");
@@ -149,12 +197,23 @@ public final class HitParticleRegistry {
         this.resolvedCache.clear();
     }
 
+    /**
+     * Registers a predicate-based rule that can spawn multiple effects.
+     */
     public void registerModelPredicate(@Nonnull Predicate<String> predicate, @Nonnull HitParticleEffect... effects) {
         Objects.requireNonNull(predicate, "predicate");
         Objects.requireNonNull(effects, "effects");
         registerModelPredicate(predicate, new HitParticleSpec(java.util.List.of(effects)));
     }
 
+    /**
+     * Resolves the best matching spec for a target model asset id.
+     *
+     * <p>If no rule matches, this returns a single-effect spec using {@code fallbackParticleSystemId}.</p>
+     *
+     * @param modelAssetId Target model asset id (nullable).
+     * @param fallbackParticleSystemId Particle system id used when no rules match.
+     */
     @Nonnull
     public HitParticleSpec resolveSpec(@Nullable String modelAssetId, @Nonnull String fallbackParticleSystemId) {
         Objects.requireNonNull(fallbackParticleSystemId, "fallbackParticleSystemId");

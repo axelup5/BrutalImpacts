@@ -18,6 +18,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * File/layout utilities for Brutal Impacts' on-disk configuration.
+ *
+ * <p>This mod uses a data directory named {@value #DIR_NAME} and stores a small set of bundled files plus
+ * user-editable JSON configuration. On startup (and on reload), the mod:</p>
+ *
+ * <ul>
+ *   <li>Creates the directory if needed</li>
+ *   <li>Overwrites bundled docs + defaults (safe to replace on update)</li>
+ *   <li>Creates the user file once and never overwrites it</li>
+ *   <li>Loads all {@code *.json} rules with a stable priority order</li>
+ * </ul>
+ *
+ * <p>You can override the base directory by setting the JVM system property {@code brutalimpacts.dir}.
+ * The final data dir will be {@code <override>}/{@value #DIR_NAME}.</p>
+ */
 public final class BrutalImpactsFiles {
 
     public static final String DIR_NAME = "BrutalImpacts";
@@ -29,6 +45,16 @@ public final class BrutalImpactsFiles {
     private BrutalImpactsFiles() {
     }
 
+    /**
+     * Resolves the directory where Brutal Impacts should store/read its JSON files.
+     *
+     * <p>Resolution order:</p>
+     * <ol>
+     *   <li>If {@code -Dbrutalimpacts.dir=<path>} is set, returns {@code <path>/BrutalImpacts/}</li>
+     *   <li>Otherwise, returns {@code BrutalImpacts/} next to the plugin code source (usually the JAR)</li>
+     *   <li>Fallback: {@code ./BrutalImpacts/}</li>
+     * </ol>
+     */
     @Nonnull
     public static Path resolveDataDir(@Nonnull Class<?> pluginClass) {
         Objects.requireNonNull(pluginClass, "pluginClass");
@@ -50,6 +76,12 @@ public final class BrutalImpactsFiles {
         }
     }
 
+    /**
+     * Ensures the on-disk directory layout exists and writes bundled files.
+     *
+     * <p>Bundled files are refreshed on every run (to reflect mod updates), except
+     * {@value #USER_HIT_PARTICLES_FILE} which is created once and never overwritten.</p>
+     */
     public static void ensureLayout(@Nonnull Class<?> pluginClass, @Nonnull Path dataDir) throws IOException {
         Objects.requireNonNull(pluginClass, "pluginClass");
         Objects.requireNonNull(dataDir, "dataDir");
@@ -150,6 +182,11 @@ public final class BrutalImpactsFiles {
     public record JsonLoadError(@Nonnull Path path, @Nonnull String message) {
     }
 
+    /**
+     * Copies a classpath resource to disk.
+     *
+     * @param overwrite whether an existing file should be replaced
+     */
     private static void copyResource(@Nonnull Class<?> pluginClass, @Nonnull String resourcePath, @Nonnull Path out, boolean overwrite) throws IOException {
         Objects.requireNonNull(pluginClass, "pluginClass");
         Objects.requireNonNull(resourcePath, "resourcePath");
