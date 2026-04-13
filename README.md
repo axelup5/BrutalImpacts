@@ -1,7 +1,13 @@
+![banner](media/BrutalImpacts_Banner.png)
+
 # Brutal Impacts
 
 Brutal Impacts is a Hytale server mod that adds **extra impact particles** when entities take damage.
 It does **not** replace vanilla particles; it appends additional world particles to the damage event.
+
+Currently, all mobs have extra particles; they aren't the best, but I'll try to improve them in future updates.
+
+This mod supports both the base game's particle systems and custom ones created by users.
 
 ## Configuration (Hit Particles JSON)
 
