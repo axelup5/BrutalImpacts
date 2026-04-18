@@ -2,9 +2,15 @@ package dev.hytalemodding.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -134,41 +140,56 @@ public final class HitParticleRulesJson {
         Objects.requireNonNull(registry, "registry");
         Objects.requireNonNull(reader, "reader");
 
-        Config config;
+        JsonObject root;
         try {
-            config = GSON.fromJson(reader, Config.class);
+            JsonReader jsonReader = new JsonReader(reader);
+            jsonReader.setLenient(true);
+            JsonElement rootEl = JsonParser.parseReader(jsonReader);
+            root = rootEl != null && rootEl.isJsonObject() ? rootEl.getAsJsonObject() : new JsonObject();
         } catch (JsonParseException e) {
             throw new IllegalArgumentException("Invalid hit-particles JSON", e);
         }
 
-        List<Rule> rules = config == null ? List.of() : safeList(config.rules);
+        JsonArray rules = root.has("rules") && root.get("rules").isJsonArray() ? root.getAsJsonArray("rules") : new JsonArray();
 
         int loaded = 0;
-        for (Rule rule : rules) {
-            if (rule == null || rule.match == null) {
+        for (JsonElement ruleEl : rules) {
+            if (ruleEl == null || !ruleEl.isJsonObject()) {
                 continue;
             }
 
-            String type = rule.match.type == null ? "" : rule.match.type.trim().toLowerCase(Locale.ROOT);
-            String value = rule.match.value == null ? null : rule.match.value.trim();
+            JsonObject rule = ruleEl.getAsJsonObject();
+            JsonObject match = getObj(rule, "match");
+            if (match == null) {
+                continue;
+            }
+
+            String type = getString(match, "type");
+            type = type == null ? "" : type.trim().toLowerCase(Locale.ROOT);
+            String value = getString(match, "value");
+            value = value == null ? null : value.trim();
             if (value == null || value.isBlank()) {
                 continue;
             }
 
-            List<Effect> effects = rule.effects != null ? rule.effects : null;
+            JsonArray effects = rule.has("effects") && rule.get("effects").isJsonArray() ? rule.getAsJsonArray("effects") : null;
+            ArrayList<HitParticleEffect> compiledEffects = new ArrayList<>(effects == null ? 1 : effects.size());
             if (effects == null || effects.isEmpty()) {
-                if (rule.particleSystemId == null || rule.particleSystemId.isBlank()) {
+                HitParticleEffect single = compileSingleEffectFromRule(rule);
+                if (single == null) {
                     continue;
                 }
-                effects = List.of(effectFromSingle(rule.particleSystemId, rule.color, rule.scale));
-            }
-
-            ArrayList<HitParticleEffect> compiledEffects = new ArrayList<>(effects.size());
-            for (Effect effect : effects) {
-                if (effect == null || effect.particleSystemId == null || effect.particleSystemId.isBlank()) {
-                    continue;
+                compiledEffects.add(single);
+            } else {
+                for (JsonElement effectEl : effects) {
+                    if (effectEl == null || !effectEl.isJsonObject()) {
+                        continue;
+                    }
+                    HitParticleEffect compiled = compileEffect(effectEl.getAsJsonObject());
+                    if (compiled != null) {
+                        compiledEffects.add(compiled);
+                    }
                 }
-                compiledEffects.add(effectToRuntime(effect));
             }
 
             if (compiledEffects.isEmpty()) {
@@ -180,7 +201,7 @@ public final class HitParticleRulesJson {
                 case "exact" -> registry.registerModelExact(value, compiledArray);
                 case "prefix" -> registry.registerModelPrefix(value, compiledArray);
                 case "contains" -> registry.registerModelContains(value, compiledArray);
-                default -> throw new IllegalArgumentException("Unknown match.type: " + rule.match.type);
+                default -> throw new IllegalArgumentException("Unknown match.type: " + getString(match, "type"));
             }
             loaded++;
         }
@@ -188,58 +209,102 @@ public final class HitParticleRulesJson {
         return loaded;
     }
 
-    private static Effect effectFromSingle(@Nonnull String particleSystemId, Color color, Number scale) {
-        Effect effect = new Effect();
-        effect.particleSystemId = particleSystemId;
-        effect.color = color;
-        effect.scale = scale;
-        return effect;
-    }
-
-    private static HitParticleEffect effectToRuntime(@Nonnull Effect effect) {
-        float scale = effect.scale == null ? 1.0F : effect.scale.floatValue();
-        if (effect.color == null) {
-            return HitParticleEffect.of(effect.particleSystemId, scale);
+    @Nullable
+    private static HitParticleEffect compileSingleEffectFromRule(@Nonnull JsonObject rule) {
+        String particleSystemId = getString(rule, "particleSystemId");
+        if (particleSystemId == null || particleSystemId.isBlank()) {
+            return null;
         }
 
-        int r = effect.color.r == null ? 0 : effect.color.r;
-        int g = effect.color.g == null ? 0 : effect.color.g;
-        int b = effect.color.b == null ? 0 : effect.color.b;
-        return HitParticleEffect.tinted(effect.particleSystemId, r, g, b, scale);
+        Float scale = getNumberAsFloat(rule, "scale");
+        float scaleValue = scale == null ? 1.0F : scale;
+        return compileEffectFields(particleSystemId, scaleValue, rule, "color");
     }
 
-    private static <T> List<T> safeList(List<T> list) {
-        return list == null ? List.of() : list;
+    @Nullable
+    private static HitParticleEffect compileEffect(@Nonnull JsonObject effectObj) {
+        String particleSystemId = getString(effectObj, "particleSystemId");
+        if (particleSystemId == null || particleSystemId.isBlank()) {
+            return null;
+        }
+
+        Float scale = getNumberAsFloat(effectObj, "scale");
+        float scaleValue = scale == null ? 1.0F : scale;
+        return compileEffectFields(particleSystemId, scaleValue, effectObj, "color");
     }
 
-    private static final class Config {
-        private List<Rule> rules;
+    @Nullable
+    private static HitParticleEffect compileEffectFields(
+        @Nonnull String particleSystemId,
+        float scale,
+        @Nonnull JsonObject obj,
+        @Nonnull String colorField
+    ) {
+        if (!obj.has(colorField)) {
+            return HitParticleEffect.of(particleSystemId, scale);
+        }
+
+        JsonElement colorEl = obj.get(colorField);
+        if (colorEl == null || colorEl.isJsonNull()) {
+            return HitParticleEffect.noTint(particleSystemId, scale);
+        }
+
+        if (!colorEl.isJsonObject()) {
+            throw new IllegalArgumentException("Invalid color field for particleSystemId=" + particleSystemId + " (expected object or null)");
+        }
+
+        JsonObject colorObj = colorEl.getAsJsonObject();
+        Integer r = getNumberAsInt(colorObj, "r");
+        Integer g = getNumberAsInt(colorObj, "g");
+        Integer b = getNumberAsInt(colorObj, "b");
+        return HitParticleEffect.tinted(particleSystemId, r == null ? 0 : r, g == null ? 0 : g, b == null ? 0 : b, scale);
     }
 
-    private static final class Rule {
-        private Match match;
-        private List<Effect> effects;
-
-        // Convenience: allow a single effect without "effects": []
-        private String particleSystemId;
-        private Color color;
-        private Number scale;
+    @Nullable
+    private static JsonObject getObj(@Nonnull JsonObject obj, @Nonnull String key) {
+        if (!obj.has(key)) {
+            return null;
+        }
+        JsonElement el = obj.get(key);
+        if (el == null || el.isJsonNull() || !el.isJsonObject()) {
+            return null;
+        }
+        return el.getAsJsonObject();
     }
 
-    private static final class Match {
-        private String type;
-        private String value;
+    @Nullable
+    private static String getString(@Nonnull JsonObject obj, @Nonnull String key) {
+        if (!obj.has(key)) {
+            return null;
+        }
+        JsonElement el = obj.get(key);
+        if (el == null || el.isJsonNull()) {
+            return null;
+        }
+        return el.isJsonPrimitive() ? el.getAsString() : null;
     }
 
-    private static final class Effect {
-        private String particleSystemId;
-        private Color color;
-        private Number scale;
+    @Nullable
+    private static Float getNumberAsFloat(@Nonnull JsonObject obj, @Nonnull String key) {
+        if (!obj.has(key)) {
+            return null;
+        }
+        JsonElement el = obj.get(key);
+        if (el == null || el.isJsonNull()) {
+            return null;
+        }
+        return el.isJsonPrimitive() && el.getAsJsonPrimitive().isNumber() ? el.getAsFloat() : null;
     }
 
-    private static final class Color {
-        private Integer r;
-        private Integer g;
-        private Integer b;
+    @Nullable
+    private static Integer getNumberAsInt(@Nonnull JsonObject obj, @Nonnull String key) {
+        if (!obj.has(key)) {
+            return null;
+        }
+        JsonElement el = obj.get(key);
+        if (el == null || el.isJsonNull()) {
+            return null;
+        }
+        return el.isJsonPrimitive() && el.getAsJsonPrimitive().isNumber() ? el.getAsInt() : null;
     }
 }

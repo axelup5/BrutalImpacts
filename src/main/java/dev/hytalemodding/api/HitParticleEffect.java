@@ -9,24 +9,42 @@ import javax.annotation.Nullable;
  * A single particle effect to spawn on hit.
  *
  * @param particleSystemId The particle system asset id (must be non-blank).
- * @param colorOverride Optional tint applied to the particle system. If {@code null}, the caller's default color
- *                      (if any) is used.
+ * @param colorOverride Optional tint applied to the particle system.
  * @param scale Scale multiplier. Values {@code <= 0} are treated as "use default" by the runtime system.
+ * @param inheritDefaultColor When {@code true} and {@code colorOverride} is {@code null}, the runtime uses its
+ *                            configured default color (if any). When {@code false} and {@code colorOverride} is
+ *                            {@code null}, the runtime uses {@code null} (no tint).
  */
-public record HitParticleEffect(@Nonnull String particleSystemId, @Nullable Color colorOverride, float scale) {
+public record HitParticleEffect(
+    @Nonnull String particleSystemId,
+    @Nullable Color colorOverride,
+    float scale,
+    boolean inheritDefaultColor
+) {
 
     /**
-     * Creates an effect with scale {@code 1.0} and no tint override.
+     * Creates an effect with scale {@code 1.0} and no explicit tint override.
+     *
+     * <p>If the runtime has a default color configured, this effect will inherit it.</p>
      */
     public static HitParticleEffect of(@Nonnull String particleSystemId) {
-        return new HitParticleEffect(particleSystemId, null, 1.0F);
+        return new HitParticleEffect(particleSystemId, null, 1.0F, true);
     }
 
     /**
-     * Creates an effect with no tint override.
+     * Creates an effect with no explicit tint override.
+     *
+     * <p>If the runtime has a default color configured, this effect will inherit it.</p>
      */
     public static HitParticleEffect of(@Nonnull String particleSystemId, float scale) {
-        return new HitParticleEffect(particleSystemId, null, scale);
+        return new HitParticleEffect(particleSystemId, null, scale, true);
+    }
+
+    /**
+     * Creates an effect that explicitly uses no tint, even if the runtime has a default color configured.
+     */
+    public static HitParticleEffect noTint(@Nonnull String particleSystemId, float scale) {
+        return new HitParticleEffect(particleSystemId, null, scale, false);
     }
 
     /**
@@ -42,7 +60,7 @@ public record HitParticleEffect(@Nonnull String particleSystemId, @Nullable Colo
      * <p>RGB values are clamped to {@code [0, 255]}.</p>
      */
     public static HitParticleEffect tinted(@Nonnull String particleSystemId, int r, int g, int b, float scale) {
-        return new HitParticleEffect(particleSystemId, new Color(toByte(r), toByte(g), toByte(b)), scale);
+        return new HitParticleEffect(particleSystemId, new Color(toByte(r), toByte(g), toByte(b)), scale, false);
     }
 
     private static byte toByte(int value) {

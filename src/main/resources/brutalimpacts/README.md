@@ -70,3 +70,9 @@ You can change it in-game with:
   ]
 }
 ```
+
+#### Color rules
+
+- If `"color"` is omitted: the effect inherits the runtime default color (if configured).
+- If `"color": null`: the effect uses no tint (even if a runtime default color exists).
+- If `"color": { "r": ..., "g": ..., "b": ... }`: the effect uses that RGB tint.

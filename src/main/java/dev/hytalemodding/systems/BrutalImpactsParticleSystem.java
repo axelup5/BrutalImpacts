@@ -11,6 +11,7 @@ import com.hypixel.hytale.component.dependency.SystemDependency;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector4d;
 import com.hypixel.hytale.component.query.Query;
+import com.hypixel.hytale.math.util.TrigMathUtil;
 import com.hypixel.hytale.protocol.Color;
 import com.hypixel.hytale.protocol.Direction;
 import com.hypixel.hytale.protocol.Vector3f;
@@ -18,8 +19,10 @@ import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.particle.config.WorldParticle;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.modules.entity.damage.Damage;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageEventSystem;
+import com.hypixel.hytale.server.core.modules.entity.damage.DamageCause;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageModule;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageSystems;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
@@ -37,6 +40,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -62,6 +66,9 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
     private volatile float defaultScale = 1.0F;
     private final double defaultViewDistance;
     private final boolean debug;
+
+    private static final int MAX_EXTRA_WORLD_PARTICLES = 32;
+    private static final float DEFAULT_SPREAD_DEGREES = 10.0F;
 
     /**
      * @param particleSystemId Fallback particle system id used when no rule matches.
@@ -119,6 +126,11 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
             return;
         }
 
+        TransformComponent targetTransform = archetypeChunk.getComponent(index, TRANSFORM_COMPONENT_TYPE);
+        if (targetTransform == null) {
+            return;
+        }
+
         String modelAssetId = null;
         ModelComponent modelComponent = archetypeChunk.getComponent(index, MODEL_COMPONENT_TYPE);
         if (modelComponent != null && modelComponent.getModel() != null) {
@@ -135,7 +147,15 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
             return;
         }
 
-        WorldParticle[] extras = buildWorldParticles(effects);
+        Vector4d hitLocation = damage.getIfPresentMetaObject(Damage.HIT_LOCATION);
+        Vector3d targetPosition = hitLocation == null
+            ? targetTransform.getPosition()
+            : new Vector3d(hitLocation.x, hitLocation.y, hitLocation.z);
+
+        ImpactContext impact = resolveImpactContext(commandBuffer, damage, targetPosition);
+        ImpactTuning tuning = ImpactTuning.from(damage, impact.weaponClass());
+
+        WorldParticle[] extras = buildWorldParticles(effects, tuning, impact.rotation(), DEFAULT_SPREAD_DEGREES);
         if (extras.length == 0) {
             return;
         }
@@ -145,7 +165,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
             particles = new Damage.Particles(new ModelParticle[0], extras, this.defaultViewDistance);
             damage.putMetaObject(Damage.IMPACT_PARTICLES, particles);
             this.debugNotify(commandBuffer, damage, "Created IMPACT_PARTICLES + appended " + extras.length + " world particles");
-            this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extras);
+            this.spawnForPredictingSourceIfNeeded(commandBuffer, damage, targetPosition, impact, extras);
             return;
         }
 
@@ -156,7 +176,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
         }
 
         this.debugNotify(commandBuffer, damage, "Ensured " + extras.length + " world particles are present");
-        this.spawnForPredictingSourceIfNeeded(index, archetypeChunk, commandBuffer, damage, extras);
+        this.spawnForPredictingSourceIfNeeded(commandBuffer, damage, targetPosition, impact, extras);
     }
 
     /**
@@ -170,10 +190,10 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
      * - Other nearby players still receive it from vanilla (no duplicates)
      */
     private void spawnForPredictingSourceIfNeeded(
-        int index,
-        @Nonnull ArchetypeChunk<EntityStore> archetypeChunk,
         @Nonnull CommandBuffer<EntityStore> commandBuffer,
         @Nonnull Damage damage,
+        @Nonnull Vector3d targetPosition,
+        @Nonnull ImpactContext impact,
         @Nonnull WorldParticle[] extras
     ) {
         boolean canBePredicted = damage.getMetaStore().getMetaObject(Damage.CAN_BE_PREDICTED);
@@ -196,21 +216,20 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
             return;
         }
 
-        TransformComponent targetTransform = archetypeChunk.getComponent(index, TRANSFORM_COMPONENT_TYPE);
-        if (targetTransform == null) {
-            return;
-        }
-
-        Vector4d hitLocation = damage.getIfPresentMetaObject(Damage.HIT_LOCATION);
-        Vector3d targetPosition = hitLocation == null
-            ? targetTransform.getPosition()
-            : new Vector3d(hitLocation.x, hitLocation.y, hitLocation.z);
-
         ObjectArrayList<Ref<EntityStore>> justSource = new ObjectArrayList<>(1);
         justSource.add(sourceRef);
 
         for (WorldParticle extra : extras) {
-            ParticleUtil.spawnParticleEffect(extra, targetPosition, justSource, commandBuffer);
+            ParticleUtil.spawnParticleEffect(
+                extra,
+                targetPosition,
+                impact.rotation().yawToSource,
+                0.0F,
+                0.0F,
+                null,
+                justSource,
+                commandBuffer
+            );
         }
         this.debugNotify(commandBuffer, damage, "Sent predicted-only particles to source (" + extras.length + ")");
     }
@@ -240,25 +259,42 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
     }
 
     @Nonnull
-    private WorldParticle[] buildWorldParticles(@Nonnull List<HitParticleEffect> effects) {
-        ArrayList<WorldParticle> out = new ArrayList<>(effects.size());
+    private WorldParticle[] buildWorldParticles(
+        @Nonnull List<HitParticleEffect> effects,
+        @Nonnull ImpactTuning tuning,
+        @Nonnull ImpactRotation rotation,
+        float spreadDegrees
+    ) {
+        int repeats = Math.max(1, tuning.repeats);
+        float spreadRad = Math.max(0.0F, spreadDegrees) * TrigMathUtil.degToRad;
+
+        int expected = Math.min(MAX_EXTRA_WORLD_PARTICLES, effects.size() * repeats);
+        ArrayList<WorldParticle> out = new ArrayList<>(expected);
+
         for (HitParticleEffect effect : effects) {
             if (effect == null || effect.particleSystemId() == null || effect.particleSystemId().isBlank()) {
                 continue;
             }
 
-            Color colorToUse = effect.colorOverride() != null ? effect.colorOverride() : this.defaultColor;
-            float scaleToUse = effect.scale() > 0.0F ? effect.scale() : this.defaultScale;
+            Color colorToUse = resolveColor(effect);
+            float baseScale = effect.scale() > 0.0F ? effect.scale() : this.defaultScale;
+            float scaleToUse = clamp(baseScale * tuning.scaleMultiplier, 0.05F, 8.0F);
 
-            out.add(
-                new WorldParticle(
-                    effect.particleSystemId(),
-                    colorToUse,
-                    scaleToUse,
-                    new Vector3f(0.0F, 0.0F, 0.0F),
-                    new Direction(0.0F, 0.0F, 0.0F)
-                )
-            );
+            int localRepeats = repeats;
+            for (int i = 0; i < localRepeats && out.size() < MAX_EXTRA_WORLD_PARTICLES; i++) {
+                float yawJitter = repeats <= 1 ? 0.0F : lerp(-spreadRad, spreadRad, (float) i / (float) (repeats - 1));
+                float pitchJitter = repeats <= 1 ? 0.0F : (((i & 1) == 0) ? 0.35F : -0.35F) * (spreadRad * 0.5F);
+
+                out.add(
+                    new WorldParticle(
+                        effect.particleSystemId(),
+                        colorToUse,
+                        scaleToUse,
+                        new Vector3f(0.0F, 0.0F, 0.0F),
+                        new Direction(rotation.yawOffset + yawJitter, rotation.pitchOffset + pitchJitter, 0.0F)
+                    )
+                );
+            }
         }
 
         if (this.debug) {
@@ -268,12 +304,22 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
                 sb.append(" {id=").append(wp.getSystemId())
                     .append(", scale=").append(wp.getScale())
                     .append(", color=").append(formatColor(wp.getColor()))
+                    .append(", rotYaw=").append(wp.getRotationOffset() == null ? "null" : wp.getRotationOffset().yaw)
+                    .append(", rotPitch=").append(wp.getRotationOffset() == null ? "null" : wp.getRotationOffset().pitch)
                     .append("}");
             }
             System.out.println(sb);
         }
 
         return out.toArray(new WorldParticle[0]);
+    }
+
+    @Nullable
+    private Color resolveColor(@Nonnull HitParticleEffect effect) {
+        if (effect.colorOverride() != null) {
+            return effect.colorOverride();
+        }
+        return effect.inheritDefaultColor() ? this.defaultColor : null;
     }
 
     private static void appendWorldParticles(@Nonnull Damage.Particles particles, @Nonnull WorldParticle[] extras) {
@@ -315,7 +361,129 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
         }
         return Objects.equals(a.getSystemId(), b.getSystemId())
             && Float.compare(a.getScale(), b.getScale()) == 0
-            && Objects.equals(a.getColor(), b.getColor());
+            && Objects.equals(a.getColor(), b.getColor())
+            && Objects.equals(a.getPositionOffset(), b.getPositionOffset())
+            && Objects.equals(a.getRotationOffset(), b.getRotationOffset());
+    }
+
+    private static float clamp(float value, float min, float max) {
+        return Math.max(min, Math.min(max, value));
+    }
+
+    private static float lerp(float a, float b, float t) {
+        return a + (b - a) * t;
+    }
+
+    private record ImpactContext(@Nonnull WeaponClass weaponClass, @Nonnull ImpactRotation rotation) {
+    }
+
+    private record ImpactRotation(float yawToSource, float yawOffset, float pitchOffset) {
+    }
+
+    private record ImpactTuning(float scaleMultiplier, int repeats) {
+        @Nonnull
+        static ImpactTuning from(@Nonnull Damage damage, @Nonnull WeaponClass weaponClass) {
+            float dmg = Math.max(0.0F, damage.getAmount());
+            boolean isProjectile = damage.getSource() instanceof Damage.ProjectileSource;
+
+            float scale = 0.85F + (dmg * 0.06F);
+            int repeats = 1 + (int) Math.floor(dmg / 6.0F);
+
+            if (isProjectile) {
+                scale *= 0.85F;
+                repeats = Math.max(1, repeats - 1);
+            } else {
+                scale *= 1.05F;
+            }
+
+            scale *= weaponClass.scaleMultiplier;
+            repeats = Math.max(1, (int) Math.round(repeats * weaponClass.repeatMultiplier));
+
+            scale = clamp(scale, 0.5F, 2.5F);
+            repeats = Math.max(1, Math.min(5, repeats));
+            return new ImpactTuning(scale, repeats);
+        }
+    }
+
+    private enum WeaponClass {
+        UNARMED(0.95F, 0.90F),
+        SWORD(1.00F, 1.00F),
+        AXE(1.05F, 1.05F),
+        HAMMER(1.15F, 1.15F),
+        SPEAR(1.00F, 1.05F),
+        DAGGER(0.95F, 1.10F),
+        BOW(0.90F, 0.85F),
+        STAFF(0.95F, 0.95F),
+        OTHER(1.00F, 1.00F);
+
+        final float scaleMultiplier;
+        final float repeatMultiplier;
+
+        WeaponClass(float scaleMultiplier, float repeatMultiplier) {
+            this.scaleMultiplier = scaleMultiplier;
+            this.repeatMultiplier = repeatMultiplier;
+        }
+    }
+
+    @Nonnull
+    private static ImpactContext resolveImpactContext(
+        @Nonnull CommandBuffer<EntityStore> commandBuffer,
+        @Nonnull Damage damage,
+        @Nonnull Vector3d targetPosition
+    ) {
+        WeaponClass weaponClass = WeaponClass.UNARMED;
+        ImpactRotation rotation = new ImpactRotation(0.0F, 0.0F, 0.0F);
+
+        if (damage.getSource() instanceof Damage.EntitySource sourceEntity) {
+            Ref<EntityStore> sourceRef = sourceEntity.getRef();
+            if (sourceRef != null && sourceRef.isValid()) {
+                TransformComponent sourceTransform = commandBuffer.getComponent(sourceRef, TRANSFORM_COMPONENT_TYPE);
+                if (sourceTransform != null) {
+                    Vector3d sourcePos = sourceTransform.getPosition();
+                    float yawToSource = TrigMathUtil.atan2(sourcePos.x - targetPosition.x, sourcePos.z - targetPosition.z);
+
+                    double dx = targetPosition.x - sourcePos.x;
+                    double dz = targetPosition.z - sourcePos.z;
+                    double dy = targetPosition.y - sourcePos.y;
+                    double horizontal = Math.sqrt((dx * dx) + (dz * dz));
+                    float pitchAway = horizontal <= 1.0E-6 ? 0.0F : TrigMathUtil.atan2(dy, horizontal);
+
+                    // Vanilla uses yawToSource for impact particles. To make "spray away from source", rotate by PI.
+                    rotation = new ImpactRotation(yawToSource, TrigMathUtil.PI, pitchAway);
+                }
+
+                Player player = commandBuffer.getComponent(sourceRef, Player.getComponentType());
+                if (player != null) {
+                    ItemStack inHand = player.getInventory() == null ? null : player.getInventory().getItemInHand();
+                    weaponClass = classifyWeapon(inHand);
+                }
+            }
+        }
+
+        return new ImpactContext(weaponClass, rotation);
+    }
+
+
+    @Nonnull
+    private static WeaponClass classifyWeapon(@Nullable ItemStack inHand) {
+        if (inHand == null || !inHand.isValid()) {
+            return WeaponClass.UNARMED;
+        }
+
+        String itemId = inHand.getItemId();
+        if (itemId == null || itemId.isBlank()) {
+            return WeaponClass.UNARMED;
+        }
+
+        String id = itemId.toLowerCase(Locale.ROOT);
+        if (id.contains("sword")) return WeaponClass.SWORD;
+        if (id.contains("axe")) return WeaponClass.AXE;
+        if (id.contains("hammer") || id.contains("mace")) return WeaponClass.HAMMER;
+        if (id.contains("spear") || id.contains("pike")) return WeaponClass.SPEAR;
+        if (id.contains("dagger") || id.contains("knife")) return WeaponClass.DAGGER;
+        if (id.contains("bow") || id.contains("crossbow")) return WeaponClass.BOW;
+        if (id.contains("staff") || id.contains("wand")) return WeaponClass.STAFF;
+        return WeaponClass.OTHER;
     }
 
     @Nonnull
