@@ -12,6 +12,7 @@ import dev.hytalemodding.commands.BrutalImpactsCommand;
 //import dev.hytalemodding.commands.ServerRulesCommand;
 //import dev.hytalemodding.commands.SpawnParticleSystemCommand;
 import dev.hytalemodding.config.BrutalImpactsFiles;
+import dev.hytalemodding.config.WeaponTuningRegistry;
 import dev.hytalemodding.events.ExampleEvent;
 import dev.hytalemodding.systems.BrutalImpactsParticleSystem;
 
@@ -49,24 +50,38 @@ public class BrutalImpacts extends JavaPlugin {
         // Hit particle rules are loaded from JSON in the BrutalImpacts data directory.
         // You can override the base directory with: -Dbrutalimpacts.dir=<path>
         Path dataDir = BrutalImpactsFiles.resolveDataDir(BrutalImpacts.class);
+        WeaponTuningRegistry weaponTuningRegistry = new WeaponTuningRegistry();
         try {
             BrutalImpactsFiles.ensureLayout(BrutalImpacts.class, dataDir);
-            var report = BrutalImpactsFiles.clearAndLoadAllHitParticleJsonReport(BrutalImpactsApi.hitParticles(), dataDir);
-            System.out.println("[BrutalImpacts] Loaded hit particle rules (" + report.rulesLoaded() + ") from " + dataDir
-                + " [files ok=" + report.filesLoaded() + ", failed=" + report.filesFailed() + "]");
-            for (var err : report.errors()) {
-                System.out.println("[BrutalImpacts] JSON load failed: " + err.path() + " (" + err.message() + ")");
+            var hitParticlesReport = BrutalImpactsFiles.clearAndLoadAllHitParticleJsonReport(BrutalImpactsApi.hitParticles(), dataDir);
+            var weaponTuningReport = BrutalImpactsFiles.clearAndLoadAllWeaponTuningJsonReport(weaponTuningRegistry, dataDir);
+            System.out.println(
+                "[BrutalImpacts] Loaded config from " + dataDir
+                    + " [hitRules=" + hitParticlesReport.rulesLoaded()
+                    + ", weaponRules=" + weaponTuningReport.rulesLoaded()
+                    + ", failed=" + (hitParticlesReport.filesFailed() + weaponTuningReport.filesFailed()) + "]"
+            );
+            for (var err : hitParticlesReport.errors()) {
+                System.out.println("[BrutalImpacts] Hit-particles JSON load failed: " + err.path() + " (" + err.message() + ")");
+            }
+            for (var err : weaponTuningReport.errors()) {
+                System.out.println("[BrutalImpacts] Weapons JSON load failed: " + err.path() + " (" + err.message() + ")");
             }
         } catch (Exception e) {
-            System.out.println("[BrutalImpacts] Failed to load hit particle rules JSON: " + e.getMessage());
+            System.out.println("[BrutalImpacts] Failed to load Brutal Impacts JSON config: " + e.getMessage());
             e.printStackTrace();
         }
 
         // Adds an extra impact particle system to all Damage events (without replacing existing ones).
         // Replace the id below with the id of your custom particle system asset.
-        BrutalImpactsParticleSystem brutalParticles = new BrutalImpactsParticleSystem("BrutalImpacts_Hit_Blood_Default", 75.0, false);
+        BrutalImpactsParticleSystem brutalParticles = new BrutalImpactsParticleSystem(
+            "BrutalImpacts_Hit_Blood_Default",
+            weaponTuningRegistry,
+            75.0,
+            false
+        );
         brutalParticles.setDefaultColor(new com.hypixel.hytale.protocol.Color((byte) 150, (byte) 0, (byte) 0));
         this.getEntityStoreRegistry().registerSystem(brutalParticles);
-        this.getCommandRegistry().registerCommand(new BrutalImpactsCommand(brutalParticles, BrutalImpacts.class, dataDir));
+        this.getCommandRegistry().registerCommand(new BrutalImpactsCommand(brutalParticles, weaponTuningRegistry, BrutalImpacts.class, dataDir));
     }
 }

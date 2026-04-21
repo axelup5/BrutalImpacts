@@ -22,7 +22,6 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.modules.entity.damage.Damage;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageEventSystem;
-import com.hypixel.hytale.server.core.modules.entity.damage.DamageCause;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageModule;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageSystems;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
@@ -33,6 +32,8 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import dev.hytalemodding.api.BrutalImpactsApi;
 import dev.hytalemodding.api.HitParticleEffect;
 import dev.hytalemodding.api.HitParticleSpec;
+import dev.hytalemodding.config.WeaponTuningProfile;
+import dev.hytalemodding.config.WeaponTuningRegistry;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
@@ -40,8 +41,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 import java.util.Set;
 
 import static com.hypixel.hytale.component.dependency.Order.BEFORE;
@@ -60,23 +59,33 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
     private static final ComponentType<EntityStore, TransformComponent> TRANSFORM_COMPONENT_TYPE = TransformComponent.getComponentType();
     private static final ComponentType<EntityStore, ModelComponent> MODEL_COMPONENT_TYPE = ModelComponent.getComponentType();
     private static final Query<EntityStore> QUERY = Query.and(TRANSFORM_COMPONENT_TYPE);
+    private static final String SOURCE_KIND_OTHER = "other";
+    private static final String SOURCE_KIND_UNARMED = "unarmed";
+    private static final String SOURCE_KIND_MELEE = "melee";
+    private static final String SOURCE_KIND_PROJECTILE = "projectile";
 
     private volatile String particleSystemId;
     private volatile @Nullable Color defaultColor;
     private volatile float defaultScale = 1.0F;
+    private final WeaponTuningRegistry weaponTuningRegistry;
     private final double defaultViewDistance;
     private final boolean debug;
 
     private static final int MAX_EXTRA_WORLD_PARTICLES = 32;
-    private static final float DEFAULT_SPREAD_DEGREES = 10.0F;
 
     /**
      * @param particleSystemId Fallback particle system id used when no rule matches.
      * @param defaultViewDistance Minimum view distance for spawned particles.
      * @param debug Enables verbose console output and source-player chat notifications.
      */
-    public BrutalImpactsParticleSystem(@Nonnull String particleSystemId, double defaultViewDistance, boolean debug) {
+    public BrutalImpactsParticleSystem(
+        @Nonnull String particleSystemId,
+        @Nonnull WeaponTuningRegistry weaponTuningRegistry,
+        double defaultViewDistance,
+        boolean debug
+    ) {
         this.particleSystemId = particleSystemId;
+        this.weaponTuningRegistry = weaponTuningRegistry;
         this.defaultViewDistance = defaultViewDistance;
         this.debug = debug;
     }
@@ -153,9 +162,10 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
             : new Vector3d(hitLocation.x, hitLocation.y, hitLocation.z);
 
         ImpactContext impact = resolveImpactContext(commandBuffer, damage, targetPosition);
-        ImpactTuning tuning = ImpactTuning.from(damage, impact.weaponClass());
+        WeaponTuningProfile profile = this.weaponTuningRegistry.resolve(impact.sourceKind(), impact.weaponItemId());
+        ImpactTuning tuning = ImpactTuning.from(damage, profile);
 
-        WorldParticle[] extras = buildWorldParticles(effects, tuning, impact.rotation(), DEFAULT_SPREAD_DEGREES);
+        WorldParticle[] extras = buildWorldParticles(effects, tuning, impact.rotation());
         if (extras.length == 0) {
             return;
         }
@@ -262,12 +272,9 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
     private WorldParticle[] buildWorldParticles(
         @Nonnull List<HitParticleEffect> effects,
         @Nonnull ImpactTuning tuning,
-        @Nonnull ImpactRotation rotation,
-        float spreadDegrees
+        @Nonnull ImpactRotation rotation
     ) {
         int repeats = Math.max(1, tuning.repeats);
-        float spreadRad = Math.max(0.0F, spreadDegrees) * TrigMathUtil.degToRad;
-
         int expected = Math.min(MAX_EXTRA_WORLD_PARTICLES, effects.size() * repeats);
         ArrayList<WorldParticle> out = new ArrayList<>(expected);
 
@@ -280,18 +287,14 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
             float baseScale = effect.scale() > 0.0F ? effect.scale() : this.defaultScale;
             float scaleToUse = clamp(baseScale * tuning.scaleMultiplier, 0.05F, 8.0F);
 
-            int localRepeats = repeats;
-            for (int i = 0; i < localRepeats && out.size() < MAX_EXTRA_WORLD_PARTICLES; i++) {
-                float yawJitter = repeats <= 1 ? 0.0F : lerp(-spreadRad, spreadRad, (float) i / (float) (repeats - 1));
-                float pitchJitter = repeats <= 1 ? 0.0F : (((i & 1) == 0) ? 0.35F : -0.35F) * (spreadRad * 0.5F);
-
+            for (int i = 0; i < repeats && out.size() < MAX_EXTRA_WORLD_PARTICLES; i++) {
                 out.add(
                     new WorldParticle(
                         effect.particleSystemId(),
                         colorToUse,
                         scaleToUse,
                         new Vector3f(0.0F, 0.0F, 0.0F),
-                        new Direction(rotation.yawOffset + yawJitter, rotation.pitchOffset + pitchJitter, 0.0F)
+                        new Direction(rotation.yawOffset, rotation.pitchOffset, 0.0F)
                     )
                 );
             }
@@ -335,19 +338,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
         }
 
         for (WorldParticle extra : extras) {
-            if (extra == null) {
-                continue;
-            }
-
-            boolean alreadyPresent = false;
-            for (WorldParticle wp : combined) {
-                if (sameWorldParticle(wp, extra)) {
-                    alreadyPresent = true;
-                    break;
-                }
-            }
-
-            if (!alreadyPresent) {
+            if (extra != null) {
                 combined.add(extra);
             }
         }
@@ -355,26 +346,11 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
         particles.setWorldParticles(combined.toArray(new WorldParticle[0]));
     }
 
-    private static boolean sameWorldParticle(@Nullable WorldParticle a, @Nullable WorldParticle b) {
-        if (a == null || b == null) {
-            return false;
-        }
-        return Objects.equals(a.getSystemId(), b.getSystemId())
-            && Float.compare(a.getScale(), b.getScale()) == 0
-            && Objects.equals(a.getColor(), b.getColor())
-            && Objects.equals(a.getPositionOffset(), b.getPositionOffset())
-            && Objects.equals(a.getRotationOffset(), b.getRotationOffset());
-    }
-
     private static float clamp(float value, float min, float max) {
         return Math.max(min, Math.min(max, value));
     }
 
-    private static float lerp(float a, float b, float t) {
-        return a + (b - a) * t;
-    }
-
-    private record ImpactContext(@Nonnull WeaponClass weaponClass, @Nonnull ImpactRotation rotation) {
+    private record ImpactContext(@Nonnull String sourceKind, @Nullable String weaponItemId, @Nonnull ImpactRotation rotation) {
     }
 
     private record ImpactRotation(float yawToSource, float yawOffset, float pitchOffset) {
@@ -382,46 +358,16 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
 
     private record ImpactTuning(float scaleMultiplier, int repeats) {
         @Nonnull
-        static ImpactTuning from(@Nonnull Damage damage, @Nonnull WeaponClass weaponClass) {
+        static ImpactTuning from(@Nonnull Damage damage, @Nonnull WeaponTuningProfile profile) {
             float dmg = Math.max(0.0F, damage.getAmount());
-            boolean isProjectile = damage.getSource() instanceof Damage.ProjectileSource;
-
             float scale = 0.85F + (dmg * 0.06F);
-            int repeats = 1 + (int) Math.floor(dmg / 6.0F);
-
-            if (isProjectile) {
-                scale *= 0.85F;
-                repeats = Math.max(1, repeats - 1);
-            } else {
-                scale *= 1.05F;
-            }
-
-            scale *= weaponClass.scaleMultiplier;
-            repeats = Math.max(1, (int) Math.round(repeats * weaponClass.repeatMultiplier));
+            int repeats = 1 + (int) Math.floor(dmg / 10.0F);
+            scale *= profile.scaleMultiplier();
+            repeats = Math.max(1, (int) Math.round(repeats * profile.particleMultiplier()));
 
             scale = clamp(scale, 0.5F, 2.5F);
-            repeats = Math.max(1, Math.min(5, repeats));
+            repeats = Math.max(1, Math.min(8, repeats));
             return new ImpactTuning(scale, repeats);
-        }
-    }
-
-    private enum WeaponClass {
-        UNARMED(0.95F, 0.90F),
-        SWORD(1.00F, 1.00F),
-        AXE(1.05F, 1.05F),
-        HAMMER(1.15F, 1.15F),
-        SPEAR(1.00F, 1.05F),
-        DAGGER(0.95F, 1.10F),
-        BOW(0.90F, 0.85F),
-        STAFF(0.95F, 0.95F),
-        OTHER(1.00F, 1.00F);
-
-        final float scaleMultiplier;
-        final float repeatMultiplier;
-
-        WeaponClass(float scaleMultiplier, float repeatMultiplier) {
-            this.scaleMultiplier = scaleMultiplier;
-            this.repeatMultiplier = repeatMultiplier;
         }
     }
 
@@ -431,7 +377,8 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
         @Nonnull Damage damage,
         @Nonnull Vector3d targetPosition
     ) {
-        WeaponClass weaponClass = WeaponClass.UNARMED;
+        String sourceKind = SOURCE_KIND_OTHER;
+        String weaponItemId = null;
         ImpactRotation rotation = new ImpactRotation(0.0F, 0.0F, 0.0F);
 
         if (damage.getSource() instanceof Damage.EntitySource sourceEntity) {
@@ -455,35 +402,20 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
                 Player player = commandBuffer.getComponent(sourceRef, Player.getComponentType());
                 if (player != null) {
                     ItemStack inHand = player.getInventory() == null ? null : player.getInventory().getItemInHand();
-                    weaponClass = classifyWeapon(inHand);
+                    weaponItemId = inHand == null || !inHand.isValid() ? null : inHand.getItemId();
                 }
             }
         }
 
-        return new ImpactContext(weaponClass, rotation);
-    }
-
-
-    @Nonnull
-    private static WeaponClass classifyWeapon(@Nullable ItemStack inHand) {
-        if (inHand == null || !inHand.isValid()) {
-            return WeaponClass.UNARMED;
+        if (damage.getSource() instanceof Damage.ProjectileSource) {
+            sourceKind = SOURCE_KIND_PROJECTILE;
+        } else if (weaponItemId != null && !weaponItemId.isBlank()) {
+            sourceKind = SOURCE_KIND_MELEE;
+        } else if (damage.getSource() instanceof Damage.EntitySource) {
+            sourceKind = SOURCE_KIND_UNARMED;
         }
 
-        String itemId = inHand.getItemId();
-        if (itemId == null || itemId.isBlank()) {
-            return WeaponClass.UNARMED;
-        }
-
-        String id = itemId.toLowerCase(Locale.ROOT);
-        if (id.contains("sword")) return WeaponClass.SWORD;
-        if (id.contains("axe")) return WeaponClass.AXE;
-        if (id.contains("hammer") || id.contains("mace")) return WeaponClass.HAMMER;
-        if (id.contains("spear") || id.contains("pike")) return WeaponClass.SPEAR;
-        if (id.contains("dagger") || id.contains("knife")) return WeaponClass.DAGGER;
-        if (id.contains("bow") || id.contains("crossbow")) return WeaponClass.BOW;
-        if (id.contains("staff") || id.contains("wand")) return WeaponClass.STAFF;
-        return WeaponClass.OTHER;
+        return new ImpactContext(sourceKind, weaponItemId, rotation);
     }
 
     @Nonnull

@@ -1,7 +1,5 @@
 package dev.hytalemodding.api;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -20,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -40,8 +37,6 @@ import java.util.Objects;
  * via {@code effects: [{ particleSystemId, color, scale }, ...]}.</p>
  */
 public final class HitParticleRulesJson {
-
-    private static final Gson GSON = new GsonBuilder().setLenient().create();
 
     private HitParticleRulesJson() {
     }
@@ -137,6 +132,21 @@ public final class HitParticleRulesJson {
      * @return number of loaded rules
      */
     public static int loadInto(@Nonnull HitParticleRegistry registry, @Nonnull Reader reader) {
+        return loadIntoReport(registry, reader).entriesLoaded();
+    }
+
+    @Nonnull
+    public static LoadResult loadIntoFromFileReport(@Nonnull HitParticleRegistry registry, @Nonnull Path path) throws IOException {
+        Objects.requireNonNull(registry, "registry");
+        Objects.requireNonNull(path, "path");
+
+        try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+            return loadIntoReport(registry, reader);
+        }
+    }
+
+    @Nonnull
+    public static LoadResult loadIntoReport(@Nonnull HitParticleRegistry registry, @Nonnull Reader reader) {
         Objects.requireNonNull(registry, "registry");
         Objects.requireNonNull(reader, "reader");
 
@@ -150,7 +160,8 @@ public final class HitParticleRulesJson {
             throw new IllegalArgumentException("Invalid hit-particles JSON", e);
         }
 
-        JsonArray rules = root.has("rules") && root.get("rules").isJsonArray() ? root.getAsJsonArray("rules") : new JsonArray();
+        boolean hadSection = root.has("rules") && root.get("rules").isJsonArray();
+        JsonArray rules = hadSection ? root.getAsJsonArray("rules") : new JsonArray();
 
         int loaded = 0;
         for (JsonElement ruleEl : rules) {
@@ -206,7 +217,7 @@ public final class HitParticleRulesJson {
             loaded++;
         }
 
-        return loaded;
+        return new LoadResult(loaded, hadSection);
     }
 
     @Nullable
@@ -306,5 +317,8 @@ public final class HitParticleRulesJson {
             return null;
         }
         return el.isJsonPrimitive() && el.getAsJsonPrimitive().isNumber() ? el.getAsInt() : null;
+    }
+
+    public record LoadResult(int entriesLoaded, boolean hadSection) {
     }
 }

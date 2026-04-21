@@ -25,8 +25,14 @@ You can override the base directory with the JVM system property:
 - `USER_HitParticles.json`
   - Your personal overrides.
   - Created once and never overwritten on updates.
+- `Weapons_ReadOnly.json`
+  - Bundled defaults for source/weapon multipliers (read-only example).
+  - Overwritten when the mod updates.
+- `USER_Weapons.json`
+  - Your personal weapon/source overrides.
+  - Created once and never overwritten on updates.
 - Any other `*.json` file (e.g. `MoreAnimals.json`)
-  - Additional rules (useful for modpacks / servers).
+  - Additional hit-particle rules, weapon/source tuning, or both (useful for modpacks / servers).
 
 ### Priority (override order)
 
@@ -37,6 +43,8 @@ When multiple JSON files define rules for the same model id, priority is:
 3. `DefaultHitParticles_ReadOnly.json` (lowest)
 
 Tip: if you need one modder file to win over another, prefix the filename (e.g. `00_MoreAnimals.json`).
+
+Weapon/source tuning follows the same priority, using the `sources` and `weapons` sections.
 
 ### Hot reload
 

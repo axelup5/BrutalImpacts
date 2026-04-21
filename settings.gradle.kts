@@ -1,4 +1,4 @@
-rootProject.name = "Brutal Impacts v1.2.0"
+rootProject.name = "Brutal Impacts v2.0.0"
 
 plugins {
     // See documentation on https://scaffoldit.dev

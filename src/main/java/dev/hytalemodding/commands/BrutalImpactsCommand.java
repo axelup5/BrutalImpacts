@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalAr
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import dev.hytalemodding.api.BrutalImpactsApi;
 import dev.hytalemodding.config.BrutalImpactsFiles;
+import dev.hytalemodding.config.WeaponTuningRegistry;
 import dev.hytalemodding.systems.BrutalImpactsParticleSystem;
 
 import javax.annotation.Nonnull;
@@ -31,6 +32,7 @@ import java.util.concurrent.CompletableFuture;
 public class BrutalImpactsCommand extends AbstractCommand {
 
     private final BrutalImpactsParticleSystem particlesSystem;
+    private final WeaponTuningRegistry weaponTuningRegistry;
     private final Class<?> pluginClass;
     private final Path dataDir;
 
@@ -38,9 +40,15 @@ public class BrutalImpactsCommand extends AbstractCommand {
     private final FlagArg reloadFlag;
     private final OptionalArg<ParticleSystem> particleArg;
 
-    public BrutalImpactsCommand(@Nonnull BrutalImpactsParticleSystem particlesSystem, @Nonnull Class<?> pluginClass, @Nonnull Path dataDir) {
+    public BrutalImpactsCommand(
+        @Nonnull BrutalImpactsParticleSystem particlesSystem,
+        @Nonnull WeaponTuningRegistry weaponTuningRegistry,
+        @Nonnull Class<?> pluginClass,
+        @Nonnull Path dataDir
+    ) {
         super("brutalimpacts", "Manage Brutal Impacts (reload JSON rules / set fallback particle).");
         this.particlesSystem = particlesSystem;
+        this.weaponTuningRegistry = weaponTuningRegistry;
         this.pluginClass = pluginClass;
         this.dataDir = dataDir;
 
@@ -62,16 +70,20 @@ public class BrutalImpactsCommand extends AbstractCommand {
         if (wantsReload) {
             try {
                 BrutalImpactsFiles.ensureLayout(this.pluginClass, this.dataDir);
-                var report = BrutalImpactsFiles.clearAndLoadAllHitParticleJsonReport(BrutalImpactsApi.hitParticles(), this.dataDir);
+                var hitParticlesReport = BrutalImpactsFiles.clearAndLoadAllHitParticleJsonReport(BrutalImpactsApi.hitParticles(), this.dataDir);
+                var weaponsReport = BrutalImpactsFiles.clearAndLoadAllWeaponTuningJsonReport(this.weaponTuningRegistry, this.dataDir);
                 context.sendMessage(
                     Message.raw(
-                        "Reloaded hit particles: rules=" + report.rulesLoaded()
-                            + ", filesOk=" + report.filesLoaded()
-                            + ", filesFailed=" + report.filesFailed()
+                        "Reloaded Brutal Impacts config: hitRules=" + hitParticlesReport.rulesLoaded()
+                            + ", weaponRules=" + weaponsReport.rulesLoaded()
+                            + ", failed=" + (hitParticlesReport.filesFailed() + weaponsReport.filesFailed())
                     )
                 );
-                for (var err : report.errors()) {
-                    context.sendMessage(Message.raw("JSON load failed: " + err.path().getFileName() + " (" + err.message() + ")"));
+                for (var err : hitParticlesReport.errors()) {
+                    context.sendMessage(Message.raw("Hit-particles JSON load failed: " + err.path().getFileName() + " (" + err.message() + ")"));
+                }
+                for (var err : weaponsReport.errors()) {
+                    context.sendMessage(Message.raw("Weapons JSON load failed: " + err.path().getFileName() + " (" + err.message() + ")"));
                 }
             } catch (Exception e) {
                 context.sendMessage(Message.raw("Reload failed: " + e.getMessage()));

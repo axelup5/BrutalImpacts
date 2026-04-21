@@ -1,0 +1,10 @@
+{
+  "sources": [],
+  "weapons": [
+    {
+      "match": { "type": "contains", "value": "greatsword" },
+      "scaleMultiplier": 1,
+      "particleMultiplier": 1
+    }
+  ]
+}

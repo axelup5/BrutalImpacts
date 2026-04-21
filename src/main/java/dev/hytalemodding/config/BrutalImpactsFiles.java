@@ -40,6 +40,8 @@ public final class BrutalImpactsFiles {
 
     public static final String DEFAULT_HIT_PARTICLES_FILE = "DefaultHitParticles_ReadOnly.json";
     public static final String USER_HIT_PARTICLES_FILE = "USER_HitParticles.json";
+    public static final String DEFAULT_WEAPONS_FILE = "Weapons_ReadOnly.json";
+    public static final String USER_WEAPONS_FILE = "USER_Weapons.json";
     public static final String README_FILE = "README.md";
 
     private BrutalImpactsFiles() {
@@ -91,9 +93,11 @@ public final class BrutalImpactsFiles {
         // Always refresh bundled docs + default rules when the mod updates.
         copyResource(pluginClass, "/brutalimpacts/" + README_FILE, dataDir.resolve(README_FILE), true);
         copyResource(pluginClass, "/brutalimpacts/" + DEFAULT_HIT_PARTICLES_FILE, dataDir.resolve(DEFAULT_HIT_PARTICLES_FILE), true);
+        copyResource(pluginClass, "/brutalimpacts/" + DEFAULT_WEAPONS_FILE, dataDir.resolve(DEFAULT_WEAPONS_FILE), true);
 
         // Never overwrite the user's file once created.
         copyResource(pluginClass, "/brutalimpacts/" + USER_HIT_PARTICLES_FILE, dataDir.resolve(USER_HIT_PARTICLES_FILE), false);
+        copyResource(pluginClass, "/brutalimpacts/" + USER_WEAPONS_FILE, dataDir.resolve(USER_WEAPONS_FILE), false);
     }
 
     /**
@@ -118,17 +122,67 @@ public final class BrutalImpactsFiles {
         Objects.requireNonNull(dataDir, "dataDir");
 
         registry.clear();
+        return loadJsonFiles(
+            dataDir,
+            USER_HIT_PARTICLES_FILE,
+            DEFAULT_HIT_PARTICLES_FILE,
+            path -> {
+                HitParticleRulesJson.LoadResult result = HitParticleRulesJson.loadIntoFromFileReport(registry, path);
+                return new SectionLoadResult(result.entriesLoaded(), result.hadSection());
+            }
+        );
+    }
 
+    public static int clearAndLoadAllWeaponTuningJson(@Nonnull WeaponTuningRegistry registry, @Nonnull Path dataDir) throws IOException {
+        return clearAndLoadAllWeaponTuningJsonReport(registry, dataDir).rulesLoaded();
+    }
+
+    @Nonnull
+    public static JsonLoadReport clearAndLoadAllWeaponTuningJsonReport(@Nonnull WeaponTuningRegistry registry, @Nonnull Path dataDir) throws IOException {
+        Objects.requireNonNull(registry, "registry");
+        Objects.requireNonNull(dataDir, "dataDir");
+
+        registry.clear();
+        return loadJsonFiles(
+            dataDir,
+            USER_WEAPONS_FILE,
+            DEFAULT_WEAPONS_FILE,
+            path -> {
+                WeaponTuningRulesJson.LoadResult result = WeaponTuningRulesJson.loadIntoFromFileReport(registry, path);
+                return new SectionLoadResult(result.entriesLoaded(), result.hadSection());
+            }
+        );
+    }
+
+    public record JsonLoadReport(int rulesLoaded, int filesLoaded, int filesFailed, @Nonnull List<JsonLoadError> errors) {
+        public JsonLoadReport {
+            errors = List.copyOf(errors);
+        }
+    }
+
+    public record JsonLoadError(@Nonnull Path path, @Nonnull String message) {
+    }
+
+    @Nonnull
+    private static JsonLoadReport loadJsonFiles(
+        @Nonnull Path dataDir,
+        @Nonnull String userFileName,
+        @Nonnull String defaultFileName,
+        @Nonnull JsonSectionLoader loader
+    ) throws IOException {
         int loadedRules = 0;
         int loadedFiles = 0;
         int failedFiles = 0;
         ArrayList<JsonLoadError> errors = new ArrayList<>();
 
-        Path user = dataDir.resolve(USER_HIT_PARTICLES_FILE);
+        Path user = dataDir.resolve(userFileName);
         if (Files.exists(user)) {
             try {
-                loadedRules += HitParticleRulesJson.loadIntoFromFile(registry, user);
-                loadedFiles++;
+                SectionLoadResult result = loader.load(user);
+                if (result.hadSection()) {
+                    loadedRules += result.entriesLoaded();
+                    loadedFiles++;
+                }
             } catch (Exception e) {
                 failedFiles++;
                 errors.add(new JsonLoadError(user, e.getMessage()));
@@ -142,28 +196,35 @@ public final class BrutalImpactsFiles {
                     continue;
                 }
                 String name = p.getFileName().toString();
-                if (name.equals(USER_HIT_PARTICLES_FILE) || name.equals(DEFAULT_HIT_PARTICLES_FILE)) {
+                if (name.equals(userFileName) || name.equals(defaultFileName)) {
                     continue;
                 }
                 modderFiles.add(p);
             }
         }
+
         modderFiles.sort(Comparator.comparing(p -> p.getFileName().toString().toLowerCase(Locale.ROOT)));
         for (Path p : modderFiles) {
             try {
-                loadedRules += HitParticleRulesJson.loadIntoFromFile(registry, p);
-                loadedFiles++;
+                SectionLoadResult result = loader.load(p);
+                if (result.hadSection()) {
+                    loadedRules += result.entriesLoaded();
+                    loadedFiles++;
+                }
             } catch (Exception e) {
                 failedFiles++;
                 errors.add(new JsonLoadError(p, e.getMessage()));
             }
         }
 
-        Path defaults = dataDir.resolve(DEFAULT_HIT_PARTICLES_FILE);
+        Path defaults = dataDir.resolve(defaultFileName);
         if (Files.exists(defaults)) {
             try {
-                loadedRules += HitParticleRulesJson.loadIntoFromFile(registry, defaults);
-                loadedFiles++;
+                SectionLoadResult result = loader.load(defaults);
+                if (result.hadSection()) {
+                    loadedRules += result.entriesLoaded();
+                    loadedFiles++;
+                }
             } catch (Exception e) {
                 failedFiles++;
                 errors.add(new JsonLoadError(defaults, e.getMessage()));
@@ -171,15 +232,6 @@ public final class BrutalImpactsFiles {
         }
 
         return new JsonLoadReport(loadedRules, loadedFiles, failedFiles, errors);
-    }
-
-    public record JsonLoadReport(int rulesLoaded, int filesLoaded, int filesFailed, @Nonnull List<JsonLoadError> errors) {
-        public JsonLoadReport {
-            errors = List.copyOf(errors);
-        }
-    }
-
-    public record JsonLoadError(@Nonnull Path path, @Nonnull String message) {
     }
 
     /**
@@ -203,5 +255,13 @@ public final class BrutalImpactsFiles {
             Files.createDirectories(out.getParent());
             Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
         }
+    }
+
+    @FunctionalInterface
+    private interface JsonSectionLoader {
+        @Nonnull SectionLoadResult load(@Nonnull Path path) throws Exception;
+    }
+
+    private record SectionLoadResult(int entriesLoaded, boolean hadSection) {
     }
 }

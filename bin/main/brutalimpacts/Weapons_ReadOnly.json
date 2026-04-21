@@ -1,0 +1,86 @@
+{
+  "sources": [
+    {
+      "kind": "projectile",
+      "scaleMultiplier": 0.8,
+      "particleMultiplier": 0.8
+    },
+    {
+      "kind": "melee",
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "kind": "unarmed",
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "kind": "other",
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    }
+  ],
+  "weapons": [
+    {
+      "match": { "type": "contains", "value": "sword" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "axe" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "hammer" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "mace" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "spear" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "pike" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "dagger" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "knife" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "bow" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "crossbow" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "staff" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    },
+    {
+      "match": { "type": "contains", "value": "wand" },
+      "scaleMultiplier": 1.0,
+      "particleMultiplier": 1.0
+    }
+  ]
+}
