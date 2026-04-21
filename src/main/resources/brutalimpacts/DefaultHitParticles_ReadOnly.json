@@ -26,7 +26,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 72, "g": 186, "b": 244 },
-          "scale": 0.4
+          "scale": 0.4,
+          "fixedScale": true
         }
       ]
     },
@@ -130,7 +131,8 @@
       "match": { "type": "exact", "value": "Bluebird" },
       "particleSystemId": "BrutalImpacts_Hit_Feathers",
       "color": { "r": 48, "g": 222, "b": 254 },
-      "scale": 0.25
+      "scale": 0.25,
+      "fixedScale": true
     },
     {
       "match": { "type": "exact", "value": "Bluegill" },
@@ -296,13 +298,15 @@
       "match": { "type": "exact", "value": "Chick" },
       "particleSystemId": "BrutalImpacts_Hit_Feathers",
       "color": { "r": 254, "g": 230, "b": 43 },
-      "scale": 0.25
+      "scale": 0.25,
+      "fixedScale": true
     },
     {
       "match": { "type": "exact", "value": "Chick_Desert" },
       "particleSystemId": "BrutalImpacts_Hit_Feathers",
       "color": { "r": 254, "g": 215, "b": 113 },
-      "scale": 0.25
+      "scale": 0.25,
+      "fixedScale": true
     },
     {
       "match": { "type": "exact", "value": "Chicken" },
@@ -315,7 +319,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 246, "g": 241, "b": 217 },
-          "scale": 0.35
+          "scale": 0.35,
+          "fixedScale": true
         }
       ]
     },
@@ -330,7 +335,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 254, "g": 215, "b": 113 },
-          "scale": 0.35
+          "scale": 0.35,
+          "fixedScale": true
         }
       ]
     },
@@ -340,7 +346,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 59, "g": 183, "b": 245 },
-          "scale": 0.35
+          "scale": 0.35,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
@@ -460,7 +467,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 57, "g": 61, "b": 71 },
-          "scale": 0.3
+          "scale": 0.3,
+          "fixedScale": true
         }
       ]
     },
@@ -505,7 +513,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 86, "g": 67, "b": 56 },
-          "scale": 0.3
+          "scale": 0.3,
+          "fixedScale": true
         }
       ]
     },
@@ -683,7 +692,8 @@
       "match": { "type": "exact", "value": "Finch_Green" },
       "particleSystemId": "BrutalImpacts_Hit_Feathers",
       "color": { "r": 91, "g": 162, "b": 84 },
-      "scale": 0.25
+      "scale": 0.25,
+      "fixedScale": true
     },
     {
       "match": { "type": "exact", "value": "Flamingo" },
@@ -696,7 +706,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 253, "g": 129, "b": 170 },
-          "scale": 0.4
+          "scale": 0.4,
+          "fixedScale": true
         }
       ]
     },
@@ -1167,7 +1178,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 133, "g": 90, "b": 41 },
-          "scale": 0.4
+          "scale": 0.4,
+          "fixedScale": true
         }
       ]
     },
@@ -2014,7 +2026,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 110, "g": 66, "b": 51 },
-          "scale": 0.3
+          "scale": 0.3,
+          "fixedScale": true
         }
       ]
     },
@@ -2029,7 +2042,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 240, "g": 240, "b": 255 },
-          "scale": 0.3
+          "scale": 0.3,
+          "fixedScale": true
         }
       ]
     },
@@ -2044,7 +2058,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 255, "g": 227, "b": 49 },
-          "scale": 0.3
+          "scale": 0.3,
+          "fixedScale": true
         }
       ]
     },
@@ -2059,7 +2074,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 104, "g": 120, "b": 175 },
-          "scale": 0.12
+          "scale": 0.12,
+          "fixedScale": true
         }
       ]
     },
@@ -2119,7 +2135,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 104, "g": 151, "b": 178 },
-          "scale": 0.3
+          "scale": 0.3,
+          "fixedScale": true
         }
       ]
     },
@@ -2349,7 +2366,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 33, "g": 42, "b": 67 },
-          "scale": 0.45
+          "scale": 0.45,
+          "fixedScale": true
         }
       ]
     },
@@ -3440,7 +3458,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 235, "g": 89, "b": 39 },
-          "scale": 0.3
+          "scale": 0.3,
+          "fixedScale": true
         }
       ]
     },
@@ -3455,7 +3474,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 235, "g": 89, "b": 39 },
-          "scale": 0.25
+          "scale": 0.25,
+          "fixedScale": true
         }
       ]
     },
@@ -3629,7 +3649,8 @@
       "match": { "type": "exact", "value": "Sparrow" },
       "particleSystemId": "BrutalImpacts_Hit_Feathers",
       "color": { "r": 213, "g": 123, "b": 58 },
-      "scale": 0.25
+      "scale": 0.25,
+      "fixedScale": true
     },
     {
       "match": { "type": "exact", "value": "Spawn_Void" },
@@ -3877,7 +3898,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 36, "g": 44, "b": 102 },
-          "scale": 0.45
+          "scale": 0.45,
+          "fixedScale": true
         }
       ]
     },
@@ -4222,7 +4244,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 116, "g": 77, "b": 68 },
-          "scale": 0.35
+          "scale": 0.35,
+          "fixedScale": true
         }
       ]
     },
@@ -4230,7 +4253,8 @@
       "match": { "type": "exact", "value": "Turkey_Chick" },
       "particleSystemId": "BrutalImpacts_Hit_Feathers",
       "color": { "r": 168, "g": 108, "b": 92 },
-      "scale": 0.25
+      "scale": 0.25,
+      "fixedScale": true
     },
     {
       "match": { "type": "exact", "value": "Vulture" },
@@ -4243,7 +4267,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Feathers",
           "color": { "r": 223, "g": 119, "b": 47 },
-          "scale": 0.45
+          "scale": 0.45,
+          "fixedScale": true
         }
       ]
     },
@@ -4406,7 +4431,8 @@
       "match": { "type": "exact", "value": "Woodpecker" },
       "particleSystemId": "BrutalImpacts_Hit_Feathers",
       "color": { "r": 33, "g": 131, "b": 52 },
-      "scale": 0.25
+      "scale": 0.25,
+      "fixedScale": true
     },
     {
       "match": { "type": "exact", "value": "Wraith" },

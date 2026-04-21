@@ -52,6 +52,14 @@ After editing any JSON file, reload rules in-game:
 
 - `/brutalimpacts --reload`
 
+### Debug mode
+
+You can toggle verbose debug output in-game with:
+
+- `/brutalimpacts debug`
+- `/brutalimpacts debug on`
+- `/brutalimpacts debug off`
+
 ### Default Particles
 
 The default particles (the blood splatter) can be replaced using:

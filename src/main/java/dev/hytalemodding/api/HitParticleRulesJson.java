@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.hypixel.hytale.protocol.Vector3f;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -252,12 +253,12 @@ public final class HitParticleRulesJson {
         @Nonnull String colorField
     ) {
         if (!obj.has(colorField)) {
-            return HitParticleEffect.of(particleSystemId, scale);
+            return applyExtraFields(HitParticleEffect.of(particleSystemId, scale), obj);
         }
 
         JsonElement colorEl = obj.get(colorField);
         if (colorEl == null || colorEl.isJsonNull()) {
-            return HitParticleEffect.noTint(particleSystemId, scale);
+            return applyExtraFields(HitParticleEffect.noTint(particleSystemId, scale), obj);
         }
 
         if (!colorEl.isJsonObject()) {
@@ -268,7 +269,53 @@ public final class HitParticleRulesJson {
         Integer r = getNumberAsInt(colorObj, "r");
         Integer g = getNumberAsInt(colorObj, "g");
         Integer b = getNumberAsInt(colorObj, "b");
-        return HitParticleEffect.tinted(particleSystemId, r == null ? 0 : r, g == null ? 0 : g, b == null ? 0 : b, scale);
+        return applyExtraFields(
+            HitParticleEffect.tinted(particleSystemId, r == null ? 0 : r, g == null ? 0 : g, b == null ? 0 : b, scale),
+            obj
+        );
+    }
+
+    @Nonnull
+    private static HitParticleEffect applyExtraFields(@Nonnull HitParticleEffect base, @Nonnull JsonObject obj) {
+        HitParticleEffect effect = base;
+
+        Vector3f offset = parseOffset(obj);
+        if (offset != null) {
+            effect = effect.withOffset(offset);
+        }
+
+        Boolean fixedScale = getBoolean(obj, "fixedScale");
+        if (fixedScale == null) {
+            fixedScale = getBoolean(obj, "fixed");
+        }
+        if (fixedScale != null) {
+            effect = effect.withFixedScale(fixedScale);
+        }
+
+        return effect;
+    }
+
+    @Nullable
+    private static Vector3f parseOffset(@Nonnull JsonObject obj) {
+        JsonObject offsetObj = getObj(obj, "offset");
+        if (offsetObj != null) {
+            float x = getNumberAsFloatDefault(offsetObj, "x", 0.0F);
+            float y = getNumberAsFloatDefault(offsetObj, "y", 0.0F);
+            float z = getNumberAsFloatDefault(offsetObj, "z", 0.0F);
+            return new Vector3f(x, y, z);
+        }
+
+        Float x = getNumberAsFloat(obj, "x");
+        if (x == null) x = getNumberAsFloat(obj, "X");
+        Float y = getNumberAsFloat(obj, "y");
+        if (y == null) y = getNumberAsFloat(obj, "Y");
+        Float z = getNumberAsFloat(obj, "z");
+        if (z == null) z = getNumberAsFloat(obj, "Z");
+
+        if (x == null && y == null && z == null) {
+            return null;
+        }
+        return new Vector3f(x == null ? 0.0F : x, y == null ? 0.0F : y, z == null ? 0.0F : z);
     }
 
     @Nullable
@@ -317,6 +364,23 @@ public final class HitParticleRulesJson {
             return null;
         }
         return el.isJsonPrimitive() && el.getAsJsonPrimitive().isNumber() ? el.getAsInt() : null;
+    }
+
+    @Nullable
+    private static Boolean getBoolean(@Nonnull JsonObject obj, @Nonnull String key) {
+        if (!obj.has(key)) {
+            return null;
+        }
+        JsonElement el = obj.get(key);
+        if (el == null || el.isJsonNull()) {
+            return null;
+        }
+        return el.isJsonPrimitive() && el.getAsJsonPrimitive().isBoolean() ? el.getAsBoolean() : null;
+    }
+
+    private static float getNumberAsFloatDefault(@Nonnull JsonObject obj, @Nonnull String key, float fallback) {
+        Float value = getNumberAsFloat(obj, key);
+        return value == null ? fallback : value;
     }
 
     public record LoadResult(int entriesLoaded, boolean hadSection) {

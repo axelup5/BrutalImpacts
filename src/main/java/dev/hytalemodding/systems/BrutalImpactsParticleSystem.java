@@ -67,11 +67,11 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
     private volatile String particleSystemId;
     private volatile @Nullable Color defaultColor;
     private volatile float defaultScale = 1.0F;
+    private volatile boolean debug;
     private final WeaponTuningRegistry weaponTuningRegistry;
     private final double defaultViewDistance;
-    private final boolean debug;
 
-    private static final int MAX_EXTRA_WORLD_PARTICLES = 32;
+    private static final int MAX_EXTRA_WORLD_PARTICLES = 64;
 
     /**
      * @param particleSystemId Fallback particle system id used when no rule matches.
@@ -105,6 +105,19 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
 
     public void setDefaultScale(float defaultScale) {
         this.defaultScale = defaultScale;
+    }
+
+    public boolean isDebugEnabled() {
+        return this.debug;
+    }
+
+    public void setDebugEnabled(boolean debug) {
+        this.debug = debug;
+    }
+
+    public boolean toggleDebug() {
+        this.debug = !this.debug;
+        return this.debug;
     }
 
     @Nonnull
@@ -285,7 +298,10 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
 
             Color colorToUse = resolveColor(effect);
             float baseScale = effect.scale() > 0.0F ? effect.scale() : this.defaultScale;
-            float scaleToUse = clamp(baseScale * tuning.scaleMultiplier, 0.05F, 8.0F);
+            float scaleToUse = effect.fixedScale()
+                ? clamp(baseScale, 0.05F, 8.0F)
+                : clamp(baseScale * tuning.scaleMultiplier, 0.05F, 8.0F);
+            Vector3f offsetToUse = effect.positionOffset() == null ? new Vector3f(0.0F, 0.0F, 0.0F) : effect.positionOffset();
 
             for (int i = 0; i < repeats && out.size() < MAX_EXTRA_WORLD_PARTICLES; i++) {
                 out.add(
@@ -293,7 +309,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
                         effect.particleSystemId(),
                         colorToUse,
                         scaleToUse,
-                        new Vector3f(0.0F, 0.0F, 0.0F),
+                        offsetToUse,
                         new Direction(rotation.yawOffset, rotation.pitchOffset, 0.0F)
                     )
                 );
@@ -307,6 +323,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
                 sb.append(" {id=").append(wp.getSystemId())
                     .append(", scale=").append(wp.getScale())
                     .append(", color=").append(formatColor(wp.getColor()))
+                    .append(", offset=").append(wp.getPositionOffset())
                     .append(", rotYaw=").append(wp.getRotationOffset() == null ? "null" : wp.getRotationOffset().yaw)
                     .append(", rotPitch=").append(wp.getRotationOffset() == null ? "null" : wp.getRotationOffset().pitch)
                     .append("}");
@@ -360,12 +377,10 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
         @Nonnull
         static ImpactTuning from(@Nonnull Damage damage, @Nonnull WeaponTuningProfile profile) {
             float dmg = Math.max(0.0F, damage.getAmount());
-            float scale = 0.85F + (dmg * 0.06F);
-            int repeats = 1 + (int) Math.floor(dmg / 10.0F);
-            scale *= profile.scaleMultiplier();
-            repeats = Math.max(1, (int) Math.round(repeats * profile.particleMultiplier()));
+            float scale = (dmg * profile.scaleMultiplier() * 0.1F);
+            int repeats = 1 + (int) Math.floor(dmg * profile.particleMultiplier() / 10.0F);
 
-            scale = clamp(scale, 0.5F, 2.5F);
+            scale = clamp(scale, 0.5F, 3F);
             repeats = Math.max(1, Math.min(8, repeats));
             return new ImpactTuning(scale, repeats);
         }

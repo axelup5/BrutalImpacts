@@ -4,7 +4,9 @@
       "match": { "type": "exact", "value": "Skeleton" },
       "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
       "color": { "r": 235, "g": 224, "b": 192 },
-      "scale": 1.0
+      "scale": 1.0,
+      "fixedScale": false,
+      "offset": { "x": 0.0, "y": 0.0, "z": 0.0 }
     }
   ]
 }

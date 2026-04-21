@@ -42,6 +42,17 @@ After editing any JSON file, you can reload rules in-game with:
 
 `/brutalimpacts --reload`
 
+### Debug mode
+
+To toggle verbose debug output in-game:
+
+`/brutalimpacts debug`
+
+To explicitly enable/disable it:
+
+- `/brutalimpacts debug on`
+- `/brutalimpacts debug off`
+
 ### Default fallback particle (optional)
 
 If no rule matches a model id, the mod uses a fallback particle system id.
@@ -71,7 +82,9 @@ You can change it in-game with:
         {
           "particleSystemId": "BrutalImpacts_Hit_Bone_Default",
           "color": { "r": 0, "g": 80, "b": 255 },
-          "scale": 1.0 
+          "scale": 1.0,
+          "offset": { "x": 0.0, "y": -0.5, "z": 0.0 },
+          "fixedScale": true
         }
       ]
     }
@@ -84,6 +97,13 @@ You can change it in-game with:
 - If `"color"` is omitted: the effect inherits the runtime default color (if configured).
 - If `"color": null`: the effect uses no tint (even if a runtime default color exists).
 - If `"color": { "r": ..., "g": ..., "b": ... }`: the effect uses that RGB tint.
+
+#### Offset and scale rules
+
+- `offset` is optional and uses relative hit coordinates: `{ "x": 0.0, "y": -1.0, "z": 0.0 }`
+- As a convenience, `x/y/z` or `X/Y/Z` also work directly on the effect object.
+- `fixedScale: true` keeps the authored scale and prevents damage-based scale changes.
+- `fixed: true` is also accepted as a shorter alias for `fixedScale`.
 
 ## Weapon/source tuning config
 

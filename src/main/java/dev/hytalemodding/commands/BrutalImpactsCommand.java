@@ -37,6 +37,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
     private final Path dataDir;
 
     private final DefaultArg<String> actionArg;
+    private final DefaultArg<String> valueArg;
     private final FlagArg reloadFlag;
     private final OptionalArg<ParticleSystem> particleArg;
 
@@ -53,6 +54,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
         this.dataDir = dataDir;
 
         this.actionArg = this.withDefaultArg("action", "Action (reload)", ArgTypes.STRING, "", "Default: (none)");
+        this.valueArg = this.withDefaultArg("value", "Action value (on/off/toggle)", ArgTypes.STRING, "", "Default: (none)");
         this.reloadFlag = this.withFlagArg("reload", "Reload hit particle JSON files");
 
         this.particleArg = this.withOptionalArg(
@@ -66,6 +68,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
     @Override
     protected CompletableFuture<Void> execute(@Nonnull CommandContext context) {
         String action = this.actionArg.get(context);
+        String value = this.valueArg.get(context);
         boolean wantsReload = (action != null && action.equalsIgnoreCase("reload")) || Boolean.TRUE.equals(this.reloadFlag.get(context));
         if (wantsReload) {
             try {
@@ -91,11 +94,36 @@ public class BrutalImpactsCommand extends AbstractCommand {
             return CompletableFuture.completedFuture(null);
         }
 
+        if (action != null && action.equalsIgnoreCase("debug")) {
+            String normalized = value == null ? "" : value.trim().toLowerCase();
+            boolean enabled;
+            switch (normalized) {
+                case "", "toggle" -> enabled = this.particlesSystem.toggleDebug();
+                case "on", "true", "1" -> {
+                    this.particlesSystem.setDebugEnabled(true);
+                    enabled = true;
+                }
+                case "off", "false", "0" -> {
+                    this.particlesSystem.setDebugEnabled(false);
+                    enabled = false;
+                }
+                default -> {
+                    context.sendMessage(Message.raw("Usage: /brutalimpacts debug [on|off|toggle]"));
+                    return CompletableFuture.completedFuture(null);
+                }
+            }
+
+            context.sendMessage(Message.raw("Brutal Impacts debug mode: " + (enabled ? "ON" : "OFF")));
+            return CompletableFuture.completedFuture(null);
+        }
+
         ParticleSystem particleSystem = this.particleArg.get(context);
         if (particleSystem == null) {
             context.sendMessage(Message.raw("Current default particle: " + this.particlesSystem.getParticleSystemId()));
+            context.sendMessage(Message.raw("Debug mode: " + (this.particlesSystem.isDebugEnabled() ? "ON" : "OFF")));
             context.sendMessage(Message.raw("Usage: /brutalimpacts reload"));
             context.sendMessage(Message.raw("   or: /brutalimpacts --reload"));
+            context.sendMessage(Message.raw("   or: /brutalimpacts debug [on|off|toggle]"));
             context.sendMessage(Message.raw("   or: /brutalimpacts --particle <ParticleSystemId>"));
             return CompletableFuture.completedFuture(null);
         }

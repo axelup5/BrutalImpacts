@@ -28,9 +28,9 @@
       "particleMultiplier": 1.0
     },
     {
-      "match": { "type": "contains", "value": "axe" },
-      "scaleMultiplier": 1.0,
-      "particleMultiplier": 1.0
+      "match": { "type": "contains", "value": "battleaxe" },
+      "scaleMultiplier": 0.8,
+      "particleMultiplier": 0.8
     },
     {
       "match": { "type": "contains", "value": "hammer" },
@@ -63,14 +63,14 @@
       "particleMultiplier": 1.0
     },
     {
-      "match": { "type": "contains", "value": "bow" },
+      "match": { "type": "contains", "value": "crossbow" },
       "scaleMultiplier": 1.0,
       "particleMultiplier": 1.0
     },
     {
-      "match": { "type": "contains", "value": "crossbow" },
-      "scaleMultiplier": 1.0,
-      "particleMultiplier": 1.0
+      "match": { "type": "contains", "value": "bow" },
+      "scaleMultiplier": 0.7,
+      "particleMultiplier": 0.7
     },
     {
       "match": { "type": "contains", "value": "staff" },
