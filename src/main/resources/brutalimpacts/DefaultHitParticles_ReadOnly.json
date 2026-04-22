@@ -549,12 +549,14 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Eye",
           "color": { "r": 255, "g": 207, "b": 159 },
-          "scale": 0.7
+          "scale": 0.7,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 157, "g": 255, "b": 70 },
-          "scale": 0.5
+          "scale": 0.5,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Blood_Default",
