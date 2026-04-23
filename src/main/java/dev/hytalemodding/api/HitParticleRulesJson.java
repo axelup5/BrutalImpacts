@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.hypixel.hytale.protocol.Vector3f;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -279,7 +278,7 @@ public final class HitParticleRulesJson {
     private static HitParticleEffect applyExtraFields(@Nonnull HitParticleEffect base, @Nonnull JsonObject obj) {
         HitParticleEffect effect = base;
 
-        Vector3f offset = parseOffset(obj);
+        ParticleOffset offset = parseOffset(obj);
         if (offset != null) {
             effect = effect.withOffset(offset);
         }
@@ -296,13 +295,13 @@ public final class HitParticleRulesJson {
     }
 
     @Nullable
-    private static Vector3f parseOffset(@Nonnull JsonObject obj) {
+    private static ParticleOffset parseOffset(@Nonnull JsonObject obj) {
         JsonObject offsetObj = getObj(obj, "offset");
         if (offsetObj != null) {
             float x = getNumberAsFloatDefault(offsetObj, "x", 0.0F);
             float y = getNumberAsFloatDefault(offsetObj, "y", 0.0F);
             float z = getNumberAsFloatDefault(offsetObj, "z", 0.0F);
-            return new Vector3f(x, y, z);
+            return new ParticleOffset(x, y, z);
         }
 
         Float x = getNumberAsFloat(obj, "x");
@@ -315,7 +314,7 @@ public final class HitParticleRulesJson {
         if (x == null && y == null && z == null) {
             return null;
         }
-        return new Vector3f(x == null ? 0.0F : x, y == null ? 0.0F : y, z == null ? 0.0F : z);
+        return new ParticleOffset(x == null ? 0.0F : x, y == null ? 0.0F : y, z == null ? 0.0F : z);
     }
 
     @Nullable

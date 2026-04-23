@@ -1,7 +1,6 @@
 package dev.hytalemodding.api;
 
 import com.hypixel.hytale.protocol.Color;
-import com.hypixel.hytale.protocol.Vector3f;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -23,7 +22,7 @@ public record HitParticleEffect(
     @Nullable Color colorOverride,
     float scale,
     boolean inheritDefaultColor,
-    @Nullable Vector3f positionOffset,
+    @Nullable ParticleOffset positionOffset,
     boolean fixedScale
 ) {
 
@@ -68,7 +67,7 @@ public record HitParticleEffect(
         return new HitParticleEffect(particleSystemId, new Color(toByte(r), toByte(g), toByte(b)), scale, false, null, false);
     }
 
-    public HitParticleEffect withOffset(@Nullable Vector3f positionOffset) {
+    public HitParticleEffect withOffset(@Nullable ParticleOffset positionOffset) {
         return new HitParticleEffect(this.particleSystemId, this.colorOverride, this.scale, this.inheritDefaultColor, positionOffset, this.fixedScale);
     }
 

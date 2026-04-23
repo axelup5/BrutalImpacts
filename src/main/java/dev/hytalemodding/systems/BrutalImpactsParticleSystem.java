@@ -8,13 +8,10 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.SystemGroup;
 import com.hypixel.hytale.component.dependency.Dependency;
 import com.hypixel.hytale.component.dependency.SystemDependency;
-import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.math.vector.Vector4d;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.math.util.TrigMathUtil;
 import com.hypixel.hytale.protocol.Color;
 import com.hypixel.hytale.protocol.Direction;
-import com.hypixel.hytale.protocol.Vector3f;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.particle.config.WorldParticle;
@@ -31,6 +28,7 @@ import com.hypixel.hytale.server.core.universe.world.ParticleUtil;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import dev.hytalemodding.api.BrutalImpactsApi;
 import dev.hytalemodding.api.HitParticleEffect;
+import dev.hytalemodding.api.ParticleOffset;
 import dev.hytalemodding.api.HitParticleSpec;
 import dev.hytalemodding.config.WeaponTuningProfile;
 import dev.hytalemodding.config.WeaponTuningRegistry;
@@ -39,6 +37,9 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import org.joml.Vector3d;
+import org.joml.Vector3f;
+import org.joml.Vector4d;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -267,8 +268,8 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
 
         if (damage.getSource() instanceof Damage.EntitySource sourceEntity) {
             Player player = commandBuffer.getComponent(sourceEntity.getRef(), Player.getComponentType());
-            if (player != null) {
-                player.sendMessage(Message.raw("[BrutalImpacts] " + msg + " (source=" + sourceType + ")"));
+            if (player != null && player.getPlayerRef() != null) {
+                player.getPlayerRef().sendMessage(Message.raw("[BrutalImpacts] " + msg + " (source=" + sourceType + ")"));
             }
         }
     }
@@ -301,7 +302,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
             float scaleToUse = effect.fixedScale()
                 ? clamp(baseScale, 0.05F, 8.0F)
                 : clamp(baseScale * tuning.scaleMultiplier, 0.05F, 8.0F);
-            Vector3f offsetToUse = effect.positionOffset() == null ? new Vector3f(0.0F, 0.0F, 0.0F) : effect.positionOffset();
+            ParticleOffset offsetToUse = effect.positionOffset() == null ? ParticleOffset.ZERO : effect.positionOffset();
 
             for (int i = 0; i < repeats && out.size() < MAX_EXTRA_WORLD_PARTICLES; i++) {
                 out.add(
@@ -309,7 +310,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
                         effect.particleSystemId(),
                         colorToUse,
                         scaleToUse,
-                        offsetToUse,
+                        new Vector3f(offsetToUse.x(), offsetToUse.y(), offsetToUse.z()),
                         new Direction(rotation.yawOffset, rotation.pitchOffset, 0.0F)
                     )
                 );
