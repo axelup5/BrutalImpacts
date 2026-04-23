@@ -1,8 +1,16 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        maven("https://maven.scaffoldit.dev/releases")
+    }
+}
+
 rootProject.name = "Brutal Impacts v2.0.2"
 
 plugins {
     // See documentation on https://scaffoldit.dev
-    id("dev.scaffoldit") version "0.2.+"
+    id("dev.scaffoldit") version "0.2.14"
 }
 
 // Would you like to do a split project?
