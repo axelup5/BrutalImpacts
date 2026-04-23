@@ -1,8 +1,0 @@
-{
-  "Spawners": [
-    {
-      "SpawnerId": "Block_Break_Metal_Sparks",
-      "FixedRotation": true
-    }
-  ]
-}
