@@ -34,8 +34,8 @@
     },
     {
       "match": { "type": "contains", "value": "hammer" },
-      "scaleMultiplier": 1.0,
-      "particleMultiplier": 1.0
+      "scaleMultiplier": 0.8,
+      "particleMultiplier": 0.8
     },
     {
       "match": { "type": "contains", "value": "mace" },
