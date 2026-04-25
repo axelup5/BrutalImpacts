@@ -1,5 +1,5 @@
 {
-  "RenderMode": "Erosion",
+  "RenderMode": "BlendLinear",
   "EmitOffset": {
     "X": {
       "Min": 0.2,
@@ -22,11 +22,11 @@
   "MaxConcurrentParticles": 25,
   "ParticleLifeSpan": {
     "Min": 0.2,
-    "Max": 0.25
+    "Max": 0.3
   },
   "TotalParticles": {
-    "Min": 4,
-    "Max": 6
+    "Min": 1,
+    "Max": 1
   },
   "InitialVelocity": {
     "Speed": {
@@ -43,46 +43,43 @@
     }
   },
   "Particle": {
-    "Texture": "Particles/Textures/Rnd/Water_Splash_Test4.png",
+    "Texture": "Particles/Textures/Rnd/Water_Splash_Animated2.png",
+    "ScaleRatioConstraint": "OneToOne",
     "UVOption": "RandomFlipU",
     "Animation": {
-      "0": {},
-      "25": {
+      "0": {
+        "FrameIndex": {
+          "Min": 0,
+          "Max": 0
+        }
+      },
+      "40": {
         "FrameIndex": {
           "Min": 1,
           "Max": 1
         }
       },
-      "45": {
+      "70": {
         "FrameIndex": {
           "Min": 2,
           "Max": 2
         }
       },
-      "60": {
+      "90": {
         "FrameIndex": {
           "Min": 3,
           "Max": 3
         }
-      },
-      "75": {
-        "FrameIndex": {
-          "Min": 4,
-          "Max": 4
-        }
-      },
-      "90": {
-        "FrameIndex": {
-          "Min": 5,
-          "Max": 5
-        }
       }
     },
     "InitialAnimationFrame": {
+      "FrameIndex": {
+        "Min": 0
+      },
       "Scale": {
         "X": {
-          "Min": 0.1,
-          "Max": 0.15
+          "Min": 0.08,
+          "Max": 0.1
         }
       },
       "Rotation": {
@@ -91,17 +88,14 @@
           "Max": 180.0
         }
       },
-      "Opacity": 1,
-      "FrameIndex": {
-        "Min": 0,
-        "Max": 0
-      }
+      "Opacity": 1
     },
+    "SoftParticles": "Disable",
+    "UseSpriteBlending": true,
     "FrameSize": {
       "Width": 128,
       "Height": 128
-    },
-    "SoftParticles": "Disable"
+    }
   },
   "SpawnBurst": true,
   "UseEmitDirection": true,
@@ -113,5 +107,6 @@
         "Z": 0.8
       }
     }
-  ]
+  ],
+  "LightInfluence": 0.4
 }
