@@ -1,14 +1,17 @@
 {
   "Spawners": [
     {
-      "SpawnerId": "BrutalImpacts_Blood_Drops2"
+      "SpawnerId": "BrutalImpacts_Blood_Drops2_Individual"
     },
     {
-      "SpawnerId": "BrutalImpacts_Blood_Splatter",
-      "TotalSpawners": 1
+      "SpawnerId": "BrutalImpacts_Blood_Splatter_Individual"
     },
     {
-      "SpawnerId": "BrutalImpacts_Blood_Drops_Directional"
+      "SpawnerId": "BrutalImpacts_Blood_Drops_Directional_Individual",
+      "StartDelay": 0,
+      "PositionOffset": {
+        "Y": 5
+      }
     }
   ],
   "IsImportant": false,

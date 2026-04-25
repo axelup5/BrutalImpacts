@@ -187,7 +187,8 @@
         "Min": 0,
         "Max": 0
       }
-    }
+    },
+    "UseSpriteBlending": false
   },
   "SpawnBurst": false,
   "UseEmitDirection": false,

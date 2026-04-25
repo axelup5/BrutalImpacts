@@ -377,7 +377,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
         @Nonnull
         static ImpactTuning from(@Nonnull Damage damage, @Nonnull WeaponTuningProfile profile) {
             float dmg = Math.max(0.0F, damage.getAmount());
-            float scale = 0.5F + (dmg * profile.scaleMultiplier() * 0.025F);
+            float scale = 0.5F + (dmg * profile.scaleMultiplier() * 0.0275F);
             int repeats = 1 + (int) Math.floor(dmg * profile.particleMultiplier() / 10.0F);
 
             scale = clamp(scale, 0.5F, 1.6F);
