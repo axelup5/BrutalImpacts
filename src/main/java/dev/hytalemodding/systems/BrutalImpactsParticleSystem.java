@@ -30,6 +30,7 @@ import dev.hytalemodding.api.BrutalImpactsApi;
 import dev.hytalemodding.api.HitParticleEffect;
 import dev.hytalemodding.api.ParticleOffset;
 import dev.hytalemodding.api.HitParticleSpec;
+import dev.hytalemodding.config.BrutalImpactsTuningSettings;
 import dev.hytalemodding.config.WeaponTuningProfile;
 import dev.hytalemodding.config.WeaponTuningRegistry;
 
@@ -69,6 +70,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
     private volatile @Nullable Color defaultColor;
     private volatile float defaultScale = 1.0F;
     private volatile boolean debug;
+    private volatile BrutalImpactsTuningSettings tuningSettings = BrutalImpactsTuningSettings.NORMAL;
     private final WeaponTuningRegistry weaponTuningRegistry;
     private final double defaultViewDistance;
 
@@ -119,6 +121,15 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
     public boolean toggleDebug() {
         this.debug = !this.debug;
         return this.debug;
+    }
+
+    @Nonnull
+    public BrutalImpactsTuningSettings getTuningSettings() {
+        return this.tuningSettings;
+    }
+
+    public void applyTuningSettings(@Nonnull BrutalImpactsTuningSettings tuningSettings) {
+        this.tuningSettings = tuningSettings.normalized();
     }
 
     @Nonnull
@@ -177,7 +188,7 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
 
         ImpactContext impact = resolveImpactContext(commandBuffer, damage, targetPosition);
         WeaponTuningProfile profile = this.weaponTuningRegistry.resolve(impact.sourceKind(), impact.weaponItemId());
-        ImpactTuning tuning = ImpactTuning.from(damage, profile);
+        ImpactTuning tuning = ImpactTuning.from(damage, profile, this.tuningSettings);
 
         WorldParticle[] extras = buildWorldParticles(effects, tuning, impact.rotation());
         if (extras.length == 0) {
@@ -376,12 +387,17 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
 
     private record ImpactTuning(float scaleMultiplier, int repeats) {
         @Nonnull
-        static ImpactTuning from(@Nonnull Damage damage, @Nonnull WeaponTuningProfile profile) {
+        static ImpactTuning from(
+            @Nonnull Damage damage,
+            @Nonnull WeaponTuningProfile profile,
+            @Nonnull BrutalImpactsTuningSettings tuningSettings
+        ) {
             float dmg = Math.max(0.0F, damage.getAmount());
-            float scale = 0.5F + (dmg * profile.scaleMultiplier() * 0.0275F);
-            int repeats = 1 + (int) Math.floor(dmg * profile.particleMultiplier() / 10.0F);
+            BrutalImpactsTuningSettings normalizedSettings = tuningSettings.normalized();
+            float scale = normalizedSettings.minScale() + (dmg * profile.scaleMultiplier() * normalizedSettings.scaleMultiplier() * 0.0275F);
+            int repeats = 1 + (int) Math.floor(dmg * profile.particleMultiplier() * normalizedSettings.particleMultiplier() / 10.0F);
 
-            scale = clamp(scale, 0.5F, 3F);
+            scale = clamp(scale, normalizedSettings.minScale(), normalizedSettings.maxScale());
             repeats = Math.max(1, Math.min(8, repeats));
             return new ImpactTuning(scale, repeats);
         }

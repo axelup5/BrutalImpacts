@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalAr
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import dev.hytalemodding.api.BrutalImpactsApi;
 import dev.hytalemodding.config.BrutalImpactsFiles;
+import dev.hytalemodding.config.BrutalImpactsTuningStore;
 import dev.hytalemodding.config.WeaponTuningRegistry;
 import dev.hytalemodding.systems.BrutalImpactsParticleSystem;
 
@@ -33,6 +34,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
 
     private final BrutalImpactsParticleSystem particlesSystem;
     private final WeaponTuningRegistry weaponTuningRegistry;
+    private final BrutalImpactsTuningStore tuningStore;
     private final Class<?> pluginClass;
     private final Path dataDir;
 
@@ -44,6 +46,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
     public BrutalImpactsCommand(
         @Nonnull BrutalImpactsParticleSystem particlesSystem,
         @Nonnull WeaponTuningRegistry weaponTuningRegistry,
+        @Nonnull BrutalImpactsTuningStore tuningStore,
         @Nonnull Class<?> pluginClass,
         @Nonnull Path dataDir
     ) {
@@ -51,6 +54,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
         this.requirePermission("axelup.brutalimpacts.command.brutalimpacts");
         this.particlesSystem = particlesSystem;
         this.weaponTuningRegistry = weaponTuningRegistry;
+        this.tuningStore = tuningStore;
         this.pluginClass = pluginClass;
         this.dataDir = dataDir;
 
@@ -72,26 +76,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
         String value = this.valueArg.get(context);
         boolean wantsReload = (action != null && action.equalsIgnoreCase("reload")) || Boolean.TRUE.equals(this.reloadFlag.get(context));
         if (wantsReload) {
-            try {
-                BrutalImpactsFiles.ensureLayout(this.pluginClass, this.dataDir);
-                var hitParticlesReport = BrutalImpactsFiles.clearAndLoadAllHitParticleJsonReport(BrutalImpactsApi.hitParticles(), this.dataDir);
-                var weaponsReport = BrutalImpactsFiles.clearAndLoadAllWeaponTuningJsonReport(this.weaponTuningRegistry, this.dataDir);
-                context.sendMessage(
-                    Message.raw(
-                        "Reloaded Brutal Impacts config: hitRules=" + hitParticlesReport.rulesLoaded()
-                            + ", weaponRules=" + weaponsReport.rulesLoaded()
-                            + ", failed=" + (hitParticlesReport.filesFailed() + weaponsReport.filesFailed())
-                    )
-                );
-                for (var err : hitParticlesReport.errors()) {
-                    context.sendMessage(Message.raw("Hit-particles JSON load failed: " + err.path().getFileName() + " (" + err.message() + ")"));
-                }
-                for (var err : weaponsReport.errors()) {
-                    context.sendMessage(Message.raw("Weapons JSON load failed: " + err.path().getFileName() + " (" + err.message() + ")"));
-                }
-            } catch (Exception e) {
-                context.sendMessage(Message.raw("Reload failed: " + e.getMessage()));
-            }
+            context.sendMessage(Message.raw(this.reloadAll()));
             return CompletableFuture.completedFuture(null);
         }
 
@@ -122,15 +107,47 @@ public class BrutalImpactsCommand extends AbstractCommand {
         if (particleSystem == null) {
             context.sendMessage(Message.raw("Current default particle: " + this.particlesSystem.getParticleSystemId()));
             context.sendMessage(Message.raw("Debug mode: " + (this.particlesSystem.isDebugEnabled() ? "ON" : "OFF")));
+            context.sendMessage(Message.raw("Runtime tuning: min=" + this.tuningStore.get().minScale()
+                + ", max=" + this.tuningStore.get().maxScale()
+                + ", scaleMul=" + this.tuningStore.get().scaleMultiplier()
+                + ", particleMul=" + this.tuningStore.get().particleMultiplier()));
             context.sendMessage(Message.raw("Usage: /brutalimpacts reload"));
             context.sendMessage(Message.raw("   or: /brutalimpacts --reload"));
             context.sendMessage(Message.raw("   or: /brutalimpacts debug [on|off|toggle]"));
             context.sendMessage(Message.raw("   or: /brutalimpacts --particle <ParticleSystemId>"));
+            context.sendMessage(Message.raw("   or: /brutalimpactsui"));
             return CompletableFuture.completedFuture(null);
         }
 
         this.particlesSystem.setParticleSystemId(particleSystem.getId());
         context.sendMessage(Message.raw("Updated fallback hit particle to: " + particleSystem.getId()));
         return CompletableFuture.completedFuture(null);
+    }
+
+    @Nonnull
+    public String reloadAll() {
+        try {
+            BrutalImpactsFiles.ensureLayout(this.pluginClass, this.dataDir);
+            var hitParticlesReport = BrutalImpactsFiles.clearAndLoadAllHitParticleJsonReport(BrutalImpactsApi.hitParticles(), this.dataDir);
+            var weaponsReport = BrutalImpactsFiles.clearAndLoadAllWeaponTuningJsonReport(this.weaponTuningRegistry, this.dataDir);
+            this.particlesSystem.applyTuningSettings(this.tuningStore.load());
+
+            StringBuilder message = new StringBuilder("Reloaded Brutal Impacts config: hitRules=")
+                .append(hitParticlesReport.rulesLoaded())
+                .append(", weaponRules=")
+                .append(weaponsReport.rulesLoaded())
+                .append(", failed=")
+                .append(hitParticlesReport.filesFailed() + weaponsReport.filesFailed());
+
+            for (var err : hitParticlesReport.errors()) {
+                message.append(" | Hit JSON failed: ").append(err.path().getFileName()).append(" (").append(err.message()).append(")");
+            }
+            for (var err : weaponsReport.errors()) {
+                message.append(" | Weapons JSON failed: ").append(err.path().getFileName()).append(" (").append(err.message()).append(")");
+            }
+            return message.toString();
+        } catch (Exception e) {
+            return "Reload failed: " + e.getMessage();
+        }
     }
 }

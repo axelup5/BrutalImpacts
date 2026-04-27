@@ -5,6 +5,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import dev.hytalemodding.api.BrutalImpactsApi;
 import dev.hytalemodding.commands.BrutalImpactsCommand;
+import dev.hytalemodding.commands.BrutalImpactsUiCommand;
 //import dev.hytalemodding.commands.ExampleCommand;
 //import dev.hytalemodding.commands.ExamplePlayerCommand;
 //import dev.hytalemodding.commands.ExampleTargetEntityCommand;
@@ -12,6 +13,7 @@ import dev.hytalemodding.commands.BrutalImpactsCommand;
 //import dev.hytalemodding.commands.ServerRulesCommand;
 //import dev.hytalemodding.commands.SpawnParticleSystemCommand;
 import dev.hytalemodding.config.BrutalImpactsFiles;
+import dev.hytalemodding.config.BrutalImpactsTuningStore;
 import dev.hytalemodding.config.WeaponTuningRegistry;
 import dev.hytalemodding.events.ExampleEvent;
 import dev.hytalemodding.systems.BrutalImpactsParticleSystem;
@@ -51,10 +53,12 @@ public class BrutalImpacts extends JavaPlugin {
         // You can override the base directory with: -Dbrutalimpacts.dir=<path>
         Path dataDir = BrutalImpactsFiles.resolveDataDir(BrutalImpacts.class);
         WeaponTuningRegistry weaponTuningRegistry = new WeaponTuningRegistry();
+        BrutalImpactsTuningStore tuningStore = new BrutalImpactsTuningStore(dataDir.resolve(BrutalImpactsFiles.USER_RUNTIME_SETTINGS_FILE));
         try {
             BrutalImpactsFiles.ensureLayout(BrutalImpacts.class, dataDir);
             var hitParticlesReport = BrutalImpactsFiles.clearAndLoadAllHitParticleJsonReport(BrutalImpactsApi.hitParticles(), dataDir);
             var weaponTuningReport = BrutalImpactsFiles.clearAndLoadAllWeaponTuningJsonReport(weaponTuningRegistry, dataDir);
+            tuningStore.load();
             System.out.println(
                 "[BrutalImpacts] Loaded config from " + dataDir
                     + " [hitRules=" + hitParticlesReport.rulesLoaded()
@@ -81,7 +85,16 @@ public class BrutalImpacts extends JavaPlugin {
             false
         );
         brutalParticles.setDefaultColor(new com.hypixel.hytale.protocol.Color((byte) 150, (byte) 0, (byte) 0));
+        brutalParticles.applyTuningSettings(tuningStore.get());
         this.getEntityStoreRegistry().registerSystem(brutalParticles);
-        this.getCommandRegistry().registerCommand(new BrutalImpactsCommand(brutalParticles, weaponTuningRegistry, BrutalImpacts.class, dataDir));
+        BrutalImpactsCommand brutalImpactsCommand = new BrutalImpactsCommand(
+            brutalParticles,
+            weaponTuningRegistry,
+            tuningStore,
+            BrutalImpacts.class,
+            dataDir
+        );
+        this.getCommandRegistry().registerCommand(brutalImpactsCommand);
+        this.getCommandRegistry().registerCommand(new BrutalImpactsUiCommand(brutalParticles, tuningStore, brutalImpactsCommand));
     }
 }

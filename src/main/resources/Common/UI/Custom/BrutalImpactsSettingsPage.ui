@@ -1,0 +1,175 @@
+$Common = "Common.ui";
+
+Group {
+    LayoutMode: Center;
+
+    SceneBlur {
+        Anchor: (Fill: true);
+    }
+
+    Group #RootPanel {
+        Anchor: (Width: 760, Height: 620);
+        LayoutMode: Top;
+        Padding: (Left: 18, Top: 18, Right: 18, Bottom: 18);
+        Background: #151515ee;
+        OutlineColor: #6f0d0dff;
+        OutlineSize: 2;
+
+        Label #Title {
+            Text: "Brutal Impacts";
+            Style: (FontSize: 22, HorizontalAlignment: Center, TextColor: #ffffffff);
+            Anchor: (Bottom: 10);
+        }
+
+        Label #Subtitle {
+            Text: "Ajusta la escala y densidad de particulas en tiempo real";
+            Style: (FontSize: 12, HorizontalAlignment: Center, TextColor: #d8d8d8ff);
+            Anchor: (Bottom: 16);
+        }
+
+        Group #PresetRow {
+            LayoutMode: Left;
+            Anchor: (Height: 42, Bottom: 12);
+
+            TextButton #CleanPreset {
+                Text: "Clean";
+                Style: $Common.@DefaultTextButtonStyle;
+                Anchor: (Width: 140, Right: 8);
+            }
+
+            TextButton #NormalPreset {
+                Text: "Normal";
+                Style: $Common.@DefaultTextButtonStyle;
+                Anchor: (Width: 140, Right: 8);
+            }
+
+            TextButton #BrutalPreset {
+                Text: "BRUTAL";
+                Style: $Common.@DefaultTextButtonStyle;
+                Anchor: (Width: 140);
+            }
+        }
+
+        Label #PresetLabel {
+            Text: "Perfil activo";
+            Style: (FontSize: 11, TextColor: #b0b0b0ff);
+            Anchor: (Bottom: 4);
+        }
+
+        Label #PresetValue {
+            Style: (FontSize: 14, TextColor: #ffffffff);
+            Anchor: (Bottom: 16);
+        }
+
+        Label #MinScaleLabel {
+            Text: "Escala minima";
+            Style: (FontSize: 12, TextColor: #ffffffff);
+            Anchor: (Bottom: 4);
+        }
+
+        FloatSliderNumberField #MinScale {
+            Min: 0.05;
+            Max: 3.0;
+            Step: 0.05;
+            Anchor: (Height: 34, Bottom: 4);
+        }
+
+        Label #MinScaleValue {
+            Style: (FontSize: 11, TextColor: #b0b0b0ff, HorizontalAlignment: Right);
+            Anchor: (Bottom: 16);
+        }
+
+        Label #MaxScaleLabel {
+            Text: "Escala maxima";
+            Style: (FontSize: 12, TextColor: #ffffffff);
+            Anchor: (Bottom: 4);
+        }
+
+        FloatSliderNumberField #MaxScale {
+            Min: 0.1;
+            Max: 5.0;
+            Step: 0.05;
+            Anchor: (Height: 34, Bottom: 4);
+        }
+
+        Label #MaxScaleValue {
+            Style: (FontSize: 11, TextColor: #b0b0b0ff, HorizontalAlignment: Right);
+            Anchor: (Bottom: 16);
+        }
+
+        Label #ScaleMultiplierLabel {
+            Text: "Multiplicador global de escala";
+            Style: (FontSize: 12, TextColor: #ffffffff);
+            Anchor: (Bottom: 4);
+        }
+
+        FloatSliderNumberField #ScaleMultiplier {
+            Min: 0.1;
+            Max: 3.0;
+            Step: 0.05;
+            Anchor: (Height: 34, Bottom: 4);
+        }
+
+        Label #ScaleMultiplierValue {
+            Style: (FontSize: 11, TextColor: #b0b0b0ff, HorizontalAlignment: Right);
+            Anchor: (Bottom: 16);
+        }
+
+        Label #ParticleMultiplierLabel {
+            Text: "Multiplicador global de particulas";
+            Style: (FontSize: 12, TextColor: #ffffffff);
+            Anchor: (Bottom: 4);
+        }
+
+        FloatSliderNumberField #ParticleMultiplier {
+            Min: 0.1;
+            Max: 3.0;
+            Step: 0.05;
+            Anchor: (Height: 34, Bottom: 4);
+        }
+
+        Label #ParticleMultiplierValue {
+            Style: (FontSize: 11, TextColor: #b0b0b0ff, HorizontalAlignment: Right);
+            Anchor: (Bottom: 16);
+        }
+
+        Group #ActionRow {
+            LayoutMode: Left;
+            Anchor: (Height: 42, Bottom: 12);
+
+            TextButton #ReloadButton {
+                Text: "Recargar JSON";
+                Style: $Common.@DefaultTextButtonStyle;
+                Anchor: (Width: 180, Right: 8);
+            }
+
+            TextButton #DebugButton {
+                Text: "Debug";
+                Style: $Common.@DefaultTextButtonStyle;
+                Anchor: (Width: 120, Right: 8);
+            }
+
+            TextButton #CloseButton {
+                Text: "Cerrar";
+                Style: $Common.@DefaultTextButtonStyle;
+                Anchor: (Width: 120);
+            }
+        }
+
+        Label #DebugLabel {
+            Text: "Debug";
+            Style: (FontSize: 11, TextColor: #b0b0b0ff);
+            Anchor: (Bottom: 4);
+        }
+
+        Label #DebugValue {
+            Style: (FontSize: 14, TextColor: #ffffffff);
+            Anchor: (Bottom: 8);
+        }
+
+        Label #StatusText {
+            Style: (FontSize: 11, TextColor: #d9b1b1ff, Wrap: true, HorizontalAlignment: Center);
+            Anchor: (Height: 34);
+        }
+    }
+}
