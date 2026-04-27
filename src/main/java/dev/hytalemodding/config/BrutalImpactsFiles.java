@@ -42,6 +42,7 @@ public final class BrutalImpactsFiles {
     public static final String USER_HIT_PARTICLES_FILE = "USER_HitParticles.json";
     public static final String DEFAULT_WEAPONS_FILE = "Weapons_ReadOnly.json";
     public static final String USER_WEAPONS_FILE = "USER_Weapons.json";
+    public static final String USER_RUNTIME_SETTINGS_FILE = "USER_RuntimeSettings.json";
     public static final String README_FILE = "README.md";
 
     private BrutalImpactsFiles() {
@@ -98,6 +99,7 @@ public final class BrutalImpactsFiles {
         // Never overwrite the user's file once created.
         copyResource(pluginClass, "/brutalimpacts/" + USER_HIT_PARTICLES_FILE, dataDir.resolve(USER_HIT_PARTICLES_FILE), false);
         copyResource(pluginClass, "/brutalimpacts/" + USER_WEAPONS_FILE, dataDir.resolve(USER_WEAPONS_FILE), false);
+        copyResource(pluginClass, "/brutalimpacts/" + USER_RUNTIME_SETTINGS_FILE, dataDir.resolve(USER_RUNTIME_SETTINGS_FILE), false);
     }
 
     /**
