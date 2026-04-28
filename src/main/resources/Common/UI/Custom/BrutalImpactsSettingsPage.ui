@@ -3,10 +3,6 @@ $Common = "Common.ui";
 Group {
     LayoutMode: Center;
 
-    SceneBlur {
-        Anchor: (Fill: true);
-    }
-
     Group #RootPanel {
         Anchor: (Width: 760, Height: 620);
         LayoutMode: Top;
