@@ -26,6 +26,7 @@ public final class BrutalImpactsUiCommand extends AbstractPlayerCommand {
         @Nonnull BrutalImpactsCommand brutalImpactsCommand
     ) {
         super("brutalimpactsui", "Open the Brutal Impacts tuning interface.");
+        this.requirePermission("axelup.brutalimpacts.command.brutalimpactsui");
         this.particleSystem = particleSystem;
         this.tuningStore = tuningStore;
         this.brutalImpactsCommand = brutalImpactsCommand;
