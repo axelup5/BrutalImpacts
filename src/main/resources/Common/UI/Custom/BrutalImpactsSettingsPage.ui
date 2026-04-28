@@ -3,27 +3,23 @@ $Common = "Common.ui";
 Group {
     LayoutMode: Center;
 
-    SceneBlur {
-        Anchor: (Fill: true);
-    }
-
     Group #RootPanel {
         Anchor: (Width: 760, Height: 620);
         LayoutMode: Top;
         Padding: (Left: 18, Top: 18, Right: 18, Bottom: 18);
         Background: #151515ee;
         OutlineColor: #6f0d0dff;
-        OutlineSize: 2;
+        OutlineSize: 6;
 
         Label #Title {
             Text: "Brutal Impacts";
-            Style: (FontSize: 22, HorizontalAlignment: Center, TextColor: #ffffffff);
+            Style: (FontSize: 40, TextColor: #ff0000);
             Anchor: (Bottom: 10);
         }
 
         Label #Subtitle {
             Text: "Ajusta la escala y densidad de particulas en tiempo real";
-            Style: (FontSize: 12, HorizontalAlignment: Center, TextColor: #d8d8d8ff);
+            Style: (FontSize: 26, TextColor: #ff0000);
             Anchor: (Bottom: 16);
         }
 
@@ -75,7 +71,7 @@ Group {
         }
 
         Label #MinScaleValue {
-            Style: (FontSize: 11, TextColor: #b0b0b0ff, HorizontalAlignment: Right);
+            Style: (FontSize: 11, TextColor: #b0b0b0ff);
             Anchor: (Bottom: 16);
         }
 
@@ -93,7 +89,7 @@ Group {
         }
 
         Label #MaxScaleValue {
-            Style: (FontSize: 11, TextColor: #b0b0b0ff, HorizontalAlignment: Right);
+            Style: (FontSize: 11, TextColor: #b0b0b0ff);
             Anchor: (Bottom: 16);
         }
 
@@ -111,7 +107,7 @@ Group {
         }
 
         Label #ScaleMultiplierValue {
-            Style: (FontSize: 11, TextColor: #b0b0b0ff, HorizontalAlignment: Right);
+            Style: (FontSize: 11, TextColor: #b0b0b0ff);
             Anchor: (Bottom: 16);
         }
 
@@ -129,7 +125,7 @@ Group {
         }
 
         Label #ParticleMultiplierValue {
-            Style: (FontSize: 11, TextColor: #b0b0b0ff, HorizontalAlignment: Right);
+            Style: (FontSize: 11, TextColor: #b0b0b0ff);
             Anchor: (Bottom: 16);
         }
 
@@ -168,7 +164,7 @@ Group {
         }
 
         Label #StatusText {
-            Style: (FontSize: 11, TextColor: #d9b1b1ff, Wrap: true, HorizontalAlignment: Center);
+            Style: (FontSize: 11, TextColor: #d9b1b1ff, Wrap: true);
             Anchor: (Height: 34);
         }
     }

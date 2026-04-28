@@ -26,7 +26,7 @@ import java.util.Locale;
 
 public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<BrutalImpactsSettingsPage.PageEventData> {
 
-    private static final String PAGE_LAYOUT = "Custom/BrutalImpactsSettingsPage.ui";
+    private static final String PAGE_LAYOUT = "BrutalImpactsSettingsPage.ui";
     private static final String ACTION_APPLY = "apply";
     private static final String ACTION_PRESET = "preset";
     private static final String ACTION_RELOAD = "reload";
@@ -114,8 +114,8 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
 
                 this.populate(update);
                 this.setStatus(update, status);
-                if (player != null) {
-                    player.sendMessage(Message.raw("[BrutalImpacts] " + status));
+                if (player != null && player.getPlayerRef() != null) {
+                    player.getPlayerRef().sendMessage(Message.raw("[BrutalImpacts] " + status));
                 }
             }
             case ACTION_DEBUG -> {
