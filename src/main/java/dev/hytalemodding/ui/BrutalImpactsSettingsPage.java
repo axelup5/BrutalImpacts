@@ -69,11 +69,12 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
         String action = data.action == null ? "" : data.action;
         switch (action) {
             case ACTION_APPLY -> {
+                BrutalImpactsTuningSettings current = this.tuningStore.get().normalized();
                 BrutalImpactsTuningSettings next = new BrutalImpactsTuningSettings(
-                    parseOrDefault(data.minScale, this.tuningStore.get().minScale()),
-                    parseOrDefault(data.maxScale, this.tuningStore.get().maxScale()),
-                    parseOrDefault(data.scaleMultiplier, this.tuningStore.get().scaleMultiplier()),
-                    parseOrDefault(data.particleMultiplier, this.tuningStore.get().particleMultiplier())
+                    valueOrDefault(data.minScale, current.minScale()),
+                    valueOrDefault(data.maxScale, current.maxScale()),
+                    valueOrDefault(data.scaleMultiplier, current.scaleMultiplier()),
+                    valueOrDefault(data.particleMultiplier, current.particleMultiplier())
                 ).normalized();
 
                 this.particleSystem.applyTuningSettings(next);
@@ -166,6 +167,12 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
         events.addEventBinding(CustomUIEventBindingType.Activating, "#CleanPreset", EventData.of("Action", ACTION_PRESET).append("Preset", "clean"));
         events.addEventBinding(CustomUIEventBindingType.Activating, "#NormalPreset", EventData.of("Action", ACTION_PRESET).append("Preset", "normal"));
         events.addEventBinding(CustomUIEventBindingType.Activating, "#BrutalPreset", EventData.of("Action", ACTION_PRESET).append("Preset", "brutal"));
+        events.addEventBinding(
+            CustomUIEventBindingType.Activating,
+            "#ApplyButton",
+            EventData.of("Action", ACTION_APPLY).append("@MinScale", "#MinScale.Value").append("@MaxScale", "#MaxScale.Value")
+                .append("@ScaleMultiplier", "#ScaleMultiplier.Value").append("@ParticleMultiplier", "#ParticleMultiplier.Value")
+        );
         events.addEventBinding(CustomUIEventBindingType.Activating, "#ReloadButton", EventData.of("Action", ACTION_RELOAD));
         events.addEventBinding(CustomUIEventBindingType.Activating, "#DebugButton", EventData.of("Action", ACTION_DEBUG));
         events.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", ACTION_CLOSE));
@@ -208,15 +215,8 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
         return "Custom";
     }
 
-    private static float parseOrDefault(String value, float fallback) {
-        if (value == null || value.isBlank()) {
-            return fallback;
-        }
-        try {
-            return Float.parseFloat(value);
-        } catch (NumberFormatException e) {
-            return fallback;
-        }
+    private static float valueOrDefault(Float value, float fallback) {
+        return value == null ? fallback : value;
     }
 
     @Nonnull
@@ -228,17 +228,17 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
         public static final BuilderCodec<PageEventData> CODEC = BuilderCodec.builder(PageEventData.class, PageEventData::new)
             .append(new KeyedCodec<>("Action", Codec.STRING), (d, v) -> d.action = v, d -> d.action).add()
             .append(new KeyedCodec<>("Preset", Codec.STRING), (d, v) -> d.preset = v, d -> d.preset).add()
-            .append(new KeyedCodec<>("@MinScale", Codec.STRING), (d, v) -> d.minScale = v, d -> d.minScale).add()
-            .append(new KeyedCodec<>("@MaxScale", Codec.STRING), (d, v) -> d.maxScale = v, d -> d.maxScale).add()
-            .append(new KeyedCodec<>("@ScaleMultiplier", Codec.STRING), (d, v) -> d.scaleMultiplier = v, d -> d.scaleMultiplier).add()
-            .append(new KeyedCodec<>("@ParticleMultiplier", Codec.STRING), (d, v) -> d.particleMultiplier = v, d -> d.particleMultiplier).add()
+            .append(new KeyedCodec<>("@MinScale", Codec.FLOAT), (d, v) -> d.minScale = v, d -> d.minScale).add()
+            .append(new KeyedCodec<>("@MaxScale", Codec.FLOAT), (d, v) -> d.maxScale = v, d -> d.maxScale).add()
+            .append(new KeyedCodec<>("@ScaleMultiplier", Codec.FLOAT), (d, v) -> d.scaleMultiplier = v, d -> d.scaleMultiplier).add()
+            .append(new KeyedCodec<>("@ParticleMultiplier", Codec.FLOAT), (d, v) -> d.particleMultiplier = v, d -> d.particleMultiplier).add()
             .build();
 
         public String action;
         public String preset;
-        public String minScale;
-        public String maxScale;
-        public String scaleMultiplier;
-        public String particleMultiplier;
+        public Float minScale;
+        public Float maxScale;
+        public Float scaleMultiplier;
+        public Float particleMultiplier;
     }
 }
