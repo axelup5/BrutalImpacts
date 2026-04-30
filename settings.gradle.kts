@@ -6,7 +6,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Brutal Impacts (pre-release) v2.3.0"
+rootProject.name = "Brutal Impacts (pre-release) v2.3.2"
 
 plugins {
     // See documentation on https://scaffoldit.dev
@@ -30,7 +30,7 @@ hytale {
 
     manifest {
         Group = "Axelup"
-        Name = "Brutal Impacts"
+        Name = "Brutal Impacts (pre-release)"
         Main = "dev.hytalemodding.BrutalImpacts"
     }
 }

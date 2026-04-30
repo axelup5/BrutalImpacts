@@ -1,7 +1,7 @@
 {
     "Group": "Axelup",
     "Name": "Brutal Impacts (pre-release)",
-    "Version": "2.3.0",
+    "Version": "2.3.2",
     "Description": "Adds new particle effects and blood splatter when entities are hit, enhancing the visual impact of combat.",
     "Authors": [
         {
@@ -15,6 +15,6 @@
     "IncludesAssetPack": true,
     "Dependencies": {},
     "OptionalDependencies": {},
-    "ServerVersion": "2026.04.23-3f4475f43",
+    "ServerVersion": "2026.04.30-b4f6a911e",
     "Main": "dev.hytalemodding.BrutalImpacts"
 }
