@@ -3,44 +3,44 @@ $Common = "Common.ui";
 @PanelBackground = PatchStyle(Color: #141414);
 @SectionBackground = PatchStyle(Color: #1d1d1d);
 @SectionBorder = #7b1313;
-@SectionTitleStyle = LabelStyle(FontName: "Secondary", FontSize: 18, TextColor: #ffffff);
-@BodyLabelStyle = LabelStyle(FontSize: 12, TextColor: #f0f0f0);
-@MutedLabelStyle = LabelStyle(FontSize: 11, TextColor: #c7c7c7);
-@ValueLabelStyle = LabelStyle(FontName: "Mono", FontSize: 12, TextColor: #ffffff);
+@SectionTitleStyle = LabelStyle(FontName: "Secondary", FontSize: 20, TextColor: #ffffff);
+@BodyLabelStyle = LabelStyle(FontSize: 18, TextColor: #f0f0f0);
+@MutedLabelStyle = LabelStyle(FontSize: 18, TextColor: #c7c7c7);
+@ValueLabelStyle = LabelStyle(FontName: "Mono", FontSize: 18, TextColor: #ffffff);
 @ActionButtonStyle = TextButtonStyle(
     Default: (
         Background: PatchStyle(Color: #6f1111),
-        LabelStyle: (FontSize: 13, TextColor: #ffffff, RenderBold: true)
+        LabelStyle: (FontSize: 20, TextColor: #ffffff, RenderBold: true, Alignment: Center)
     ),
     Hovered: (
         Background: PatchStyle(Color: #8d1515),
-        LabelStyle: (FontSize: 13, TextColor: #ffffff, RenderBold: true)
+        LabelStyle: (FontSize: 20, TextColor: #ffffff, RenderBold: true, Alignment: Center)
     ),
     Pressed: (
         Background: PatchStyle(Color: #a91b1b),
-        LabelStyle: (FontSize: 13, TextColor: #ffffff, RenderBold: true)
+        LabelStyle: (FontSize: 20, TextColor: #ffffff, RenderBold: true, Alignment: Center)
     ),
     Disabled: (
         Background: PatchStyle(Color: #363636),
-        LabelStyle: (FontSize: 13, TextColor: #bababa, RenderBold: true)
+        LabelStyle: (FontSize: 20, TextColor: #bababa, RenderBold: true, Alignment: Center)
     )
 );
 @SecondaryButtonStyle = TextButtonStyle(
     Default: (
         Background: PatchStyle(Color: #292929),
-        LabelStyle: (FontSize: 13, TextColor: #ffffff, RenderBold: true)
+        LabelStyle: (FontSize: 20, TextColor: #ffffff, RenderBold: true, Alignment: Center)
     ),
     Hovered: (
         Background: PatchStyle(Color: #343434),
-        LabelStyle: (FontSize: 13, TextColor: #ffffff, RenderBold: true)
+        LabelStyle: (FontSize: 20, TextColor: #ffffff, RenderBold: true, Alignment: Center)
     ),
     Pressed: (
         Background: PatchStyle(Color: #404040),
-        LabelStyle: (FontSize: 13, TextColor: #ffffff, RenderBold: true)
+        LabelStyle: (FontSize: 20, TextColor: #ffffff, RenderBold: true, Alignment: Center)
     ),
     Disabled: (
         Background: PatchStyle(Color: #242424),
-        LabelStyle: (FontSize: 13, TextColor: #8e8e8e, RenderBold: true)
+        LabelStyle: (FontSize: 20, TextColor: #8e8e8e, RenderBold: true, Alignment: Center)
     )
 );
 @SliderTrack = PatchStyle(Color: #2a2a2a, Border: 1);
@@ -51,18 +51,18 @@ $Common = "Common.ui";
     Fill: @SliderFill,
     Handle: @SliderHandle,
     HandleWidth: 14,
-    HandleHeight: 24
+    HandleHeight: 38
 );
-@NumberStyle = InputFieldStyle(FontName: "Mono", FontSize: 12, TextColor: #ffffff);
+@NumberStyle = InputFieldStyle(FontName: "Mono", FontSize: 16, TextColor: #ffffff);
 
 Group {
     LayoutMode: Center;
     Background: #080808(0.88);
 
     Group #RootPanel {
-        Anchor: (Width: 860, Height: 700);
+        Anchor: (Width: 860, Height: 860);
         LayoutMode: Top;
-        Padding: (Left: 22, Top: 22, Right: 22, Bottom: 20);
+        Padding: (Left: 22, Top: 22, Right: 22, Bottom: 22);
         Background: @PanelBackground;
         OutlineColor: #9d1717;
         OutlineSize: 6;
@@ -83,21 +83,27 @@ Group {
                 }
 
                 Label #Subtitle {
-                    Text: "Tuning runtime de escala, densidad y depuracion de impactos";
-                    Style: (FontSize: 16, TextColor: #d4d4d4, Wrap: true);
-                    Anchor: (Height: 42);
+                    Text: "Welcome to the BrutalImpacts UI.";
+                    Style: @BodyLabelStyle;
+                    Anchor: (Height: 20);
+                }
+
+                Label #Subtitle2 {
+                    Text: "Here, you can customize your experience. You can also use the command shortcuts.";
+                    Style: @BodyLabelStyle;
+                    Anchor: (Height: 20);
                 }
             }
 
             Group #LogoFrame {
-                Anchor: (Width: 84, Height: 84);
+                Anchor: (Width: 100, Height: 100);
                 Background: #222222;
                 OutlineColor: #8b1414;
                 OutlineSize: 2;
-                Padding: (Left: 8, Top: 8, Right: 8, Bottom: 8);
+                Padding: (Left: 2, Top: 2, Right: 2, Bottom: 2);
 
                 AssetImage #Logo {
-                    AssetPath: "../../../icon-256.png";
+                    Background: PatchStyle(TexturePath: "icon-256.png");
                     Anchor: (Full: 0);
                     HitTestVisible: false;
                 }
@@ -113,7 +119,7 @@ Group {
             OutlineSize: 2;
 
             Label {
-                Text: "Perfiles";
+                Text: "Presets";
                 Style: @SectionTitleStyle;
                 Anchor: (Bottom: 10);
             }
@@ -146,20 +152,20 @@ Group {
                 Anchor: (Height: 24);
 
                 Label #PresetLabel {
-                    Text: "Perfil activo";
+                    Text: "Active Preset:";
                     Style: @MutedLabelStyle;
-                    Anchor: (Width: 92, Right: 10);
+                    Anchor: (Right: 10);
                 }
 
                 Label #PresetValue {
                     Style: @ValueLabelStyle;
-                    Anchor: (Width: 120, Right: 22);
+                    Anchor: (Right: 22);
                 }
 
                 Label #DebugLabel {
-                    Text: "Debug";
+                    Text: "Debug:";
                     Style: @MutedLabelStyle;
-                    Anchor: (Width: 48, Right: 10);
+                    Anchor: (Right: 10);
                 }
 
                 Label #DebugValue {
@@ -171,107 +177,88 @@ Group {
 
         Group #TuningSection {
             LayoutMode: Top;
-            Anchor: (Height: 372, Bottom: 12);
+            Anchor: (Height: 412, Bottom: 12);
             Padding: (Left: 14, Top: 12, Right: 14, Bottom: 12);
             Background: @SectionBackground;
             OutlineColor: @SectionBorder;
             OutlineSize: 2;
 
             Label {
-                Text: "Ajustes de impacto";
+                Text: "Impact Settings";
                 Style: @SectionTitleStyle;
                 Anchor: (Bottom: 8);
             }
 
             Label {
-                Text: "Los sliders guardan y aplican valores con dos decimales.";
-                Style: @MutedLabelStyle;
+                Text: "Using the sliders, you can adjust each variable individually to fine-tune the settings.";
+                Style: @BodyLabelStyle;
                 Anchor: (Bottom: 12);
             }
 
             Label #MinScaleLabel {
-                Text: "Escala minima";
+                Text: "Minimum Scale";
                 Style: @BodyLabelStyle;
                 Anchor: (Bottom: 4);
             }
 
             FloatSliderNumberField #MinScale {
-                Min: 0.05;
-                Max: 3.0;
-                Step: 0.05;
+                Min: 10;
+                Max: 800;
+                Step: 1;
                 NumberFieldMaxDecimalPlaces: 2;
                 SliderStyle: @TuningSliderStyle;
                 NumberFieldStyle: @NumberStyle;
-                Anchor: (Height: 38, Bottom: 4);
-            }
-
-            Label #MinScaleValue {
-                Style: @MutedLabelStyle;
-                Anchor: (Bottom: 12);
+                Anchor: (Height: 38, Bottom: 16);
             }
 
             Label #MaxScaleLabel {
-                Text: "Escala maxima";
+                Text: "Maximum Scale";
                 Style: @BodyLabelStyle;
                 Anchor: (Bottom: 4);
             }
 
             FloatSliderNumberField #MaxScale {
-                Min: 0.10;
-                Max: 5.0;
-                Step: 0.05;
+                Min: 10;
+                Max: 800;
+                Step: 1;
                 NumberFieldMaxDecimalPlaces: 2;
                 SliderStyle: @TuningSliderStyle;
                 NumberFieldStyle: @NumberStyle;
-                Anchor: (Height: 38, Bottom: 4);
-            }
-
-            Label #MaxScaleValue {
-                Style: @MutedLabelStyle;
-                Anchor: (Bottom: 12);
+                Anchor: (Height: 38, Bottom: 16);
             }
 
             Label #ScaleMultiplierLabel {
-                Text: "Multiplicador global de escala";
+                Text: "Global Scale Multiplier";
                 Style: @BodyLabelStyle;
                 Anchor: (Bottom: 4);
             }
 
             FloatSliderNumberField #ScaleMultiplier {
-                Min: 0.10;
-                Max: 3.0;
-                Step: 0.05;
+                Min: 10;
+                Max: 500;
+                Step: 1;
                 NumberFieldMaxDecimalPlaces: 2;
                 SliderStyle: @TuningSliderStyle;
                 NumberFieldStyle: @NumberStyle;
-                Anchor: (Height: 38, Bottom: 4);
-            }
-
-            Label #ScaleMultiplierValue {
-                Style: @MutedLabelStyle;
-                Anchor: (Bottom: 12);
+                Anchor: (Height: 38, Bottom: 16);
             }
 
             Label #ParticleMultiplierLabel {
-                Text: "Multiplicador global de particulas";
+                Text: "Global Particle Multiplier";
                 Style: @BodyLabelStyle;
                 Anchor: (Bottom: 4);
             }
 
             FloatSliderNumberField #ParticleMultiplier {
-                Min: 0.10;
-                Max: 3.0;
-                Step: 0.05;
+                Min: 10;
+                Max: 500;
+                Step: 1;
                 NumberFieldMaxDecimalPlaces: 2;
                 SliderStyle: @TuningSliderStyle;
                 NumberFieldStyle: @NumberStyle;
-                Anchor: (Height: 38, Bottom: 4);
+                Anchor: (Height: 38, Bottom: 16);
             }
 
-            Label #ParticleMultiplierValue {
-                Style: @MutedLabelStyle;
-                Anchor: (Bottom: 0);
-            }
         }
 
         Group #ActionSection {
@@ -287,13 +274,13 @@ Group {
                 Anchor: (Height: 42, Bottom: 10);
 
                 TextButton #ApplyButton {
-                    Text: "Aplicar";
+                    Text: "Apply";
                     Style: @ActionButtonStyle;
                     Anchor: (Width: 140, Right: 10);
                 }
 
                 TextButton #ReloadButton {
-                    Text: "Recargar JSON";
+                    Text: "Reload JSON";
                     Style: @SecondaryButtonStyle;
                     Anchor: (Width: 170, Right: 10);
                 }
@@ -305,14 +292,14 @@ Group {
                 }
 
                 TextButton #CloseButton {
-                    Text: "Cerrar";
+                    Text: "Close";
                     Style: @SecondaryButtonStyle;
                     Anchor: (Width: 120);
                 }
             }
 
             Label #StatusText {
-                Style: (FontSize: 12, TextColor: #f3d6d6, Wrap: true);
+                Style: @MutedLabelStyle;
                 Anchor: (Height: 54);
             }
         }
