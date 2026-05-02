@@ -81,10 +81,10 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
                 try {
                     this.tuningStore.save(next);
                     this.populate(update);
-                    this.setStatus(update, "Ajustes guardados y aplicados.");
+                    this.setStatus(update, "Settings saved and applied.");
                 } catch (IOException e) {
                     this.populate(update);
-                    this.setStatus(update, "No se pudo guardar USER_RuntimeSettings.json: " + e.getMessage());
+                    this.setStatus(update, "Could not save USER_RuntimeSettings.json: " + e.getMessage());
                 }
             }
             case ACTION_PRESET -> {
@@ -98,10 +98,10 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
                 try {
                     this.tuningStore.save(preset);
                     this.populate(update);
-                    this.setStatus(update, "Perfil " + this.currentPresetName() + " aplicado.");
+                    this.setStatus(update, "Preset " + this.currentPresetName() + " applied.");
                 } catch (IOException e) {
                     this.populate(update);
-                    this.setStatus(update, "No se pudo guardar el perfil: " + e.getMessage());
+                    this.setStatus(update, "Could not save the preset: " + e.getMessage());
                 }
             }
             case ACTION_RELOAD -> {
@@ -110,7 +110,7 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
                     BrutalImpactsTuningSettings loaded = this.tuningStore.load().normalized();
                     this.particleSystem.applyTuningSettings(loaded);
                 } catch (IOException e) {
-                    status = status + " Ajustes runtime: error al recargar (" + e.getMessage() + ").";
+                    status = status + "Runtime settings: error reloading (" + e.getMessage() + ").";
                 }
 
                 this.populate(update);
@@ -186,14 +186,14 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
         commands.set("#ScaleMultiplier.Value", settings.scaleMultiplier());
         commands.set("#ParticleMultiplier.Value", settings.particleMultiplier());
 
-        commands.set("#MinScaleValue.Text", format(settings.minScale()));
-        commands.set("#MaxScaleValue.Text", format(settings.maxScale()));
-        commands.set("#ScaleMultiplierValue.Text", format(settings.scaleMultiplier()));
-        commands.set("#ParticleMultiplierValue.Text", format(settings.particleMultiplier()));
+        //commands.set("#MinScaleValue.Text", format(settings.minScale()));
+        //commands.set("#MaxScaleValue.Text", format(settings.maxScale()));
+        //commands.set("#ScaleMultiplierValue.Text", format(settings.scaleMultiplier()));
+        //commands.set("#ParticleMultiplierValue.Text", format(settings.particleMultiplier()));
 
         commands.set("#PresetValue.Text", this.currentPresetName());
         commands.set("#DebugValue.Text", this.particleSystem.isDebugEnabled() ? "ON" : "OFF");
-        commands.set("#StatusText.Text", "Listo.");
+        commands.set("#StatusText.Text", "Done.");
     }
 
     private void setStatus(@Nonnull UICommandBuilder commands, @Nonnull String text) {
