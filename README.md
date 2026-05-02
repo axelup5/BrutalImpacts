@@ -1,5 +1,46 @@
 ![banner](media/BrutalImpacts_Banner.png)
 
+✨ Brand New User Interface (UI)
+
+Your experience just leveled up. The mod now features an intuitive User Interface, making configuration faster, clearer, and more enjoyable than ever.
+
+/brutalimpactsui
+
+![UI](media/UI_Settings.gif)
+
+---
+
+🖱️ New Preset Styles
+
+Inside the new UI, you’ll find three one-click presets to instantly match your preferred particle style:
+
+* Clean – A vanilla-like style.
+* Normal – Balanced visuals for everyday gameplay.
+* Brutal – Maximum intensity for a dramatic and violent experience.
+
+Switch between them anytime and find the vibe that fits your playstyle.
+
+---
+
+⚙️ Advanced Customization Options
+
+Take full control over how your particles behave with new adjustable parameters:
+
+* Minimum Scale: Sets the lower bound for particle size.
+* Maximum Scale: Defines the upper bound for particle size.
+* Global Scale Multiplier: This acts as a sensitivity factor, scaling particle size dynamically based on the intensity of the hit.
+* Particle Multiplier: Determines how many particle spawners are triggered per damage event.
+
+Fine-tune your visuals, push the limits, and make every hit feel exactly the way you want.
+
+---
+
+🔥 Now it reacts to damage!!🔥
+
+As you can see, the more damage is caused, the greater the number and scale of the particle effects will be.
+
+![scale](media/Mannequin_DamageScale_1.gif)
+
 # Brutal Impacts
 
 Brutal Impacts is a Hytale server mod that adds **extra impact particles** when entities take damage.
@@ -56,9 +97,7 @@ After editing any JSON file, reload rules in-game:
 
 You can toggle verbose debug output in-game with:
 
-- `/brutalimpacts debug`
-- `/brutalimpacts debug on`
-- `/brutalimpacts debug off`
+- `/brutalimpacts --debug`
 
 ### Default Particles
 
