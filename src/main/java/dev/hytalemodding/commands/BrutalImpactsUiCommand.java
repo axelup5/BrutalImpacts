@@ -3,8 +3,10 @@ package dev.hytalemodding.commands;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
+import com.hypixel.hytale.server.core.command.system.CommandSender;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.modules.singleplayer.SingleplayerModule;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -13,6 +15,7 @@ import dev.hytalemodding.systems.BrutalImpactsParticleSystem;
 import dev.hytalemodding.ui.BrutalImpactsSettingsPage;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public final class BrutalImpactsUiCommand extends AbstractPlayerCommand {
 
@@ -30,6 +33,19 @@ public final class BrutalImpactsUiCommand extends AbstractPlayerCommand {
         this.particleSystem = particleSystem;
         this.tuningStore = tuningStore;
         this.brutalImpactsCommand = brutalImpactsCommand;
+    }
+
+    @Override
+    public boolean hasPermission(CommandSender sender) {
+        if (super.hasPermission(sender)) {
+            return true;
+        }
+
+        if (sender instanceof Player) {
+            return Objects.equals(sender.getUuid(), SingleplayerModule.getUuid());
+        }
+
+        return false;
     }
 
     @Override
