@@ -1,14 +1,14 @@
 {
   "Spawners": [
     {
-      "SpawnerId": "Block_Land_Hard_Leaves_Needles",
+      "SpawnerId": "BrutalImpacts_Fur",
       "PositionOffset": {
         "X": 0.0,
         "Z": 0
       }
     },
     {
-      "SpawnerId": "Block_Break_Leaves_Needles_Up"
+      "SpawnerId": "BrutalImpacts_Fur_Up"
     }
   ]
 }

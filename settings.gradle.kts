@@ -6,7 +6,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Brutal Impacts v2.3.3"
+rootProject.name = "Brutal Impacts v2.3.4"
 
 plugins {
     // See documentation on https://scaffoldit.dev

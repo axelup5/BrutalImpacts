@@ -1,7 +1,7 @@
 package dev.hytalemodding.api;
 
 import com.hypixel.hytale.protocol.Color;
-import com.hypixel.hytale.protocol.Vector3f;
+import org.joml.Vector3f;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -14,24 +14,20 @@
       "Max": 0.2
     }
   },
-  "ParticleRotationInfluence": "Billboard",
-  "LinearFiltering": false,
+  "ParticleRotationInfluence": "BillboardVelocity",
+  "LinearFiltering": true,
   "ParticleRotateWithSpawner": false,
   "TrailSpawnerPositionMultiplier": 1,
   "TrailSpawnerRotationMultiplier": 1,
-  "MaxConcurrentParticles": 30,
+  "MaxConcurrentParticles": 20,
   "ParticleLifeSpan": {
-    "Min": 0.2,
-    "Max": 0.3
-  },
-  "TotalParticles": {
-    "Min": 1,
-    "Max": 2
+    "Min": 0.15,
+    "Max": 0.2
   },
   "InitialVelocity": {
     "Speed": {
-      "Min": 3,
-      "Max": 4
+      "Min": 4,
+      "Max": 5
     },
     "Yaw": {
       "Min": 0.0,
@@ -43,43 +39,38 @@
     }
   },
   "Particle": {
-    "Texture": "Particles/Textures/Rnd/Sauce_Splash.png",
-    "UVOption": "RandomFlipUV",
+    "Texture": "Particles/Textures/Basic/Flash_Spritesheet5.png",
+    "ScaleRatioConstraint": "OneToOne",
     "Animation": {
       "0": {},
       "40": {},
-      "70": {
-        "FrameIndex": {
-          "Min": 0,
-          "Max": 0
-        }
-      },
-      "90": {}
+      "60": {},
+      "85": {}
     },
     "InitialAnimationFrame": {
-      "FrameIndex": {
-        "Min": 0,
-        "Max": 3
+      "Rotation": {
+        "Z": {
+          "Min": -180,
+          "Max": -180
+        }
       },
       "Scale": {
         "X": {
-          "Min": 0.05,
-          "Max": 0.15
+          "Min": 0.075,
+          "Max": 0.1
         }
       },
-      "Rotation": {
-        "Z": {
-          "Min": 180.0,
-          "Max": 180.0
-        }
-      },
-      "Opacity": 1
+      "FrameIndex": {
+        "Min": 0,
+        "Max": 3
+      }
     },
     "SoftParticles": "Disable",
     "FrameSize": {
       "Width": 64,
       "Height": 64
-    }
+    },
+    "UVOption": "RandomFlipU"
   },
   "SpawnBurst": true,
   "UseEmitDirection": true,
@@ -89,11 +80,15 @@
         "X": 0.8,
         "Y": 0.8,
         "Z": 0.8
-      },
-      "LinearAcceleration": {
-        "Y": -4
       }
     }
   ],
-  "LightInfluence": 0.4
+  "IntersectionHighlight": {
+    "HighlightThreshold": 0
+  },
+  "LightInfluence": 1,
+  "TotalParticles": {
+    "Min": 1,
+    "Max": 1
+  }
 }

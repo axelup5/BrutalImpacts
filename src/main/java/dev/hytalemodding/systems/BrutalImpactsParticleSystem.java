@@ -8,13 +8,13 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.SystemGroup;
 import com.hypixel.hytale.component.dependency.Dependency;
 import com.hypixel.hytale.component.dependency.SystemDependency;
-import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.math.vector.Vector4d;
+import org.joml.Vector3d;
+import org.joml.Vector4d;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.math.util.TrigMathUtil;
 import com.hypixel.hytale.protocol.Color;
 import com.hypixel.hytale.protocol.Direction;
-import com.hypixel.hytale.protocol.Vector3f;
+import org.joml.Vector3f;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.particle.config.WorldParticle;
@@ -279,7 +279,10 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
         if (damage.getSource() instanceof Damage.EntitySource sourceEntity) {
             Player player = commandBuffer.getComponent(sourceEntity.getRef(), Player.getComponentType());
             if (player != null) {
-                player.sendMessage(Message.raw("[BrutalImpacts] " + msg + " (source=" + sourceType + ")"));
+                PlayerRef playerRef = player.getPlayerRef();
+                if (playerRef != null) {
+                    playerRef.sendMessage(Message.raw("[BrutalImpacts] " + msg + " (source=" + sourceType + ")"));
+                }
             }
         }
     }
