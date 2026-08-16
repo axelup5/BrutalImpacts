@@ -1,5 +1,5 @@
 {
-  "RenderMode": "Erosion",
+  "RenderMode": "BlendLinear",
   "EmitOffset": {
     "X": {
       "Min": 0.2,
@@ -19,19 +19,19 @@
   "ParticleRotateWithSpawner": false,
   "TrailSpawnerPositionMultiplier": 1,
   "TrailSpawnerRotationMultiplier": 1,
-  "MaxConcurrentParticles": 25,
+  "MaxConcurrentParticles": 30,
   "ParticleLifeSpan": {
-    "Min": 0.2,
-    "Max": 0.25
+    "Min": 0.15,
+    "Max": 0.2
   },
   "TotalParticles": {
-    "Min": 4,
-    "Max": 6
+    "Min": 6,
+    "Max": 7
   },
   "InitialVelocity": {
     "Speed": {
-      "Min": 3.0,
-      "Max": 4
+      "Min": 3,
+      "Max": 5
     },
     "Yaw": {
       "Min": 0.0,
@@ -43,46 +43,38 @@
     }
   },
   "Particle": {
-    "Texture": "Particles/Textures/Rnd/Water_Splash_Test4.png",
-    "UVOption": "RandomFlipU",
+    "Texture": "Particles/Textures/Rnd/Drops3.png",
+    "UVOption": "RandomFlipUV",
     "Animation": {
-      "0": {},
+      "0": {
+        "FrameIndex": {
+          "Max": 3
+        }
+      },
       "25": {
         "FrameIndex": {
-          "Min": 1,
-          "Max": 1
+          "Max": 3
         }
       },
-      "45": {
+      "50": {
         "FrameIndex": {
-          "Min": 2,
-          "Max": 2
-        }
-      },
-      "60": {
-        "FrameIndex": {
-          "Min": 3,
           "Max": 3
         }
       },
       "75": {
         "FrameIndex": {
-          "Min": 4,
-          "Max": 4
-        }
-      },
-      "90": {
-        "FrameIndex": {
-          "Min": 5,
-          "Max": 5
+          "Max": 3
         }
       }
     },
     "InitialAnimationFrame": {
+      "FrameIndex": {
+        "Min": 0
+      },
       "Scale": {
         "X": {
-          "Min": 0.1,
-          "Max": 0.15
+          "Min": 0.03,
+          "Max": 0.04
         }
       },
       "Rotation": {
@@ -91,17 +83,13 @@
           "Max": 180.0
         }
       },
-      "Opacity": 1,
-      "FrameIndex": {
-        "Min": 0,
-        "Max": 0
-      }
+      "Opacity": 1
     },
+    "SoftParticles": "Disable",
     "FrameSize": {
-      "Width": 128,
-      "Height": 128
-    },
-    "SoftParticles": "Disable"
+      "Width": 64,
+      "Height": 64
+    }
   },
   "SpawnBurst": true,
   "UseEmitDirection": true,
@@ -113,5 +101,6 @@
         "Z": 0.8
       }
     }
-  ]
+  ],
+  "LightInfluence": 0.4
 }

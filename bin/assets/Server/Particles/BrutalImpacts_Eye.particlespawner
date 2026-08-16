@@ -9,10 +9,6 @@
     "X": {
       "Min": -0.1,
       "Max": 0.1
-    },
-    "Z": {
-      "Min": -0.1,
-      "Max": 0.1
     }
   },
   "ParticleRotationInfluence": "Billboard",
@@ -27,14 +23,13 @@
     "Min": 25,
     "Max": 30
   },
-  "TotalParticles": {
-    "Min": 1,
-    "Max": 2
-  },
   "Attractors": [
     {
-      "Radius": 2,
-      "RadialImpulse": 25
+      "Radius": 2.5,
+      "RadialImpulse": 25,
+      "LinearImpulse": {
+        "Z": -8
+      }
     }
   ],
   "Particle": {
@@ -114,5 +109,10 @@
     }
   },
   "SpawnBurst": false,
-  "IsLowRes": false
+  "IsLowRes": false,
+  "TotalParticles": {
+    "Min": 1,
+    "Max": 1
+  },
+  "UseEmitDirection": true
 }

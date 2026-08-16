@@ -63,7 +63,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 255, "g": 255, "b": 255 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.5, "z": 0}
         }
       ]
     },
@@ -529,7 +530,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 246, "g": 88, "b": 11 },
-          "scale": 1.6
+          "scale": 1.6,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Fire",
@@ -539,7 +541,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 246, "g": 88, "b": 11 },
-          "scale": 0.7
+          "scale": 0.7,
+          "fixedScale": true
         }
       ]
     },
@@ -954,7 +957,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 255, "g": 220, "b": 100 },
-          "scale": 0.5
+          "scale": 0.5,
+          "fixedScale": true
         }
       ]
     },
@@ -975,6 +979,12 @@
           "particleSystemId": "BrutalImpacts_Hit_Metal",
           "color": { "r": 75, "g": 75, "b": 75 },
           "scale": 0.5
+        },
+        {
+          "particleSystemId": "BrutalImpacts_Hit_Smoke",
+          "color": { "r": 30, "g": 30, "b": 30 },
+          "scale": 0.2,
+          "offset": { "x": 0, "y": -0.5, "z": 0}
         }
       ]
     },
@@ -1039,7 +1049,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 77, "g": 179, "b": 77 },
-          "scale": 2.5
+          "scale": 2.5,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
@@ -1059,7 +1070,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 208, "g": 88, "b": 44 },
-          "scale": 2.5
+          "scale": 2.5,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
@@ -1079,7 +1091,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 24, "g": 127, "b": 201 },
-          "scale": 2.5
+          "scale": 2.5,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
@@ -1104,7 +1117,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 88, "g": 229, "b": 255 },
-          "scale": 2.5
+          "scale": 2.5,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
@@ -1124,7 +1138,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 193, "g": 169, "b": 76 },
-          "scale": 2.5
+          "scale": 2.5,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
@@ -1159,7 +1174,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 255, "g": 161, "b": 32 },
-          "scale": 2
+          "scale": 2,
+          "fixedScale": true
         }
       ]
     },
@@ -1196,7 +1212,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 255, "g": 222, "b": 45 },
-          "scale": 1
+          "scale": 1,
+          "offset": { "x": 0, "y": -1.5, "z": 0}
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
@@ -1437,7 +1454,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 30, "g": 30, "b": 30 },
-          "scale": 0.2
+          "scale": 0.2,
+          "offset": { "x": 0, "y": -0.5, "z": 0 }
         }
       ]
     },
@@ -1813,7 +1831,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 167, "g": 179, "b": 34 },
-          "scale": 1.5
+          "scale": 1.5,
+          "fixedScale": true
         }
       ]
     },
@@ -1898,7 +1917,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 157, "g": 255, "b": 70 },
-          "scale": 0.8
+          "scale": 0.8,
+          "fixedScale": true
         }
       ]
     },
@@ -1998,7 +2018,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 157, "g": 255, "b": 70 },
-          "scale": 0.5
+          "scale": 0.5,
+          "fixedScale": true
         }
       ]
     },
@@ -2650,7 +2671,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 157, "g": 255, "b": 70 },
-          "scale": 0.4
+          "scale": 0.4,
+          "fixedScale": true
         }
       ]
     },
@@ -2670,7 +2692,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Liquid",
           "color": { "r": 188, "g": 255, "b": 59 },
-          "scale": 0.6
+          "scale": 0.6,
+          "offset": {"x": 0, "y": -0.4, "z": 0 }
         }
       ]
     },
@@ -2820,7 +2843,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 255, "g": 122, "b": 255 },
-          "scale": 0.7
+          "scale": 0.7,
+          "fixedScale": true
         }
       ]
     },
@@ -2855,7 +2879,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -2880,7 +2905,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -2900,7 +2926,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -2925,7 +2952,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -2945,12 +2973,14 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 147, "g": 255, "b": 255 },
-          "scale": 0.4
+          "scale": 0.4,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -2975,7 +3005,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -2995,7 +3026,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -3020,7 +3052,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -3035,12 +3068,14 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 255, "g": 85, "b": 70 },
-          "scale": 2
+          "scale": 2,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 46, "g": 41, "b": 40 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -3055,7 +3090,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 255, "g": 85, "b": 70 },
-          "scale": 2
+          "scale": 2,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Metal",
@@ -3065,7 +3101,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 46, "g": 41, "b": 40 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -3080,7 +3117,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 255, "g": 85, "b": 70 },
-          "scale": 2
+          "scale": 2,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Liquid",
@@ -3090,7 +3128,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 46, "g": 41, "b": 40 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.3, "z": 0 }
         }
       ]
     },
@@ -3105,7 +3144,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 255, "g": 85, "b": 70 },
-          "scale": 0.5
+          "scale": 0.5,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Flesh",
@@ -3115,7 +3155,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 46, "g": 41, "b": 40 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -3150,7 +3191,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Aura",
           "color": { "r": 157, "g": 255, "b": 70 },
-          "scale": 0.4
+          "scale": 0.4,
+          "fixedScale": true
         }
       ]
     },
@@ -3245,7 +3287,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 189, "g": 169, "b": 139 },
-          "scale": 1
+          "scale": 1,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Flesh",
@@ -3265,7 +3308,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 189, "g": 169, "b": 139 },
-          "scale": 1
+          "scale": 1,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Flesh",
@@ -3290,7 +3334,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 189, "g": 169, "b": 139 },
-          "scale": 1
+          "scale": 1,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Flesh",
@@ -3310,7 +3355,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 189, "g": 169, "b": 139 },
-          "scale": 1
+          "scale": 1,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Flesh",
@@ -3330,7 +3376,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 189, "g": 169, "b": 139 },
-          "scale": 1
+          "scale": 1,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Flesh",
@@ -3355,7 +3402,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 189, "g": 169, "b": 139 },
-          "scale": 1
+          "scale": 1,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Flesh",
@@ -3380,7 +3428,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 189, "g": 169, "b": 139 },
-          "scale": 1
+          "scale": 1,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Flesh",
@@ -3400,7 +3449,8 @@
         {
           "particleSystemId": "Block_Hit_Sand",
           "color": { "r": 189, "g": 169, "b": 139 },
-          "scale": 1
+          "scale": 1,
+          "fixedScale": true
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Metal",
@@ -3517,7 +3567,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.3, "z": 0 }
         }
       ]
     },
@@ -3537,7 +3588,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 30, "g": 30, "b": 30 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.3, "z": 0 }
         }
       ]
     },
@@ -3690,7 +3742,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Fire_Color",
           "color": { "r": 143, "g": 120, "b": 185 },
-          "scale": 0.5
+          "scale": 0.5,
+          "offset": { "x": 0, "y": -0.1, "z": 0 }
         }
       ]
     },
@@ -3740,7 +3793,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 30, "g": 30, "b": 30 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.3, "z": 0 }
         },
         {
           "particleSystemId": "BrutalImpacts_Hit_Fire",
@@ -3760,7 +3814,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.3, "z": 0 }
         }
       ]
     },
@@ -4587,7 +4642,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 30, "g": 30, "b": 30 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -4612,7 +4668,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 183, "g": 229, "b": 238 },
-          "scale": 0.3
+          "scale": 0.3,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     },
@@ -4637,7 +4694,8 @@
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",
           "color": { "r": 219, "g": 178, "b": 90 },
-          "scale": 0.25
+          "scale": 0.25,
+          "offset": { "x": 0, "y": -0.7, "z": 0 }
         }
       ]
     }
