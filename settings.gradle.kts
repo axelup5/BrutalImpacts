@@ -6,11 +6,11 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Brutal Impacts (pre-release) v2.3.3"
+rootProject.name = "Brutal Impacts (pre-release) v2.3.4"
 
 plugins {
     // See documentation on https://scaffoldit.dev
-    id("dev.scaffoldit") version "0.2.14"
+    id("dev.scaffoldit") version "0.2.16"
 }
 
 // Would you like to do a split project?
