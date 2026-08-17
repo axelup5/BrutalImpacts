@@ -8,7 +8,6 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.server.core.Message;
-import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
@@ -63,7 +62,7 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
 
     @Override
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, @Nonnull PageEventData data) {
-        Player player = store.getComponent(ref, Player.getComponentType());
+        PlayerRef playerRef = store.getComponent(ref, PlayerRef.getComponentType());
         UICommandBuilder update = new UICommandBuilder();
 
         String action = data.action == null ? "" : data.action;
@@ -115,8 +114,8 @@ public final class BrutalImpactsSettingsPage extends InteractiveCustomUIPage<Bru
 
                 this.populate(update);
                 this.setStatus(update, status);
-                if (player != null && player.getPlayerRef() != null) {
-                    player.getPlayerRef().sendMessage(Message.raw("[BrutalImpacts] " + status));
+                if (playerRef != null) {
+                    playerRef.sendMessage(Message.raw("[BrutalImpacts] " + status));
                 }
             }
             case ACTION_DEBUG -> {

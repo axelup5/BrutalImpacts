@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import com.google.gson.Strictness;
 import com.google.gson.stream.JsonReader;
 import org.joml.Vector3f;
 
@@ -154,7 +155,7 @@ public final class HitParticleRulesJson {
         JsonObject root;
         try {
             JsonReader jsonReader = new JsonReader(reader);
-            jsonReader.setLenient(true);
+            jsonReader.setStrictness(Strictness.LENIENT);
             JsonElement rootEl = JsonParser.parseReader(jsonReader);
             root = rootEl != null && rootEl.isJsonObject() ? rootEl.getAsJsonObject() : new JsonObject();
         } catch (JsonParseException e) {

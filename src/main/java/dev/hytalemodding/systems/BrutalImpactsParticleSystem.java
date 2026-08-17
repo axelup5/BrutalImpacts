@@ -18,7 +18,7 @@ import org.joml.Vector3f;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.particle.config.WorldParticle;
-import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.modules.entity.damage.Damage;
 import com.hypixel.hytale.server.core.modules.entity.damage.DamageEventSystem;
@@ -277,12 +277,9 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
         System.out.println("[BrutalImpacts] " + msg + " (source=" + sourceType + ")");
 
         if (damage.getSource() instanceof Damage.EntitySource sourceEntity) {
-            Player player = commandBuffer.getComponent(sourceEntity.getRef(), Player.getComponentType());
-            if (player != null) {
-                PlayerRef playerRef = player.getPlayerRef();
-                if (playerRef != null) {
-                    playerRef.sendMessage(Message.raw("[BrutalImpacts] " + msg + " (source=" + sourceType + ")"));
-                }
+            PlayerRef playerRef = commandBuffer.getComponent(sourceEntity.getRef(), PlayerRef.getComponentType());
+            if (playerRef != null) {
+                playerRef.sendMessage(Message.raw("[BrutalImpacts] " + msg + " (source=" + sourceType + ")"));
             }
         }
     }
@@ -433,11 +430,8 @@ public class BrutalImpactsParticleSystem extends DamageEventSystem {
                     rotation = new ImpactRotation(yawToSource, TrigMathUtil.PI, pitchAway);
                 }
 
-                Player player = commandBuffer.getComponent(sourceRef, Player.getComponentType());
-                if (player != null) {
-                    ItemStack inHand = player.getInventory() == null ? null : player.getInventory().getItemInHand();
-                    weaponItemId = inHand == null || !inHand.isValid() ? null : inHand.getItemId();
-                }
+                ItemStack inHand = InventoryComponent.getItemInHand(commandBuffer, sourceRef);
+                weaponItemId = inHand == null || !inHand.isValid() ? null : inHand.getItemId();
             }
         }
 
