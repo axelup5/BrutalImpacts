@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import com.google.gson.Strictness;
 import com.google.gson.stream.JsonReader;
 
 import javax.annotation.Nonnull;
@@ -56,7 +57,7 @@ public final class WeaponTuningRulesJson {
     private static JsonObject parseRoot(@Nonnull Reader reader) {
         try {
             JsonReader jsonReader = new JsonReader(reader);
-            jsonReader.setLenient(true);
+            jsonReader.setStrictness(Strictness.LENIENT);
             JsonElement rootEl = JsonParser.parseReader(jsonReader);
             return rootEl != null && rootEl.isJsonObject() ? rootEl.getAsJsonObject() : new JsonObject();
         } catch (JsonParseException e) {

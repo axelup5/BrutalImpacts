@@ -4,6 +4,7 @@
 
 import org.gradle.language.jvm.tasks.ProcessResources
 import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.api.tasks.compile.JavaCompile
 
 repositories {
     // Any external repositories besides: MavenLocal, MavenCentral, HytaleMaven, and CurseMaven
@@ -11,6 +12,11 @@ repositories {
 
 dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
+}
+
+// Keep API migrations visible as Hytale's pre-release server evolves.
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs.add("-Xlint:deprecation")
 }
 
 // Include the local Hytale asset pack in the produced JAR so the server can load it from the mod.
