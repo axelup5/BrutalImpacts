@@ -33,6 +33,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# IDE/compiler output. Sources live in src/ and assets/.
+/bin/
+
 ### VS Code ###
 .vscode/
 

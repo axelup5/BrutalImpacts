@@ -1,8 +1,0 @@
-{
-  "Spawners": [
-    {
-      "SpawnerId": "BrutalImpacts_Eye",
-      "FixedRotation": false
-    }
-  ]
-}
