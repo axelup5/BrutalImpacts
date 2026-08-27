@@ -51,6 +51,7 @@ public class BrutalImpactsCommand extends AbstractCommand {
         @Nonnull Path dataDir
     ) {
         super("brutalimpacts", "Manage Brutal Impacts (reload JSON rules / set fallback particle).");
+        this.requirePermission("axelup.brutalimpacts.command.brutalimpacts");
         this.particlesSystem = particlesSystem;
         this.weaponTuningRegistry = weaponTuningRegistry;
         this.tuningStore = tuningStore;
