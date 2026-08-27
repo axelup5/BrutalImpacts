@@ -5,6 +5,7 @@
 import org.gradle.language.jvm.tasks.ProcessResources
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.jvm.tasks.Jar
 
 repositories {
     // Any external repositories besides: MavenLocal, MavenCentral, HytaleMaven, and CurseMaven
@@ -30,4 +31,34 @@ tasks.named<ProcessResources>("processResources") {
 
     // In case other tooling also contributes the same files, avoid failing the build.
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Keep publishable JARs outside build/, because `clean` deletes that directory.
+// Rebuilding the same version overwrites its archived JAR; changing the version
+// produces a different filename and therefore preserves previous releases.
+val jarTask = tasks.named<Jar>("jar")
+val releaseDirectory = layout.projectDirectory.dir("releases")
+
+val archiveRelease by tasks.registering {
+    group = "build"
+    description = "Copies the versioned mod JAR to the persistent releases directory."
+    dependsOn(jarTask)
+
+    val sourceJar = jarTask.flatMap { it.archiveFile }
+    val archivedJar = sourceJar.map { releaseDirectory.file(it.asFile.name) }
+
+    inputs.file(sourceJar)
+    outputs.file(archivedJar)
+
+    doLast {
+        val source = sourceJar.get().asFile
+        val destination = archivedJar.get().asFile
+        destination.parentFile.mkdirs()
+        source.copyTo(destination, overwrite = true)
+        logger.lifecycle("Archived release: ${destination.absolutePath}")
+    }
+}
+
+tasks.named("build") {
+    dependsOn(archiveRelease)
 }

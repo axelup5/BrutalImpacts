@@ -36,6 +36,9 @@ build/
 # IDE/compiler output. Sources live in src/ and assets/.
 /bin/
 
+# Persistent local release archive. Upload selected JARs manually.
+/releases/
+
 ### VS Code ###
 .vscode/
 
