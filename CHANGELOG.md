@@ -51,6 +51,8 @@ The release JAR additionally passed a Java smoke check against the actual 0.7.4 
 
 The pre-release JAR passed the same Java configuration and packaging checks against the actual 0.8.0-pre.2.1 server artifact, including its `ParticleOffset` API. Hytale's SemVer parser accepted 0.8.0-pre.2.1 and rejected 0.8.0-pre.2 and the final 0.8.0 release. Its particle/spawner/texture reference check used the available 0.7.4 asset pack as a baseline; this does not validate the unavailable 0.8.0-pre.2.1 client assets.
 
+The 0.7.4 server also completed an isolated `--bare --shutdown-after-validate` asset-loading run with the release JAR, exiting with code 0. The plugin created its configuration files and registered during setup. This run opened no listening ports and loaded no worlds. The server emitted warnings about vanilla assets. A separate `--validate-assets` run was stopped while validating the chunks of bundled vanilla instances; full vanilla world validation is not claimed as passing. Neither run replaces an in-game combat/UI test.
+
 ## Official references
 
 - [Release Maven metadata](https://maven.hytale.com/release/com/hypixel/hytale/Server/maven-metadata.xml)
