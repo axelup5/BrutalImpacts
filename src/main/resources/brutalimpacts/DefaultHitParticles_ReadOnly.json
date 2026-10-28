@@ -3732,7 +3732,7 @@
       ]
     },
     {
-      "match": { "type": "exact", "value": "Spectre_Void" },
+      "match": { "type": "exact", "value": "Void_Spectre" },
       "effects": [
         {
           "particleSystemId": "BrutalImpacts_Hit_Smoke",

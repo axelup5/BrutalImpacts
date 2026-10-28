@@ -6,7 +6,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Brutal Impacts v2.4.0"
+rootProject.name = "Brutal Impacts v2.5.0"
 
 plugins {
     // See documentation on https://scaffoldit.dev
@@ -18,7 +18,7 @@ plugins {
 
 hytale {
     usePatchline("release")
-    useVersion("latest")
+    useVersion("0.7.4")
 
     repositories {
         // Any external repositories besides: MavenLocal, MavenCentral, HytaleMaven, and CurseMaven

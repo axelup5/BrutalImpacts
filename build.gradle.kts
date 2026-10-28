@@ -18,6 +18,7 @@ dependencies {
 // Keep API migrations visible as Hytale's release server evolves.
 tasks.withType<JavaCompile>().configureEach {
     options.compilerArgs.add("-Xlint:deprecation")
+    options.compilerArgs.add("-Xlint:removal")
 }
 
 // Include the local Hytale asset pack in the produced JAR so the server can load it from the mod.

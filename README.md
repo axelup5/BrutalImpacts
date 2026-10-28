@@ -43,6 +43,9 @@ As you can see, the more damage is caused, the greater the number and scale of t
 
 # Brutal Impacts
 
+Version **2.5.0** targets Hytale **0.7.4** on `dev` and **0.8.0-pre.2.1** on `pre-release`.
+See [the compatibility and migration notes](CHANGELOG.md) for build instructions, API checks, and upgrade details.
+
 Brutal Impacts is a Hytale server mod that adds **extra impact particles** when entities take damage.
 It does **not** replace vanilla particles; it appends additional world particles to the damage event.
 
