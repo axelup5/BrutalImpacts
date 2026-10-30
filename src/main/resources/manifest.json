@@ -15,6 +15,6 @@
     "IncludesAssetPack": true,
     "Dependencies": {},
     "OptionalDependencies": {},
-    "ServerVersion": ">=0.7.4 <0.8.0",
+    "ServerVersion": ">=0.7.5 <0.8.0",
     "Main": "dev.hytalemodding.BrutalImpacts"
 }
