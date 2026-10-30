@@ -54,3 +54,6 @@ devserver
 # Local Gradle user-home + caches (should never be committed)
 .gradle-user-home/
 .cache/
+
+# Python audit tooling.
+__pycache__/
