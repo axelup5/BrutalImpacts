@@ -2,12 +2,12 @@
 
 ## Hytale targets
 
-Verified against the official Maven metadata on 2026-10-27:
+Verified against the official Maven metadata and installed servers on 2026-10-30:
 
 | Git branch | Patchline | Server dependency | Manifest compatibility |
 | --- | --- | --- | --- |
-| `dev` | `release` | `0.7.4` | `>=0.7.4 <0.8.0` |
-| `pre-release` | `pre-release` | `0.8.0-pre.2.1` | `>=0.8.0-pre.2.1 <0.8.0` |
+| `dev` | `release` | `0.7.5` | `>=0.7.5 <0.8.0` |
+| `pre-release` | `pre-release` | `0.8.0-pre.3` | `>=0.8.0-pre.3 <0.8.0` |
 
 Dependencies are pinned in `settings.gradle.kts` instead of using `latest`, so rebuilding a version does not silently change its server API. The pre-release range deliberately excludes the final 0.8.0 release, which needs its own compatibility check.
 
@@ -16,8 +16,16 @@ Dependencies are pinned in `settings.gradle.kts` instead of using `latest`, so r
 - Updated the project name and plugin manifest to 2.5.0 for both patchlines.
 - Updated the default model rule from `Spectre_Void` to `Void_Spectre`, matching Hytale's renamed model. Existing effect colors, scales and offsets are preserved.
 - Enabled compiler diagnostics for both deprecated APIs and APIs marked for removal.
-- Preserved explicit command permissions, strict JSON parsing, particle prediction handling, UI settings and persistent versioned JAR archives.
+- Preserved explicit command permissions, JSON parsing, particle prediction handling, UI settings and persistent versioned JAR archives.
 - Preserved each branch's public offset API: `dev` uses JOML `Vector3f`; `pre-release` retains its immutable `ParticleOffset` record.
+
+## Particle rules promoted on 2026-10-30
+
+Promoted the 24 completed exact-match rules from the installed `USER_HitParticles.json` into the bundled defaults on both branches. This adds 23 model IDs and replaces the complete `Goblin_Miner` rule with the user's latest values. Defaults now contain 288 unique model rules, sorted alphabetically by ID. Existing rules outside that selection keep their original values.
+
+The imported rules cover Voidtaken bears and tentacles, Coffer goblins, Feastmaster, Gobliterator phases, Guardian, Burner, Spectator, Skeleton Elite, cave spiderlings and Void Anomaly crystals. Colors, scales, offsets, fixed-scale settings and effect order are copied exactly; no inferred family rules are added. The installed user files remain untouched.
+
+The source USER snapshot has SHA-256 `17518c1cb1fce38fa0c75d0ff84dd7ffd5bef3b885c2ef0adebf14325cdac86f`. Both distributable JARs contain identical defaults. The mod remains version 2.5.0.
 
 ## Local and GitHub reconciliation
 
@@ -31,7 +39,7 @@ The migration checks the actual server artifacts with Java 25 and `-Xlint:deprec
 
 Hytale's Update 7 and Update 8 notes also describe chunk/section API removals, world access changes and a new abstract method for custom permission providers. Brutal Impacts does not implement those providers or use the removed chunk/world methods, so those changes do not require adapters here.
 
-The existing `Goblin_Hermit` and `Goblin_Ogre` default rules are retained for custom packs; neither model is present in the installed 0.7.4 vanilla assets. `Goblin_Miner` remains a valid model ID: the similarly named attitude role was renamed, not this model.
+The existing `Goblin_Hermit` and `Goblin_Ogre` default rules are retained for custom packs. `Goblin_Miner` remains a valid model ID: the similarly named attitude role was renamed, not this model.
 
 Personal `USER_*.json` files are never overwritten. If a personal rule targets `Spectre_Void`, change its match value to `Void_Spectre`. The bundled read-only defaults refresh when the updated mod starts.
 
@@ -45,13 +53,13 @@ Use Java 25 and the repository's Gradle wrapper from the desired branch:
 
 The main JAR is copied to `releases/` and survives `clean`. Release and pre-release JARs have distinct names. Install only the JAR matching the server patchline.
 
-The repository has no existing automated test suite. A successful `build` verifies compilation and packaging; Gradle's `test NO-SOURCE` does not mean gameplay tests ran. Combat effects, attacker prediction and UI behavior still require an in-game smoke test with a matching client and server. The locally installed pre-release server was 0.7.0-pre.2 during the migration and must be updated separately before testing the new pre-release build.
+Both branches passed `clean build` against their pinned server artifacts with no deprecation or removal warnings. Gradle's `test NO-SOURCE` does not mean gameplay tests ran.
 
-The release JAR additionally passed a Java smoke check against the actual 0.7.4 server artifact: 266 hit rules and 17 weapon/source rules loaded; the renamed spectre retained its effects and offset; personal files and override priority survived a layout refresh; runtime tuning round-tripped; malformed JSON was rejected; Hytale's own SemVer parser accepted 0.7.4 and rejected 0.7.3 and 0.8.0. All 19 custom particle systems, 39 spawners, texture references and packaged UI resources resolved against the mod JAR and installed 0.7.4 assets. No Hytale server classes were bundled in the mod JAR.
+Each JAR passed a Java smoke check against its own API and asset pack: all 288 defaults were unique and sorted; all 24 promoted JSON objects and their runtime effects matched the source USER snapshot, including RGB, scale, offset and fixed-scale values. A clean configuration loaded 289 hit rules (288 defaults plus the bundled USER example) and 17 weapon/source rules. Personal files and override priority survived a layout refresh, runtime tuning round-tripped, and structurally malformed JSON was rejected.
 
-The pre-release JAR passed the same Java configuration and packaging checks against the actual 0.8.0-pre.2.1 server artifact, including its `ParticleOffset` API. Hytale's SemVer parser accepted 0.8.0-pre.2.1 and rejected 0.8.0-pre.2 and the final 0.8.0 release. Its particle/spawner/texture reference check used the available 0.7.4 asset pack as a baseline; this does not validate the unavailable 0.8.0-pre.2.1 client assets.
+Both channels resolved all 19 custom particle systems, 39 spawners, texture references and packaged UI resources against their matching installed assets. No Hytale server classes were bundled in the mod JARs. Hytale's SemVer parser accepted each target and rejected the previous target and the next stable 0.8.0 release.
 
-The 0.7.4 server also completed an isolated `--bare --shutdown-after-validate` asset-loading run with the release JAR, exiting with code 0. The plugin created its configuration files and registered during setup. This run opened no listening ports and loaded no worlds. The server emitted warnings about vanilla assets. A separate `--validate-assets` run was stopped while validating the chunks of bundled vanilla instances; full vanilla world validation is not claimed as passing. Neither run replaces an in-game combat/UI test.
+Both official servers (0.7.5 and 0.8.0-pre.3) completed isolated loading with their corresponding mod JAR and asset pack, exiting with code 0. These runs used `--bare --shutdown-after-validate`, with no listening ports or worlds. The servers emitted warnings about vanilla assets. This checks plugin setup and normal asset loading, rather than exhaustive validation of the chunks in every bundled vanilla instance. Combat visuals, attacker prediction and UI interaction still require an in-game check with a matching client and server.
 
 ## Official references
 

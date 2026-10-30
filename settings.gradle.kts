@@ -18,7 +18,7 @@ plugins {
 
 hytale {
     usePatchline("pre-release")
-    useVersion("0.8.0-pre.2.1")
+    useVersion("0.8.0-pre.3")
 
     repositories {
         // Any external repositories besides: MavenLocal, MavenCentral, HytaleMaven, and CurseMaven
